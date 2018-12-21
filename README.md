@@ -1,4 +1,4 @@
-![social-network](./_media/social-network.png)
+![social-networks](./_media/social-networks.png)
 
 # social-network-challenge
 
