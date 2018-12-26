@@ -22,9 +22,19 @@ sourceCompatibility = 1.8
 repositories {
 	mavenCentral()
 }
-
+bootJar {
+	baseName = 'friends-rest-service'
+	version =  '0.1.0'
+}
 
 dependencies {
-	implementation('org.springframework.boot:spring-boot-starter-web')
-	testImplementation('org.springframework.boot:spring-boot-starter-test')
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	// testCompile 'org.springframework.boot:spring-boot-starter-test'
+	compile 'org.springframework.boot:spring-boot-starter-security'
+	compile 'ch.qos.logback:logback-classic'
+	compile 'org.slf4j:jul-to-slf4j'
+	compile 'org.slf4j:log4j-over-slf4j'
+	compileOnly 'org.projectlombok:lombok:1.16.20'
+	annotationProcessor 'org.projectlombok:lombok:1.16.20'
 }

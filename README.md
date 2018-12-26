@@ -12,3 +12,8 @@ gradle wrapper
 ./gradlew build
 ./gradlew build bootRun
 ```
+
+## improvements
+
+- send username in the body instead as parameter
+- the controller has to return a something
