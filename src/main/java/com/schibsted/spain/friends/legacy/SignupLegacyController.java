@@ -29,7 +29,7 @@ public class SignupLegacyController {
       logger.info("user stored... {} ", isStored);
       return new ResponseEntity<>(user.toString(), HttpStatus.OK);
     } catch (Exception e) {
-      return new ResponseEntity<>(String.format("Error: %s", e.getMessage()), HttpStatus.BAD_REQUEST);
+      return new ResponseEntity<>(String.format("Error: %s, %s", HttpStatus.BAD_REQUEST.value(), e.getMessage()), HttpStatus.BAD_REQUEST);
     }
   }
 }

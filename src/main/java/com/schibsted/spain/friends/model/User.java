@@ -57,25 +57,25 @@ public class User {
         private void validate(){
             final List<String> errorMessages = new ArrayList<>();
             if(name == null){
-                errorMessages.add("The 'name' parameter is null.");
+                errorMessages.add("The 'username' parameter is null.");
             }
             if(name.length() < 5 || name.length() > 10){
-                errorMessages.add(String.format("The length of the'name' parameter has to be between 5 and 10: %s.",name.length()));
+                errorMessages.add(String.format("The length of the'username' parameter has to be between 5 and 10: current %s.",name.length()));
             }
             if (!name.matches("[a-zA-Z0-9]*")){
-                errorMessages.add(String.format("The'name' parameter contains invalid characters. Only alphanumeric are valid characters: %s.",name.length()));
+                errorMessages.add(String.format("The 'username' parameter contains invalid characters. Only alphanumeric are valid characters: current %s.",name.length()));
             }
             if(password == null){
                 errorMessages.add("The 'password' parameter is null.");
             }
             if(password.length() < 8 || password.length() > 12){
-                errorMessages.add(String.format("The length of the'password' parameter has to be between 8 and 12: %s.",password.length()));
+                errorMessages.add(String.format("The length of the 'password' parameter has to be between 8 and 12: current %s.",password.length()));
             }
             if (!password.matches("[a-zA-Z0-9]*")){
-                errorMessages.add(String.format("The'password' parameter contains invalid characters. Only alphanumeric are valid characters: %s.",password.length()));
+                errorMessages.add(String.format("The 'password' parameter contains invalid characters. Only alphanumeric are valid characters: current %s.",password.length()));
             }
             if (errorMessages.size() > 0){
-                throw new IllegalStateException(String.join("|| ", errorMessages));
+                throw new IllegalArgumentException(String.join("|| ", errorMessages));
             }
         }
 

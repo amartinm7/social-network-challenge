@@ -17,7 +17,7 @@ public class CustomStorageProviderAdapter implements CustomStorageProviderServic
     public boolean save(User user){
         logger.info(String.format("persisting user %s ", user.toString()));
         if (store.contains(user)){
-            throw new IllegalStateException(String.format("Error, the user already exists in the system: %s ", user.toString()));
+            throw new IllegalArgumentException(String.format("Error, the user already exists in the system: %s ", user.toString()));
         }
         return store.add(user);
     }
