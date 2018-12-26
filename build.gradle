@@ -30,7 +30,6 @@ bootJar {
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-	// testCompile 'org.springframework.boot:spring-boot-starter-test'
 	compile 'org.springframework.boot:spring-boot-starter-security'
 	compile 'ch.qos.logback:logback-classic'
 	compile 'org.slf4j:jul-to-slf4j'
