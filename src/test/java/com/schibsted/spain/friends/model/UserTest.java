@@ -88,7 +88,7 @@ public class UserTest {
         assertNotNull("The userTo is null", userFrom);
         assertTrue("Not valid request for friendship", userFrom.requestFriendShip(userTo));
         assertFalse("Not valid request for friendship", userFrom.requestFriendShip(userTo));
-        assertTrue("Not accepted friendship", userFrom.acceptFriendShip(userTo));
+        assertTrue("Not accepted friendship", userTo.acceptFriendShip(userFrom));
     }
 
     @Test
@@ -105,8 +105,8 @@ public class UserTest {
         assertNotNull("The userTo is null", userFrom);
         assertTrue("valid request for friendship but was error", userFrom.requestFriendShip(userTo));
         assertFalse("Invalid request for friendship but was ok", userFrom.requestFriendShip(userTo));
-        assertTrue("valid accepted friendship but was error", userFrom.acceptFriendShip(userTo));
-        assertFalse("Invalid accepted friendship but was ok", userFrom.acceptFriendShip(userTo));
+        assertTrue("valid accepted friendship but was error", userTo.acceptFriendShip(userFrom));
+        assertFalse("Invalid accepted friendship but was ok", userTo.acceptFriendShip(userFrom));
     }
 
     @Test
@@ -123,7 +123,7 @@ public class UserTest {
         assertNotNull("The userTo is null", userFrom);
         assertTrue("valid request for friendship but was error", userFrom.requestFriendShip(userTo));
         assertFalse("Invalid request for friendship but was ok", userFrom.requestFriendShip(userTo));
-        assertTrue("valid declined friendship but was error", userFrom.declineFriendShip(userTo));
+        assertTrue("valid declined friendship but was error", userTo.declineFriendShip(userFrom));
     }
 
     @Test
@@ -140,8 +140,8 @@ public class UserTest {
         assertNotNull("The userTo is null", userFrom);
         assertTrue("valid request for friendship but was error", userFrom.requestFriendShip(userTo));
         assertFalse("Invalid request for friendship but was ok", userFrom.requestFriendShip(userTo));
-        assertTrue("valid declined friendship but was error", userFrom.declineFriendShip(userTo));
-        assertFalse("Invalid declined friendship but was ok", userFrom.declineFriendShip(userTo));
+        assertTrue("valid declined friendship but was error", userTo.declineFriendShip(userFrom));
+        assertFalse("Invalid declined friendship but was ok", userTo.declineFriendShip(userFrom));
     }
 
     @Test
@@ -160,14 +160,14 @@ public class UserTest {
         assertNotNull("The userTo is null", userFrom);
         assertTrue("valid request for friendship but was error", userFrom.requestFriendShip(userTo1));
         assertFalse("Invalid request for friendship but was ok", userFrom.requestFriendShip(userTo1));
-        assertTrue("valid declined friendship but was error", userFrom.acceptFriendShip(userTo1));
-        assertFalse("Invalid declined friendship but was ok", userFrom.acceptFriendShip(userTo1));
+        assertTrue("valid declined friendship but was error", userTo1.acceptFriendShip(userFrom));
+        assertFalse("Invalid declined friendship but was ok", userTo1.acceptFriendShip(userFrom));
         final User userTo2 = new User.Builder().setName(usernameTo2).setPassword(passwordTo2).build();
         assertNotNull("The userTo is null", userFrom);
         assertTrue("valid request for friendship but was error", userFrom.requestFriendShip(userTo2));
         assertFalse("Invalid request for friendship but was ok", userFrom.requestFriendShip(userTo2));
-        assertTrue("valid declined friendship but was error", userFrom.acceptFriendShip(userTo2));
-        assertFalse("Invalid declined friendship but was ok", userFrom.acceptFriendShip(userTo2));
+        assertTrue("valid declined friendship but was error", userTo2.acceptFriendShip(userFrom));
+        assertFalse("Invalid declined friendship but was ok", userTo2.acceptFriendShip(userFrom));
         assertTrue("the user1 has to be friend but is not", userFrom.getFriendList().contains(userTo1));
         assertTrue("the user2 has to be friend but is not", userFrom.getFriendList().contains(userTo2));
     }
@@ -188,8 +188,8 @@ public class UserTest {
         assertNotNull("The userTo is null", userFrom);
         assertTrue("valid request for friendship but was error", userFrom.requestFriendShip(userTo1));
         assertFalse("Invalid request for friendship but was ok", userFrom.requestFriendShip(userTo1));
-        assertTrue("valid declined friendship but was error", userFrom.acceptFriendShip(userTo1));
-        assertFalse("Invalid declined friendship but was ok", userFrom.acceptFriendShip(userTo1));
+        assertTrue("valid accept friendship but was error", userTo1.acceptFriendShip(userFrom));
+        assertFalse("Invalid accept friendship but was ok", userTo1.acceptFriendShip(userFrom));
         final User userTo2 = new User.Builder().setName(usernameTo2).setPassword(passwordTo2).build();
         assertNotNull("The userTo is null", userFrom);
         assertTrue("valid request for friendship but was error", userFrom.requestFriendShip(userTo2));

@@ -21,7 +21,7 @@ public class User {
 
     public boolean requestFriendShip(User user) {
         final FriendShip friendShip = FriendShip.newInstanceRequest(this,user);
-        return this.friendShips.add(friendShip);
+        return user.friendShips.add(friendShip);
     }
 
     public boolean acceptFriendShip(User user) {
@@ -29,7 +29,7 @@ public class User {
         if ( this.friendShips.contains(friendShipPending) ){
             final FriendShip friendShipAccepted = FriendShip.newInstanceAccept(this,user);
             friendShips.remove(friendShipPending);
-            return friendShips.add(friendShipAccepted);
+            return this.friendShips.add(friendShipAccepted) && user.friendShips.add(friendShipAccepted);
         } else {
             return false;
         }
@@ -46,8 +46,8 @@ public class User {
 
     public Collection<User> getFriendList() {
         return friendShips.stream()
-                .filter(friendShip -> friendShip.isFriend())
-                .map(friendShip -> friendShip.getUserTo())
+                .filter(thisFriendShip -> thisFriendShip.isAlreadyFriend())
+                .map(thisFriendShip -> thisFriendShip.getFriend(this))
                 .collect(Collectors.toList());
     }
 

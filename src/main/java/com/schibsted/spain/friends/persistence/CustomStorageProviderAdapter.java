@@ -7,14 +7,13 @@ import org.springframework.stereotype.Component;
 
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 @Component
 public class CustomStorageProviderAdapter implements CustomStorageProviderService {
     private static final Logger logger = LoggerFactory.getLogger(CustomStorageProviderAdapter.class);
 
-    private static final Map<String,User> store = new HashMap<>();
+    private final Map<String,User> store = new HashMap<>();
 
     private void validateExists(String user){
         if (!store.containsKey(user)){

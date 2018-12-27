@@ -1,9 +1,12 @@
 package com.schibsted.spain.friends.legacy;
 
+import com.schibsted.spain.friends.model.User;
 import com.schibsted.spain.friends.service.FriendShipService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
@@ -23,29 +26,57 @@ public class FriendshipLegacyController {
   }
 
   @PostMapping("/request")
-  void requestFriendship(
+  ResponseEntity<String> requestFriendship(
       @RequestParam("usernameFrom") String usernameFrom,
       @RequestParam("usernameTo") String usernameTo,
       @RequestHeader("X-Password") String password) {
-    throw new RuntimeException("not implemented yet!");
+      logger.info("requestFriendship");
+      try {
+          final User user = new User.Builder().setName(usernameFrom).setPassword(password).build();
+          if (friendShipService.requestFriendship(user, usernameTo)){
+              return new ResponseEntity<>(user.toString(), HttpStatus.OK);
+          } else {
+              return new ResponseEntity<>("", HttpStatus.BAD_REQUEST);
+          }
+      } catch (Exception e) {
+          return new ResponseEntity<>(String.format("Error: %s, %s", HttpStatus.BAD_REQUEST.value(), e.getMessage()), HttpStatus.BAD_REQUEST);
+      }
   }
 
   @PostMapping("/accept")
-  void acceptFriendship(
+  ResponseEntity<String> acceptFriendship(
       @RequestParam("usernameFrom") String usernameFrom,
       @RequestParam("usernameTo") String usernameTo,
-      @RequestHeader("X-Password") String password
-  ) {
-    throw new RuntimeException("not implemented yet!");
+      @RequestHeader("X-Password") String password) {
+      logger.info("acceptFriendship");
+      try {
+          final User user = new User.Builder().setName(usernameFrom).setPassword(password).build();
+          if (friendShipService.acceptFriendship(user, usernameTo)){
+              return new ResponseEntity<>(user.toString(), HttpStatus.OK);
+          } else {
+              return new ResponseEntity<>("", HttpStatus.BAD_REQUEST);
+          }
+      } catch (Exception e) {
+          return new ResponseEntity<>(String.format("Error: %s, %s", HttpStatus.BAD_REQUEST.value(), e.getMessage()), HttpStatus.BAD_REQUEST);
+      }
   }
 
   @PostMapping("/decline")
-  void declineFriendship(
+  ResponseEntity<String> declineFriendship(
       @RequestParam("usernameFrom") String usernameFrom,
       @RequestParam("usernameTo") String usernameTo,
-      @RequestHeader("X-Password") String password
-  ) {
-    throw new RuntimeException("not implemented yet!");
+      @RequestHeader("X-Password") String password) {
+      logger.info("declineFriendship");
+      try {
+          final User user = new User.Builder().setName(usernameFrom).setPassword(password).build();
+          if (friendShipService.declineFriendship(user, usernameTo)){
+              return new ResponseEntity<>(user.toString(), HttpStatus.OK);
+          } else {
+              return new ResponseEntity<>("", HttpStatus.BAD_REQUEST);
+          }
+      } catch (Exception e) {
+          return new ResponseEntity<>(String.format("Error: %s, %s", HttpStatus.BAD_REQUEST.value(), e.getMessage()), HttpStatus.BAD_REQUEST);
+      }
   }
 
   @GetMapping("/list")

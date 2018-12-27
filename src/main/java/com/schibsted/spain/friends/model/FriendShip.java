@@ -1,21 +1,28 @@
 package com.schibsted.spain.friends.model;
 
+import java.util.HashSet;
+import java.util.Set;
+
 public class FriendShip {
     private final Status status;
     private final User userFrom;
     private final User userTo;
+    private final Set<User> users;
 
     private FriendShip(User userFrom, User userTo, Status status){
         this.userFrom = userFrom;
         this.userTo = userTo;
         this.status = status;
+        this.users = new HashSet<User>();
+        this.users.add(userFrom);
+        this.users.add(userTo);
     }
 
-    public boolean isFriend(){
+    public boolean isAlreadyFriend(){
         return Status.ACCEPTED.equals(this.getStatus());
     }
 
-    public static enum Status{
+    public enum Status{
         ACCEPTED, PENDING;
     }
 
@@ -48,12 +55,10 @@ public class FriendShip {
         return status;
     }
 
-    public User getUserFrom() {
-        return userFrom;
-    }
-
-    public User getUserTo() {
-        return userTo;
+    public User getFriend(User user) {
+        final Set<User> friends = new HashSet<>(this.users);
+        friends.remove(user);
+        return friends.iterator().next();
     }
 
     @Override
@@ -64,15 +69,13 @@ public class FriendShip {
         FriendShip that = (FriendShip) o;
 
         if (status != that.status) return false;
-        if (!userFrom.equals(that.userFrom)) return false;
-        return userTo.equals(that.userTo);
+        return users.equals(that.users);
     }
 
     @Override
     public int hashCode() {
         int result = status.hashCode();
-        result = 31 * result + userFrom.hashCode();
-        result = 31 * result + userTo.hashCode();
+        result = 31 * result + users.hashCode();
         return result;
     }
 
