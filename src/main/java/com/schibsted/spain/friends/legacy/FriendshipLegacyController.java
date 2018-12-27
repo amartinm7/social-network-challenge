@@ -82,8 +82,13 @@ public class FriendshipLegacyController {
   @GetMapping("/list")
   Object listFriends(
       @RequestParam("username") String username,
-      @RequestHeader("X-Password") String password
-  ) {
-    throw new RuntimeException("not implemented yet!");
+      @RequestHeader("X-Password") String password) {
+      logger.info("listFriends");
+      try {
+          final User user = new User.Builder().setName(username).setPassword(password).build();
+          return new ResponseEntity<>(user.toString(), HttpStatus.OK);
+      } catch (Exception e) {
+          return new ResponseEntity<>(String.format("Error: %s, %s", HttpStatus.BAD_REQUEST.value(), e.getMessage()), HttpStatus.BAD_REQUEST);
+      }
   }
 }

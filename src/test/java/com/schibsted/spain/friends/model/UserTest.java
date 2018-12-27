@@ -86,8 +86,8 @@ public class UserTest {
         assertNotNull("The userFrom is null", userFrom);
         final User userTo = new User.Builder().setName(usernameTo).setPassword(passwordTo).build();
         assertNotNull("The userTo is null", userFrom);
-        assertTrue("Not valid request for friendship", userFrom.requestFriendShip(userTo));
-        assertFalse("Not valid request for friendship", userFrom.requestFriendShip(userTo));
+        assertTrue("the request for friendship is ok but was error", userFrom.requestFriendShip(userTo));
+        assertFalse("the request for friendship is already done but was ok", userFrom.requestFriendShip(userTo));
         assertTrue("Not accepted friendship", userTo.acceptFriendShip(userFrom));
     }
 

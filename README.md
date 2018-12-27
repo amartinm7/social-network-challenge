@@ -15,7 +15,12 @@ gradle wrapper
 
 ## improvements
 
-- send username in the body instead as parameter
+- send username in the body instead as parameter,
+- send usernames as path paremeters and between the relations of them: 
+localhost:8080/friendship/johndoe/requestFriendshipTo/robert
+localhost:8080/friendship/robert/acceptFriendshipTo/johndoe
+localhost:8080/friendship/robert/declineFriendshipTo/johndoe
+localhost:8080/friendship/johndoe/listFriends
 - the controller has to return a something
 - review the signature of the methods
 - review the name of the test methods

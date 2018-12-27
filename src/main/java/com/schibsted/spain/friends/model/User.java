@@ -1,67 +1,71 @@
 package com.schibsted.spain.friends.model;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class User {
 
     private final String name;
     private final String password;
-    private final Set<FriendShip> friendShips;
+    private final Set<User> friends;
+    private final Set<User> pendingFriends;
 
     private User(String name, String password){
         this.name = name;
         this.password = password;
-        this.friendShips = new HashSet<>();
+        this.friends = new HashSet<>();
+        this.pendingFriends = new HashSet<>();
     }
 
     public String getName(){
         return this.name;
     }
 
-    public boolean requestFriendShip(User user) {
-        final FriendShip friendShip = FriendShip.newInstanceRequest(this,user);
-        return user.friendShips.add(friendShip);
+    public boolean requestFriendShip(User userTo) {
+        if (this.friends.contains(userTo)){
+            // not possible is already a friend
+            return false;
+        }
+        return userTo.pendingFriends.add(this);
     }
 
-    public boolean acceptFriendShip(User user) {
-        final FriendShip friendShipPending = FriendShip.newInstanceRequest(this,user);
-        if ( this.friendShips.contains(friendShipPending) ){
-            final FriendShip friendShipAccepted = FriendShip.newInstanceAccept(this,user);
-            friendShips.remove(friendShipPending);
-            return this.friendShips.add(friendShipAccepted) && user.friendShips.add(friendShipAccepted);
+    public boolean acceptFriendShip(User userTo) {
+        if (this.pendingFriends.contains(userTo)){
+            this.pendingFriends.remove(userTo);
+            userTo.pendingFriends.remove(this);
+            return this.friends.add(userTo) && userTo.friends.add(this);
         } else {
             return false;
         }
     }
 
-    public boolean declineFriendShip(User user) {
-        final FriendShip friendShipPending = FriendShip.newInstanceRequest(this,user);
-        if ( this.friendShips.contains(friendShipPending) ){
-            return friendShips.remove(friendShipPending);
+    public boolean declineFriendShip(User userTo) {
+        if (this.pendingFriends.contains(userTo)){
+            return this.pendingFriends.remove(userTo);
         } else {
             return false;
         }
     }
 
     public Collection<User> getFriendList() {
-        return friendShips.stream()
-                .filter(thisFriendShip -> thisFriendShip.isAlreadyFriend())
-                .map(thisFriendShip -> thisFriendShip.getFriend(this))
-                .collect(Collectors.toList());
+        return friends;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
+
         User user = (User) o;
-        return name.equals(user.name);
+
+        if (!name.equals(user.name)) return false;
+        return password.equals(user.password);
     }
 
     @Override
     public int hashCode() {
-        return name.hashCode();
+        int result = name.hashCode();
+        result = 31 * result + password.hashCode();
+        return result;
     }
 
     @Override

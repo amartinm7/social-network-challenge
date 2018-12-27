@@ -15,29 +15,24 @@ public class CustomStorageProviderAdapter implements CustomStorageProviderServic
 
     private final Map<String,User> store = new HashMap<>();
 
-    private void validateExists(String user){
-        if (!store.containsKey(user)){
-            throw new IllegalArgumentException(String.format("Error, the user doesn't exists in the system: %s ", user));
-        }
+    private boolean isAuthorizatedUser(User user){
+        return isUserStored(user.getName()) && store.get(user.getName()).equals(user);
     }
 
-    private void validateNotExists(String user){
-        if (store.containsKey(user)){
-            throw new IllegalArgumentException(String.format("Error, the user already exists in the system: %s ", user));
-        }
+    private boolean isUserStored(String user){
+        return store.containsKey(user);
     }
 
     @Override
-    public void save(User user){
-        logger.info(String.format("persisting user %s ", user.toString()));
-        validateNotExists(user.getName());
-        store.put(user.getName(),user);
+    public boolean save(User user){
+        return !isUserStored(user.getName()) && (store.put(user.getName(),user) == null);
     }
 
     @Override
     public boolean requestFriendship(User userFrom, String userTo) {
-        validateExists(userFrom.getName());
-        validateExists(userTo);
+        if ( !isAuthorizatedUser(userFrom) || !isUserStored(userTo) ){
+            return false;
+        }
         final User savedUserFrom = store.get(userFrom.getName());
         final User savedUserTo = store.get(userTo);
         return savedUserFrom.requestFriendShip(savedUserTo);
@@ -45,8 +40,9 @@ public class CustomStorageProviderAdapter implements CustomStorageProviderServic
 
     @Override
     public boolean acceptFriendship(User userFrom, String userTo) {
-        validateExists(userFrom.getName());
-        validateExists(userTo);
+        if ( !isAuthorizatedUser(userFrom) || !isUserStored(userTo) ){
+            return false;
+        }
         final User savedUserFrom = store.get(userFrom.getName());
         final User savedUserTo = store.get(userTo);
         return savedUserFrom.acceptFriendShip(savedUserTo);
@@ -54,8 +50,9 @@ public class CustomStorageProviderAdapter implements CustomStorageProviderServic
 
     @Override
     public boolean declineFriendship(User userFrom, String userTo) {
-        validateExists(userFrom.getName());
-        validateExists(userTo);
+        if ( !isAuthorizatedUser(userFrom) || !isUserStored(userTo) ){
+            return false;
+        }
         final User savedUserFrom = store.get(userFrom.getName());
         final User savedUserTo = store.get(userTo);
         return savedUserFrom.declineFriendShip(savedUserTo);
@@ -63,7 +60,9 @@ public class CustomStorageProviderAdapter implements CustomStorageProviderServic
 
     @Override
     public Collection<User> listFriends(User userFrom) {
-        validateExists(userFrom.getName());
+        if ( !isAuthorizatedUser(userFrom) ){
+            throw new IllegalStateException("Unauthorized");
+        }
         final User savedUserFrom = store.get(userFrom.getName());
         return savedUserFrom.getFriendList();
     }
