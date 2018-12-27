@@ -61,6 +61,9 @@ localhost:8080/friendship/johndoe/listFriends
 - review the signature of the methods
 - review the name of the test methods
 - review the messages of the test methods
+- isolate interfaces for query and for command (save)
+- don't use the user object in the front layer and others. USer VO as argument in the methods
+- review the tests ignore
 
 ## profiles
 
