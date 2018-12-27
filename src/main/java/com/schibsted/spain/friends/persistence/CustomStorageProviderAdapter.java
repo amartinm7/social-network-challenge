@@ -23,7 +23,6 @@ public class CustomStorageProviderAdapter implements CustomStorageProviderServic
         return storedUser.getPassword().equals(password);
     }
 
-
     private boolean isUserStored(String user){
         return store.containsKey(user);
     }
