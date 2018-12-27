@@ -17,3 +17,12 @@ gradle wrapper
 
 - send username in the body instead as parameter
 - the controller has to return a something
+- review the signature of the methods
+- review the name of the test methods
+- review the messages of the test methods
+
+## profiles
+specify
+```aidl
+java -jar myapp.jar --spring.profiles.active=dev
+```
