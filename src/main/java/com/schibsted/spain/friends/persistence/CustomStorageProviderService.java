@@ -10,4 +10,5 @@ public interface CustomStorageProviderService {
     boolean acceptFriendship(User userFrom, String userTo);
     boolean declineFriendship(User userFrom, String userTo);
     Collection<User> listFriends(User userFrom);
+    boolean isAuthorizatedUser(String username, String password);
 }

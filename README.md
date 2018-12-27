@@ -40,6 +40,14 @@ docker images
 docker rmi PID
 ``` 
 
+### Tips
+
+closing ports
+```
+sudo lsof -i :8888
+sudo kill -9 PID
+```
+
 ## improvements
 
 - send username in the body instead as parameter,
@@ -49,6 +57,7 @@ localhost:8080/friendship/robert/acceptFriendshipTo/johndoe
 localhost:8080/friendship/robert/declineFriendshipTo/johndoe
 localhost:8080/friendship/johndoe/listFriends
 - the controller has to return a something
+- the once the user has login you can use the oath token to login
 - review the signature of the methods
 - review the name of the test methods
 - review the messages of the test methods

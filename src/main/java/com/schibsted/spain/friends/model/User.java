@@ -19,6 +19,9 @@ public class User {
     public String getName(){
         return this.name;
     }
+    public String getPassword(){
+        return this.password;
+    }
 
     public boolean requestFriendShip(User userTo) {
         if (this.friends.contains(userTo)){

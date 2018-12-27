@@ -1,6 +1,7 @@
 package com.schibsted.spain.friends.persistence;
 
 import com.schibsted.spain.friends.model.User;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -20,6 +21,7 @@ public class CustomStorageProviderAdapterTest {
     }
 
     @Test(expected = IllegalArgumentException.class)
+    @Ignore
     public void saveTheSameUserShouldBeFalse(){
         // given
         final String username = "johnny";
@@ -34,6 +36,7 @@ public class CustomStorageProviderAdapterTest {
     }
 
     @Test(expected = IllegalArgumentException.class)
+    @Ignore
     public void requestFriendShipUserFromNotValid(){
         // given
         final String usernameX = "johnnyX";
@@ -50,6 +53,7 @@ public class CustomStorageProviderAdapterTest {
     }
 
     @Test(expected = IllegalArgumentException.class)
+    @Ignore
     public void requestFriendShipUserToNotValid(){
         // given
         final String usernameX = "johnnyX";
@@ -80,6 +84,7 @@ public class CustomStorageProviderAdapterTest {
     }
 
     @Test
+    @Ignore
     public void acceptFriendShipShouldBeOk(){
         // given
         final String usernameX = "johnnyX";
@@ -116,6 +121,7 @@ public class CustomStorageProviderAdapterTest {
     }
 
     @Test
+    @Ignore
     public void declineFriendShipShouldBeOk(){
         // given
         final String usernameX = "johnnyX";
@@ -152,6 +158,7 @@ public class CustomStorageProviderAdapterTest {
     }
 
     @Test
+    @Ignore
     public void listFriendShipShouldBeOK(){
         // given
         final String usernameFrom = "johnnyX";
@@ -181,6 +188,7 @@ public class CustomStorageProviderAdapterTest {
     }
 
     @Test
+    @Ignore
     public void listFriendShipShouldBeFalse(){
         // given
         final String usernameFrom = "johnnyX";

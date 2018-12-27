@@ -15,6 +15,14 @@ public class CustomStorageProviderAdapter implements CustomStorageProviderServic
 
     private final Map<String,User> store = new HashMap<>();
 
+    public boolean isAuthorizatedUser(String username, String password){
+        if ( !isUserStored(username) ) {
+           return false;
+        }
+        final User storedUser = store.get(username);
+        return storedUser.getPassword().equals(password);
+    }
+
     private boolean isAuthorizatedUser(User user){
         return isUserStored(user.getName()) && store.get(user.getName()).equals(user);
     }
