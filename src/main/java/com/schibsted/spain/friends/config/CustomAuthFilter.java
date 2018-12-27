@@ -13,12 +13,8 @@ import java.io.IOException;
 
 public class CustomAuthFilter extends OncePerRequestFilter {
 
-    private static final String X_PASSWORD                  = "X-Password";
-    private static final String USER_NAME                   = "username";
-    private static final String USER_NAME_FROM              = "usernameFrom";
-    private static final String REQUEST_URI_SIGNUP          = "/signup";
-    private static final String REQUEST_URI_FRIENDSHIP      = "/friendship";
-    private static final String REQUEST_URI_FRIENDSHIP_LIST = "/friendship/list";
+
+
 
     @Override
     protected void doFilterInternal(HttpServletRequest request,
@@ -26,12 +22,12 @@ public class CustomAuthFilter extends OncePerRequestFilter {
             throws ServletException, IOException {
 
         String username = "";
-        final String xPassword = request.getHeader(X_PASSWORD);
-        if (request.getRequestURI().contains(REQUEST_URI_SIGNUP)
-                || (request.getRequestURI().contains(REQUEST_URI_FRIENDSHIP_LIST))){
-            username = request.getParameter(USER_NAME);
-        } else if (request.getRequestURI().contains(REQUEST_URI_FRIENDSHIP)){
-            username = request.getParameter(USER_NAME_FROM);
+        final String xPassword = request.getHeader(HttpParams.X_PASSWORD);
+        if (request.getRequestURI().contains(HttpParams.URI_SIGNUP)
+                || (request.getRequestURI().contains(HttpParams.URI_FRIENDSHIP_LIST))){
+            username = request.getParameter(HttpParams.USER_NAME);
+        } else if (request.getRequestURI().contains(HttpParams.URI_FRIENDSHIP)){
+            username = request.getParameter(HttpParams.USER_NAME_FROM);
         }
         // Create our Authentication and let Spring know about it
         Authentication auth = new UsernamePasswordAuthenticationToken(username, xPassword);

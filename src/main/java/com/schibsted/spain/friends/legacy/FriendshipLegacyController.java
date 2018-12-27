@@ -1,5 +1,6 @@
 package com.schibsted.spain.friends.legacy;
 
+import com.schibsted.spain.friends.config.HttpParams;
 import com.schibsted.spain.friends.model.User;
 import com.schibsted.spain.friends.service.FriendShipService;
 import org.slf4j.Logger;
@@ -17,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Collection;
 
 @RestController
-@RequestMapping("/friendship")
+@RequestMapping(HttpParams.URI_FRIENDSHIP)
 public class FriendshipLegacyController {
   private static final Logger logger = LoggerFactory.getLogger(FriendshipLegacyController.class);
 
@@ -27,11 +28,11 @@ public class FriendshipLegacyController {
     this.friendShipService = friendShipService;
   }
 
-  @PostMapping("/request")
+  @PostMapping(HttpParams.URI_FRIENDSHIP_REQUEST)
   ResponseEntity<String> requestFriendship(
-      @RequestParam("usernameFrom") String usernameFrom,
-      @RequestParam("usernameTo") String usernameTo,
-      @RequestHeader("X-Password") String password) {
+      @RequestParam(HttpParams.USER_NAME_FROM) String usernameFrom,
+      @RequestParam(HttpParams.USER_NAME_TO) String usernameTo,
+      @RequestHeader(HttpParams.X_PASSWORD) String password) {
       logger.info("requestFriendship");
       try {
           final User user = new User.Builder().setName(usernameFrom).setPassword(password).build();
@@ -45,11 +46,11 @@ public class FriendshipLegacyController {
       }
   }
 
-  @PostMapping("/accept")
+  @PostMapping(HttpParams.URI_FRIENDSHIP_ACCEPT)
   ResponseEntity<String> acceptFriendship(
-      @RequestParam("usernameFrom") String usernameFrom,
-      @RequestParam("usernameTo") String usernameTo,
-      @RequestHeader("X-Password") String password) {
+      @RequestParam(HttpParams.USER_NAME_FROM) String usernameFrom,
+      @RequestParam(HttpParams.USER_NAME_TO) String usernameTo,
+      @RequestHeader(HttpParams.X_PASSWORD) String password) {
       logger.info("acceptFriendship");
       try {
           final User user = new User.Builder().setName(usernameFrom).setPassword(password).build();
@@ -63,11 +64,11 @@ public class FriendshipLegacyController {
       }
   }
 
-  @PostMapping("/decline")
+  @PostMapping(HttpParams.URI_FRIENDSHIP_DECLINE)
   ResponseEntity<String> declineFriendship(
-      @RequestParam("usernameFrom") String usernameFrom,
-      @RequestParam("usernameTo") String usernameTo,
-      @RequestHeader("X-Password") String password) {
+      @RequestParam(HttpParams.USER_NAME_FROM) String usernameFrom,
+      @RequestParam(HttpParams.USER_NAME_TO) String usernameTo,
+      @RequestHeader(HttpParams.X_PASSWORD) String password) {
       logger.info("declineFriendship");
       try {
           final User user = new User.Builder().setName(usernameFrom).setPassword(password).build();
@@ -81,10 +82,10 @@ public class FriendshipLegacyController {
       }
   }
 
-  @GetMapping("/list")
+  @GetMapping(HttpParams.URI_FRIENDSHIP_LIST)
   Object listFriends(
-      @RequestParam("username") String username,
-      @RequestHeader("X-Password") String password) {
+      @RequestParam(HttpParams.USER_NAME) String username,
+      @RequestHeader(HttpParams.X_PASSWORD) String password) {
       logger.info("listFriends");
       try {
           final User user = new User.Builder().setName(username).setPassword(password).build();

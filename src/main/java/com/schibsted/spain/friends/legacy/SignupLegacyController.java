@@ -1,5 +1,6 @@
 package com.schibsted.spain.friends.legacy;
 
+import com.schibsted.spain.friends.config.HttpParams;
 import com.schibsted.spain.friends.model.User;
 import com.schibsted.spain.friends.service.SignupService;
 import org.slf4j.Logger;
@@ -10,7 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/signup")
+@RequestMapping(HttpParams.URI_SIGNUP)
 public class SignupLegacyController {
   private static final Logger logger = LoggerFactory.getLogger(SignupLegacyController.class);
   private final SignupService signupService;
@@ -20,8 +21,8 @@ public class SignupLegacyController {
 
   @PostMapping
   public ResponseEntity<String> signUp(
-      @RequestParam("username") String username,
-      @RequestHeader("X-Password") String password) {
+      @RequestParam(HttpParams.USER_NAME) String username,
+      @RequestHeader(HttpParams.X_PASSWORD) String password) {
     logger.info("signup user");
     try {
       final User user = new User.Builder().setName(username).setPassword(password).build();

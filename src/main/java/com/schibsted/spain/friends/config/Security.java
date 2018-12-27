@@ -23,14 +23,13 @@ public class Security extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(
             AuthenticationManagerBuilder auth) throws Exception {
-        logger.info(">>>Security..." + customAuthenticationProvider.toString());
+        logger.info("configure AuthenticationManagerBuilder...");
         auth.authenticationProvider(customAuthenticationProvider);
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        logger.info(">>>Security..." + http.toString());
-        // http.authorizeRequests().anyRequest().permitAll().and().csrf().disable();
+        logger.info("configure security...");
         http.addFilterBefore(new CustomAuthFilter(), BasicAuthenticationFilter.class)
                 .authorizeRequests()
                 .anyRequest().permitAll()
@@ -38,6 +37,7 @@ public class Security extends WebSecurityConfigurerAdapter {
     }
     @Override
     public void configure(WebSecurity web) throws Exception {
-        web.ignoring().antMatchers("/signup");
+        logger.info("configure WebSecurity...");
+        web.ignoring().antMatchers(HttpParams.URI_SIGNUP);
     }
 }
