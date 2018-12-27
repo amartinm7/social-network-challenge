@@ -1,2 +1,15 @@
 server:
   port: 8080
+
+spring:
+  profiles:
+    active: "dev"
+---
+spring:
+  profiles: dev
+---
+spring:
+  profiles: test
+---
+spring:
+  profiles: prod
