@@ -23,9 +23,6 @@ public class CustomStorageProviderAdapter implements CustomStorageProviderServic
         return storedUser.getPassword().equals(password);
     }
 
-    private boolean isAuthorizatedUser(User user){
-        return isUserStored(user.getName()) && store.get(user.getName()).equals(user);
-    }
 
     private boolean isUserStored(String user){
         return store.containsKey(user);
@@ -38,7 +35,7 @@ public class CustomStorageProviderAdapter implements CustomStorageProviderServic
 
     @Override
     public boolean requestFriendship(User userFrom, String userTo) {
-        if ( !isAuthorizatedUser(userFrom) || !isUserStored(userTo) ){
+        if ( !isUserStored(userTo) ){
             return false;
         }
         final User savedUserFrom = store.get(userFrom.getName());
@@ -48,7 +45,7 @@ public class CustomStorageProviderAdapter implements CustomStorageProviderServic
 
     @Override
     public boolean acceptFriendship(User userFrom, String userTo) {
-        if ( !isAuthorizatedUser(userFrom) || !isUserStored(userTo) ){
+        if ( !isUserStored(userTo) ){
             return false;
         }
         final User savedUserFrom = store.get(userFrom.getName());
@@ -58,7 +55,7 @@ public class CustomStorageProviderAdapter implements CustomStorageProviderServic
 
     @Override
     public boolean declineFriendship(User userFrom, String userTo) {
-        if ( !isAuthorizatedUser(userFrom) || !isUserStored(userTo) ){
+        if ( !isUserStored(userTo) ){
             return false;
         }
         final User savedUserFrom = store.get(userFrom.getName());
@@ -68,9 +65,6 @@ public class CustomStorageProviderAdapter implements CustomStorageProviderServic
 
     @Override
     public Collection<User> listFriends(User userFrom) {
-        if ( !isAuthorizatedUser(userFrom) ){
-            throw new IllegalStateException("Unauthorized");
-        }
         final User savedUserFrom = store.get(userFrom.getName());
         return savedUserFrom.getFriendList();
     }
