@@ -7,11 +7,14 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Collection;
+
 @Service
 public class PersistenceAdapter implements PersistenceService{
     private static final Logger logger = LoggerFactory.getLogger(PersistenceAdapter.class);
 
     private final CustomStorageProviderService customStorageProviderService;
+
     public PersistenceAdapter(@Autowired CustomStorageProviderService customStorageProviderService){
         this.customStorageProviderService = customStorageProviderService;
     }
@@ -19,5 +22,25 @@ public class PersistenceAdapter implements PersistenceService{
     @Override
     public void save(User user){
         this.customStorageProviderService.save(user);
+    }
+
+    @Override
+    public boolean requestFriendship(User userFrom, String userTo) {
+        return this.customStorageProviderService.requestFriendship(userFrom, userTo);
+    }
+
+    @Override
+    public boolean acceptFriendship(User userFrom, String userTo) {
+        return this.customStorageProviderService.acceptFriendship(userFrom, userTo);
+    }
+
+    @Override
+    public boolean declineFriendship(User userFrom, String userTo) {
+        return this.customStorageProviderService.declineFriendship(userFrom, userTo);
+    }
+
+    @Override
+    public Collection<User> listFriends(User userFrom) {
+        return this.customStorageProviderService.listFriends(userFrom);
     }
 }
