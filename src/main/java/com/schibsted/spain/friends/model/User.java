@@ -1,16 +1,54 @@
 package com.schibsted.spain.friends.model;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class User {
 
     private final String name;
     private final String password;
+    private final Set<FriendShip> friendShips;
 
     private User(String name, String password){
         this.name = name;
         this.password = password;
+        this.friendShips = new HashSet<>();
+    }
+
+    public String getName(){
+        return this.name;
+    }
+
+    public boolean requestFriendShip(User user) {
+        final FriendShip friendShip = FriendShip.newInstanceRequest(this,user);
+        return this.friendShips.add(friendShip);
+    }
+
+    public boolean acceptFriendShip(User user) {
+        final FriendShip friendShipPending = FriendShip.newInstanceRequest(this,user);
+        if ( this.friendShips.contains(friendShipPending) ){
+            final FriendShip friendShipAccepted = FriendShip.newInstanceAccept(this,user);
+            friendShips.remove(friendShipPending);
+            return friendShips.add(friendShipAccepted);
+        } else {
+            return false;
+        }
+    }
+
+    public boolean declineFriendShip(User user) {
+        final FriendShip friendShipPending = FriendShip.newInstanceRequest(this,user);
+        if ( this.friendShips.contains(friendShipPending) ){
+            return friendShips.remove(friendShipPending);
+        } else {
+            return false;
+        }
+    }
+
+    public Collection<User> getFriendList() {
+        return friendShips.stream()
+                .filter(friendShip -> friendShip.isFriend())
+                .map(friendShip -> friendShip.getUserTo())
+                .collect(Collectors.toList());
     }
 
     @Override
