@@ -15,8 +15,8 @@ public class SignupAdapter implements SignupService {
     }
 
     @Override
-    public void signup(User user) {
+    public boolean signup(User user) {
         logger.info("signup user...");
-        persistenceService.save(user);
+        return persistenceService.save(user);
     }
 }

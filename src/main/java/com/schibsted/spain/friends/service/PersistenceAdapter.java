@@ -20,8 +20,8 @@ public class PersistenceAdapter implements PersistenceService{
     }
 
     @Override
-    public void save(User user){
-        this.customStorageProviderService.save(user);
+    public boolean save(User user){
+        return this.customStorageProviderService.save(user);
     }
 
     @Override

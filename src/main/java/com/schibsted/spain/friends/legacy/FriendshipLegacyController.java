@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Collection;
+
 @RestController
 @RequestMapping("/friendship")
 public class FriendshipLegacyController {
@@ -86,7 +88,9 @@ public class FriendshipLegacyController {
       logger.info("listFriends");
       try {
           final User user = new User.Builder().setName(username).setPassword(password).build();
-          return new ResponseEntity<>(user.toString(), HttpStatus.OK);
+          final Collection<User> friends = friendShipService.listFriends(user);
+          final String[] theFriends = friends.stream().map(friend -> friend.getName()).toArray(String[]::new);
+          return new ResponseEntity<String[]>(theFriends, HttpStatus.OK);
       } catch (Exception e) {
           return new ResponseEntity<>(String.format("Error: %s, %s", HttpStatus.BAD_REQUEST.value(), e.getMessage()), HttpStatus.BAD_REQUEST);
       }

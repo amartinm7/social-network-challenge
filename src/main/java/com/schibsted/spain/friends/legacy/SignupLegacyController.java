@@ -25,9 +25,11 @@ public class SignupLegacyController {
     logger.info("signup user");
     try {
       final User user = new User.Builder().setName(username).setPassword(password).build();
-      signupService.signup(user);
-      logger.info("user stored... {} ", user);
-      return new ResponseEntity<>(user.toString(), HttpStatus.OK);
+      if ( signupService.signup(user) ) {
+        return new ResponseEntity<>(user.toString(), HttpStatus.OK);
+      } else {
+        return new ResponseEntity<>("", HttpStatus.BAD_REQUEST);
+      }
     } catch (Exception e) {
       return new ResponseEntity<>(String.format("Error: %s, %s", HttpStatus.BAD_REQUEST.value(), e.getMessage()), HttpStatus.BAD_REQUEST);
     }
