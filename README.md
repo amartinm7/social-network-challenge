@@ -64,6 +64,7 @@ localhost:8080/friendship/johndoe/listFriends
 - isolate interfaces for query and for command (save)
 - don't use the user object in the front layer and others. USer VO as argument in the methods
 - review the tests ignore
+- create swagger doc
 
 ## profiles
 
