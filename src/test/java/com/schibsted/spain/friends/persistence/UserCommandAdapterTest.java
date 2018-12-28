@@ -83,7 +83,7 @@ public class UserCommandAdapterTest {
         assertTrue(userCommandPort.save(usernameTo, passwordTo), "The user was not saved properly" );
         assertTrue(userCommandPort.requestFriendship(usernameFrom, usernameTo), "The requestFriendship was not saved properly");
         assertFalse(userCommandPort.requestFriendship(usernameFrom, usernameTo), "The requestFriendship accepted previously, two requests are not possible.");
-        assertTrue(userCommandPort.acceptFriendship(usernameFrom, usernameTo), "The acceptFriendship was not saved properly");
+        assertTrue(userCommandPort.acceptFriendship(usernameTo, usernameFrom), "The acceptFriendship was not saved properly");
         assertFalse(userCommandPort.acceptFriendship(usernameFrom, usernameTo), "The acceptFriendship was done previously, two acceptFriendship are not possible.");
     }
 
@@ -105,7 +105,7 @@ public class UserCommandAdapterTest {
         assertTrue(userCommandPort.save(usernameTo, passwordTo), "The user was not saved properly" );
         assertTrue(userCommandPort.requestFriendship(usernameFrom, usernameTo), "The requestFriendship was not saved properly");
         assertFalse(userCommandPort.requestFriendship(usernameFrom, usernameTo), "The requestFriendship accepted previously, two requests are not possible.");
-        assertTrue(userCommandPort.declineFriendship(usernameFrom, usernameTo), "The declineFriendship was not saved properly");
+        assertTrue(userCommandPort.declineFriendship(usernameTo, usernameFrom), "The declineFriendship was not saved properly");
         assertFalse(userCommandPort.declineFriendship(usernameFrom, usernameTo), "The declineFriendship was done previously, two declineFriendship are not possible.");
     }
 
@@ -128,11 +128,11 @@ public class UserCommandAdapterTest {
         assertTrue(userCommandPort.save(usernameTo2, passwordTo2), "The user was not saved properly" );
         assertTrue(userCommandPort.requestFriendship(usernameFrom, usernameTo), "The request was not saved properly");
         assertFalse(userCommandPort.requestFriendship(usernameFrom, usernameTo), "The requestFriendship accepted previously, two requests are not possible.");
-        assertTrue(userCommandPort.acceptFriendship(usernameFrom, usernameTo), "The acceptFriendship was not saved properly");
+        assertTrue(userCommandPort.acceptFriendship(usernameTo, usernameFrom), "The acceptFriendship was not saved properly");
         assertFalse(userCommandPort.acceptFriendship(usernameFrom, usernameTo), "The acceptFriendship was done previously, two acceptFriendship are not possible.");
         assertTrue(userCommandPort.requestFriendship(usernameFrom, usernameTo2), "The request was not saved properly");
         assertFalse(userCommandPort.requestFriendship(usernameFrom, usernameTo2), "The requestFriendship accepted previously, two requests are not possible.");
-        assertTrue(userCommandPort.acceptFriendship(usernameFrom, usernameTo2), "The acceptFriendship was not saved properly");
+        assertTrue(userCommandPort.acceptFriendship(usernameTo2, usernameFrom), "The acceptFriendship was not saved properly");
         assertFalse(userCommandPort.acceptFriendship(usernameFrom, usernameTo2), "The acceptFriendship was done previously, two acceptFriendship are not possible.");
         assertTrue(userQueryPort.listFriends(usernameFrom).size() == 2, "All the users are not in the list");
     }
