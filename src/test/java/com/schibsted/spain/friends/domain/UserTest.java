@@ -2,44 +2,54 @@ package com.schibsted.spain.friends.domain;
 
 import org.junit.Test;
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.Assert.*;
 
 public class UserTest {
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void buildEmptyUserShouldThrowError(){
         // given
         final String username = "";
         final String password = "password";
         // then
-        new User.Builder().setName(username).setPassword(password).build();
+        assertThrows (IllegalArgumentException.class,() -> new User.Builder().setName(username).setPassword(password).build(), "The user was created well but the params are wrong");
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void buildEmptyPassShouldThrowError(){
         // given
         final String username = "johnny";
         final String password = "";
         // then
-        new User.Builder().setName(username).setPassword(password).build();
+        assertThrows (IllegalArgumentException.class,() -> new User.Builder().setName(username).setPassword(password).build(), "The user was created well but the params are wrong");
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void buildShortNameShouldThrowError(){
         // given
         final String username = "john";
         final String password = "password";
         // then
-        new User.Builder().setName(username).setPassword(password).build();
+        assertThrows (IllegalArgumentException.class,() -> new User.Builder().setName(username).setPassword(password).build(), "The user was created well but the params are wrong");
     }
 
     @Test
-    public void buildShortPassShouldThrowError(){
+    public void buildShortPasswordShouldThrowError(){
+        // given
+        final String username = "john";
+        final String password = "pass";
+        // then
+        assertThrows (IllegalArgumentException.class,() -> new User.Builder().setName(username).setPassword(password).build(), "The user was created well but the params are wrong");
+    }
+
+    @Test
+    public void buildUserShouldBeOK(){
         // given
         final String username = "johnny";
         final String password = "password";
         // then
-        User user = new User.Builder().setName(username).setPassword(password).build();
+        final User user = new User.Builder().setName(username).setPassword(password).build();
         assertNotNull("The created object user is null", user);
     }
 

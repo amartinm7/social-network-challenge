@@ -56,12 +56,12 @@ localhost:8080/friendship/johndoe/requestFriendshipTo/robert
 localhost:8080/friendship/robert/acceptFriendshipTo/johndoe
 localhost:8080/friendship/robert/declineFriendshipTo/johndoe
 localhost:8080/friendship/johndoe/listFriends
-- the controller has to return a something
+- the controller has to return a something - done
 - the once the user has login you can use the oath token to login
 - review the signature of the methods
 - review the name of the test methods
 - review the messages of the test methods
-- isolate interfaces for query and for command (save)
+- isolate interfaces for query and for command (save) - done
 - don't use the user object in the front layer and others. USer VO as argument in the methods
 - review the tests ignore
 - create swagger doc

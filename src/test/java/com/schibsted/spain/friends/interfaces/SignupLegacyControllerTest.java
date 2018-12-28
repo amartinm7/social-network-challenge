@@ -6,6 +6,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import com.schibsted.spain.friends.infrastructure.HttpParams;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -38,96 +39,124 @@ public class SignupLegacyControllerTest {
     public void signupEmptyUserShouldReturnBadRequest() throws Exception {
         // given
         final String username = "";
-        final String pass = "rightPassword";
+        final String password = "password";
+
+        // when
         final MultiValueMap<String,String> user = new LinkedMultiValueMap<>();
-        user.put("username", Collections.singletonList(username));
+        user.put(HttpParams.USER_NAME, Collections.singletonList(username));
+
         final HttpHeaders httpHeaders = new HttpHeaders();
-        httpHeaders.add("X-Password",pass);
+        httpHeaders.add(HttpParams.X_PASSWORD, password);
+
+        final String expectedMessage = "400";
+
         // Then
-        this.mockMvc.perform(post("/signup")
+        this.mockMvc.perform(post(HttpParams.URI_SIGNUP)
                 .contentType(MediaType.APPLICATION_JSON)
                 .params(user)
                 .headers(httpHeaders)
         ).andDo(print())
                 .andExpect(status().isBadRequest())
-                .andExpect(content().string(containsString("400")));
+                .andExpect(content().string(containsString(expectedMessage)));
     }
 
     @Test
     public void signupEmptyPassShouldReturnBadRequest() throws Exception {
         // given
         final String username = "Johnny";
-        final String pass = "";
+        final String password = "";
+
+        // when
         final MultiValueMap<String,String> user = new LinkedMultiValueMap<>();
-        user.put("username", Collections.singletonList(username));
+        user.put(HttpParams.USER_NAME, Collections.singletonList(username));
+
         final HttpHeaders httpHeaders = new HttpHeaders();
-        httpHeaders.add("X-Password",pass);
+        httpHeaders.add(HttpParams.X_PASSWORD, password);
+
+        final String expectedMessage = "400";
+
         // Then
-        this.mockMvc.perform(post("/signup")
+        this.mockMvc.perform(post(HttpParams.URI_SIGNUP)
                 .contentType(MediaType.APPLICATION_JSON)
                 .params(user)
                 .headers(httpHeaders)
         ).andDo(print())
                 .andExpect(status().isBadRequest())
-                .andExpect(content().string(containsString("400")));
+                .andExpect(content().string(containsString(expectedMessage)));
     }
 
     @Test
     public void signupBadUserShouldReturnBadRequest() throws Exception {
         // given
-        final String username = "john";
-        final String pass = "rightPassword";
+        final String username = "John";
+        final String password = "password";
+
+        // when
         final MultiValueMap<String,String> user = new LinkedMultiValueMap<>();
-        user.put("username", Collections.singletonList(username));
+        user.put(HttpParams.USER_NAME, Collections.singletonList(username));
+
         final HttpHeaders httpHeaders = new HttpHeaders();
-        httpHeaders.add("X-Password",pass);
+        httpHeaders.add(HttpParams.X_PASSWORD, password);
+
+        final String expectedMessage = "400";
+
         // Then
-        this.mockMvc.perform(post("/signup")
+        this.mockMvc.perform(post(HttpParams.URI_SIGNUP)
                 .contentType(MediaType.APPLICATION_JSON)
                 .params(user)
                 .headers(httpHeaders)
         ).andDo(print())
                 .andExpect(status().isBadRequest())
-                .andExpect(content().string(containsString("400")));
+                .andExpect(content().string(containsString(expectedMessage)));
     }
 
     public void signupBadPassShouldReturnBadRequest() throws Exception {
         // given
-        final String username = "johnny";
-        final String pass = "short";
+        final String username = "Johnny";
+        final String password = "short";
+
+        // when
         final MultiValueMap<String,String> user = new LinkedMultiValueMap<>();
-        user.put("username", Collections.singletonList(username));
+        user.put(HttpParams.USER_NAME, Collections.singletonList(username));
+
         final HttpHeaders httpHeaders = new HttpHeaders();
-        httpHeaders.add("X-Password",pass);
+        httpHeaders.add(HttpParams.X_PASSWORD, password);
+
+        final String expectedMessage = "400";
+
         // Then
-        this.mockMvc.perform(post("/signup")
+        this.mockMvc.perform(post(HttpParams.URI_SIGNUP)
                 .contentType(MediaType.APPLICATION_JSON)
                 .params(user)
                 .headers(httpHeaders)
         ).andDo(print())
                 .andExpect(status().isBadRequest())
-                .andExpect(content().string(containsString("400")));
+                .andExpect(content().string(containsString(expectedMessage)));
     }
 
     @Test
     public void signupReturnOk() throws Exception {
         // given
-        final String username = "johnny";
-        final String pass = "passXXXXX";
+        final String username = "Johnny";
+        final String password = "password";
+
+        // when
         final MultiValueMap<String,String> user = new LinkedMultiValueMap<>();
-        user.put("username", Collections.singletonList(username));
+        user.put(HttpParams.USER_NAME, Collections.singletonList(username));
+
         final HttpHeaders httpHeaders = new HttpHeaders();
-        httpHeaders.add("X-Password",pass);
-        // Expected
-        final String usernameExpected = "johnny";
+        httpHeaders.add(HttpParams.X_PASSWORD, password);
+
+        final String expectedMessage = username;
+
         // Then
-        this.mockMvc.perform(post("/signup")
+        this.mockMvc.perform(post(HttpParams.URI_SIGNUP)
                 .contentType(MediaType.APPLICATION_JSON)
                 .params(user)
                 .headers(httpHeaders)
         ).andDo(print())
                 .andExpect(status().isOk())
-                .andExpect(content().string(containsString(usernameExpected)));
+                .andExpect(content().string(containsString(expectedMessage)));
     }
 
 

@@ -29,7 +29,7 @@ public class SignupLegacyController {
     if ( signupService.signup(username, password) ) {
       return new ResponseEntity<>(username, HttpStatus.OK);
     } else {
-      return new ResponseEntity<>(String.format("Invalid username/password: %s: %s ", username, password), HttpStatus.BAD_REQUEST);
+      return new ResponseEntity<>(String.format("%d, Invalid username/password: %s: %s ", HttpStatus.BAD_REQUEST.value(), username, password), HttpStatus.BAD_REQUEST);
     }
   }
 }
