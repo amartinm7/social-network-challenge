@@ -50,7 +50,7 @@ public class SignupLegacyControllerIT {
                 .toUri();
         final HttpEntity<MultiValueMap<String, String>> request
                 = new HttpEntity<>(map, headers);
-        assertThat(this.restTemplate.postForObject(uri, request, String.class)).contains("User{name='john5', password='secureXXX'}");
+        assertThat(this.restTemplate.postForObject(uri, request, String.class)).contains("john5");
     }
 
 }

@@ -120,7 +120,7 @@ public class SignupLegacyControllerTest {
         final HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.add("X-Password",pass);
         // Expected
-        final User userExpected = new User.Builder().setName(username).setPassword(pass).build();
+        final String usernameExpected = "johnny";
         // Then
         this.mockMvc.perform(post("/signup")
                 .contentType(MediaType.APPLICATION_JSON)
@@ -128,7 +128,7 @@ public class SignupLegacyControllerTest {
                 .headers(httpHeaders)
         ).andDo(print())
                 .andExpect(status().isOk())
-                .andExpect(content().string(containsString(userExpected.toString())));
+                .andExpect(content().string(containsString(usernameExpected)));
     }
 
 
