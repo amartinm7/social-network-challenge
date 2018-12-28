@@ -26,14 +26,10 @@ public class SignupLegacyController {
       @RequestParam(HttpParams.USER_NAME) String username,
       @RequestHeader(HttpParams.X_PASSWORD) String password) {
     logger.info("signup user...");
-    try {
-      if ( signupService.signup(username, password) ) {
-        return new ResponseEntity<>(username, HttpStatus.OK);
-      } else {
-        return new ResponseEntity<>("", HttpStatus.BAD_REQUEST);
-      }
-    } catch (Exception e) {
-      return new ResponseEntity<>(String.format("Error: %s, %s", HttpStatus.BAD_REQUEST.value(), e.getMessage()), HttpStatus.BAD_REQUEST);
+    if ( signupService.signup(username, password) ) {
+      return new ResponseEntity<>(username, HttpStatus.OK);
+    } else {
+      return new ResponseEntity<>(String.format("Invalid username/password: %s: %s ", username, password), HttpStatus.BAD_REQUEST);
     }
   }
 }

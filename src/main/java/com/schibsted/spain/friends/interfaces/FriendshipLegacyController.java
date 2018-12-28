@@ -20,6 +20,7 @@ import java.util.Collection;
 @RestController
 @RequestMapping(HttpParams.URI_FRIENDSHIP)
 public class FriendshipLegacyController {
+
   private static final Logger logger = LoggerFactory.getLogger(FriendshipLegacyController.class);
 
   private FriendShipService friendShipService;
@@ -34,14 +35,10 @@ public class FriendshipLegacyController {
       @RequestParam(HttpParams.USER_NAME_TO) String usernameTo,
       @RequestHeader(HttpParams.X_PASSWORD) String password) {
       logger.info("requestFriendship");
-      try {
-          if (friendShipService.requestFriendship(usernameFrom, usernameTo)){
-              return new ResponseEntity<>("", HttpStatus.OK);
-          } else {
-              return new ResponseEntity<>("", HttpStatus.BAD_REQUEST);
-          }
-      } catch (Exception e) {
-          return new ResponseEntity<>(String.format("Error: %s, %s", HttpStatus.BAD_REQUEST.value(), e.getMessage()), HttpStatus.BAD_REQUEST);
+      if (friendShipService.requestFriendship(usernameFrom, usernameTo)){
+          return new ResponseEntity<>("", HttpStatus.OK);
+      } else {
+          return new ResponseEntity<>("", HttpStatus.BAD_REQUEST);
       }
   }
 
@@ -51,14 +48,10 @@ public class FriendshipLegacyController {
       @RequestParam(HttpParams.USER_NAME_TO) String usernameTo,
       @RequestHeader(HttpParams.X_PASSWORD) String password) {
       logger.info("acceptFriendship");
-      try {
-          if (friendShipService.acceptFriendship(usernameFrom, usernameTo)){
-              return new ResponseEntity<>("", HttpStatus.OK);
-          } else {
-              return new ResponseEntity<>("", HttpStatus.BAD_REQUEST);
-          }
-      } catch (Exception e) {
-          return new ResponseEntity<>(String.format("Error: %s, %s", HttpStatus.BAD_REQUEST.value(), e.getMessage()), HttpStatus.BAD_REQUEST);
+      if (friendShipService.acceptFriendship(usernameFrom, usernameTo)){
+          return new ResponseEntity<>("", HttpStatus.OK);
+      } else {
+          return new ResponseEntity<>("", HttpStatus.BAD_REQUEST);
       }
   }
 
@@ -68,14 +61,10 @@ public class FriendshipLegacyController {
       @RequestParam(HttpParams.USER_NAME_TO) String usernameTo,
       @RequestHeader(HttpParams.X_PASSWORD) String password) {
       logger.info("declineFriendship");
-      try {
-          if (friendShipService.declineFriendship(usernameFrom, usernameTo)){
-              return new ResponseEntity<>("", HttpStatus.OK);
-          } else {
-              return new ResponseEntity<>("", HttpStatus.BAD_REQUEST);
-          }
-      } catch (Exception e) {
-          return new ResponseEntity<>(String.format("Error: %s, %s", HttpStatus.BAD_REQUEST.value(), e.getMessage()), HttpStatus.BAD_REQUEST);
+      if (friendShipService.declineFriendship(usernameFrom, usernameTo)){
+          return new ResponseEntity<>("", HttpStatus.OK);
+      } else {
+          return new ResponseEntity<>("", HttpStatus.BAD_REQUEST);
       }
   }
 
@@ -84,12 +73,8 @@ public class FriendshipLegacyController {
       @RequestParam(HttpParams.USER_NAME) String username,
       @RequestHeader(HttpParams.X_PASSWORD) String password) {
       logger.info("listFriends");
-      try {
-          final Collection<User> friends = friendShipService.listFriends(username);
-          final String[] theFriends = friends.stream().map(friend -> friend.getName()).toArray(String[]::new);
-          return new ResponseEntity<String[]>(theFriends, HttpStatus.OK);
-      } catch (Exception e) {
-          return new ResponseEntity<>(String.format("Error: %s, %s", HttpStatus.BAD_REQUEST.value(), e.getMessage()), HttpStatus.BAD_REQUEST);
-      }
+      final Collection<User> friends = friendShipService.listFriends(username);
+      final String[] theFriends = friends.stream().map(friend -> friend.getName()).toArray(String[]::new);
+      return new ResponseEntity<String[]>(theFriends, HttpStatus.OK);
   }
 }
