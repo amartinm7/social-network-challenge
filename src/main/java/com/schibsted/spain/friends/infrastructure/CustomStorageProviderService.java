@@ -1,6 +1,6 @@
-package com.schibsted.spain.friends.persistence;
+package com.schibsted.spain.friends.infrastructure;
 
-import com.schibsted.spain.friends.model.User;
+import com.schibsted.spain.friends.domain.User;
 
 import java.util.Collection;
 

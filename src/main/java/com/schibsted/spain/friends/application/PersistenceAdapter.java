@@ -1,7 +1,7 @@
-package com.schibsted.spain.friends.service;
+package com.schibsted.spain.friends.application;
 
-import com.schibsted.spain.friends.model.User;
-import com.schibsted.spain.friends.persistence.CustomStorageProviderService;
+import com.schibsted.spain.friends.domain.User;
+import com.schibsted.spain.friends.infrastructure.CustomStorageProviderService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

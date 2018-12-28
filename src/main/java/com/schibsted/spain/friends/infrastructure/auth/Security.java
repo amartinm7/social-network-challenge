@@ -1,4 +1,4 @@
-package com.schibsted.spain.friends.config;
+package com.schibsted.spain.friends.infrastructure.auth;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

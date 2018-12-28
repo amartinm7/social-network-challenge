@@ -1,4 +1,4 @@
-package com.schibsted.spain.friends.config;
+package com.schibsted.spain.friends.infrastructure.auth;
 
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;

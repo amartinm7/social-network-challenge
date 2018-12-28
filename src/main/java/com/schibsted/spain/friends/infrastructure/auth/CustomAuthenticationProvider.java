@@ -1,6 +1,6 @@
-package com.schibsted.spain.friends.config;
+package com.schibsted.spain.friends.infrastructure.auth;
 
-import com.schibsted.spain.friends.persistence.CustomStorageProviderService;
+import com.schibsted.spain.friends.infrastructure.CustomStorageProviderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;

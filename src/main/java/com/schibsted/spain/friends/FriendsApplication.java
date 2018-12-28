@@ -1,6 +1,5 @@
 package com.schibsted.spain.friends;
 
-import com.schibsted.spain.friends.service.PersistenceAdapter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;

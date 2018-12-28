@@ -1,4 +1,4 @@
-package com.schibsted.spain.friends.model;
+package com.schibsted.spain.friends.domain;
 
 import java.util.*;
 

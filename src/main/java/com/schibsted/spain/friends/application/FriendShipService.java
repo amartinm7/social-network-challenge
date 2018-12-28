@@ -1,11 +1,9 @@
-package com.schibsted.spain.friends.service;
+package com.schibsted.spain.friends.application;
 
-import com.schibsted.spain.friends.model.User;
-
+import com.schibsted.spain.friends.domain.User;
 import java.util.Collection;
 
-public interface PersistenceService {
-    boolean save(User user);
+public interface FriendShipService {
     boolean requestFriendship(User userFrom, String userTo);
     boolean acceptFriendship(User userFrom, String userTo);
     boolean declineFriendship(User userFrom, String userTo);

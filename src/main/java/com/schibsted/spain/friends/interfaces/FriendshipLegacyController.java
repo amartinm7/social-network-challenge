@@ -1,8 +1,8 @@
-package com.schibsted.spain.friends.legacy;
+package com.schibsted.spain.friends.interfaces;
 
-import com.schibsted.spain.friends.config.HttpParams;
-import com.schibsted.spain.friends.model.User;
-import com.schibsted.spain.friends.service.FriendShipService;
+import com.schibsted.spain.friends.infrastructure.auth.HttpParams;
+import com.schibsted.spain.friends.domain.User;
+import com.schibsted.spain.friends.application.FriendShipService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

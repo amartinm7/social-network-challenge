@@ -1,5 +1,5 @@
-package com.schibsted.spain.friends.service;
-import com.schibsted.spain.friends.model.User;
+package com.schibsted.spain.friends.application;
+import com.schibsted.spain.friends.domain.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

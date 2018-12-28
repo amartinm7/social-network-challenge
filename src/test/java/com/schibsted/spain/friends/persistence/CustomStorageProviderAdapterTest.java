@@ -1,6 +1,8 @@
 package com.schibsted.spain.friends.persistence;
 
-import com.schibsted.spain.friends.model.User;
+import com.schibsted.spain.friends.domain.User;
+import com.schibsted.spain.friends.infrastructure.CustomStorageProviderAdapter;
+import com.schibsted.spain.friends.infrastructure.CustomStorageProviderService;
 import org.junit.Ignore;
 import org.junit.Test;
 

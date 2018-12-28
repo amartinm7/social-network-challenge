@@ -1,4 +1,4 @@
-package com.schibsted.spain.friends.config;
+package com.schibsted.spain.friends.infrastructure.auth;
 
 public class HttpParams {
     public static final String URI_SIGNUP                   = "/signup";
