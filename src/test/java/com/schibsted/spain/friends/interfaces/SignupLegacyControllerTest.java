@@ -1,4 +1,4 @@
-package com.schibsted.spain.friends.legacy;
+package com.schibsted.spain.friends.interfaces;
 
 import static org.hamcrest.Matchers.containsString;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;

@@ -1,6 +1,5 @@
-package com.schibsted.spain.friends.model;
+package com.schibsted.spain.friends.domain;
 
-import com.schibsted.spain.friends.domain.User;
 import org.junit.Test;
 
 import static org.junit.Assert.*;

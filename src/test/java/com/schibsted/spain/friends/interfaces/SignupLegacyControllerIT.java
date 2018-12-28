@@ -1,4 +1,4 @@
-package com.schibsted.spain.friends.legacy;
+package com.schibsted.spain.friends.interfaces;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

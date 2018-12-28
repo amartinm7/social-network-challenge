@@ -1,4 +1,4 @@
-package com.schibsted.spain.friends.persistence;
+package com.schibsted.spain.friends.domain.adapters;
 
 import static org.junit.jupiter.api.Assertions.*;
 
