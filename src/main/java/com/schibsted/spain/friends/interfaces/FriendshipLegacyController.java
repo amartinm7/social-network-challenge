@@ -35,9 +35,8 @@ public class FriendshipLegacyController {
       @RequestHeader(HttpParams.X_PASSWORD) String password) {
       logger.info("requestFriendship");
       try {
-          final User user = new User.Builder().setName(usernameFrom).setPassword(password).build();
-          if (friendShipService.requestFriendship(user, usernameTo)){
-              return new ResponseEntity<>(user.toString(), HttpStatus.OK);
+          if (friendShipService.requestFriendship(usernameFrom, usernameTo)){
+              return new ResponseEntity<>("", HttpStatus.OK);
           } else {
               return new ResponseEntity<>("", HttpStatus.BAD_REQUEST);
           }
@@ -53,9 +52,8 @@ public class FriendshipLegacyController {
       @RequestHeader(HttpParams.X_PASSWORD) String password) {
       logger.info("acceptFriendship");
       try {
-          final User user = new User.Builder().setName(usernameFrom).setPassword(password).build();
-          if (friendShipService.acceptFriendship(user, usernameTo)){
-              return new ResponseEntity<>(user.toString(), HttpStatus.OK);
+          if (friendShipService.acceptFriendship(usernameFrom, usernameTo)){
+              return new ResponseEntity<>("", HttpStatus.OK);
           } else {
               return new ResponseEntity<>("", HttpStatus.BAD_REQUEST);
           }
@@ -71,9 +69,8 @@ public class FriendshipLegacyController {
       @RequestHeader(HttpParams.X_PASSWORD) String password) {
       logger.info("declineFriendship");
       try {
-          final User user = new User.Builder().setName(usernameFrom).setPassword(password).build();
-          if (friendShipService.declineFriendship(user, usernameTo)){
-              return new ResponseEntity<>(user.toString(), HttpStatus.OK);
+          if (friendShipService.declineFriendship(usernameFrom, usernameTo)){
+              return new ResponseEntity<>("", HttpStatus.OK);
           } else {
               return new ResponseEntity<>("", HttpStatus.BAD_REQUEST);
           }
@@ -88,8 +85,7 @@ public class FriendshipLegacyController {
       @RequestHeader(HttpParams.X_PASSWORD) String password) {
       logger.info("listFriends");
       try {
-          final User user = new User.Builder().setName(username).setPassword(password).build();
-          final Collection<User> friends = friendShipService.listFriends(user);
+          final Collection<User> friends = friendShipService.listFriends(username);
           final String[] theFriends = friends.stream().map(friend -> friend.getName()).toArray(String[]::new);
           return new ResponseEntity<String[]>(theFriends, HttpStatus.OK);
       } catch (Exception e) {

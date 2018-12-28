@@ -34,6 +34,6 @@ dependencies {
 	compile 'ch.qos.logback:logback-classic'
 	compile 'org.slf4j:jul-to-slf4j'
 	compile 'org.slf4j:log4j-over-slf4j'
-	compileOnly 'org.projectlombok:lombok:1.16.20'
-	annotationProcessor 'org.projectlombok:lombok:1.16.20'
+	testCompile 'org.junit.jupiter:junit-jupiter-api'
+	testCompile 'org.junit.jupiter:junit-jupiter-engine'
 }
