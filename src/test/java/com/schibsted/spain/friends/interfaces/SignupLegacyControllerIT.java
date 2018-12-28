@@ -1,5 +1,6 @@
 package com.schibsted.spain.friends.interfaces;
 
+import com.schibsted.spain.friends.infrastructure.HttpParams;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -36,21 +37,62 @@ public class SignupLegacyControllerIT {
 
     @Test
     public void signupReturnOk() throws Exception {
+        // given a user
+        final String username = "johnnyX";
+        final String password = "password";
+
+        // when
         final String url = "http://localhost:" + port + "/signup";
+
         final HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
-        headers.add("X-Password","secureXXX");
+        headers.add(HttpParams.X_PASSWORD,password);
+
         final MultiValueMap<String,String> map = new LinkedMultiValueMap<>();
         map.put("bodyParam1", Collections.singletonList("bodyParam1xxx"));
+
         URI uri = new URL(url).toURI();
         uri = UriComponentsBuilder
                 .fromUri(uri)
-                .queryParam("username", "john5")
+                .queryParam(HttpParams.USER_NAME, username)
                 .build()
                 .toUri();
-        final HttpEntity<MultiValueMap<String, String>> request
-                = new HttpEntity<>(map, headers);
-        assertThat(this.restTemplate.postForObject(uri, request, String.class)).contains("john5");
+
+        final HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<>(map, headers);
+
+        // then
+        final String expectedMessage = username;
+        assertThat(this.restTemplate.postForObject(uri, request, String.class)).contains(expectedMessage);
+    }
+
+    @Test
+    public void signupReturnBadRequest() throws Exception {
+        // given a user
+        final String username = "johnnyX";
+        final String password = "pass";
+
+        // when
+        final String url = "http://localhost:" + port + "/signup";
+
+        final HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.add(HttpParams.X_PASSWORD,password);
+
+        final MultiValueMap<String,String> map = new LinkedMultiValueMap<>();
+        map.put("bodyParam1", Collections.singletonList("bodyParam1xxx"));
+
+        URI uri = new URL(url).toURI();
+        uri = UriComponentsBuilder
+                .fromUri(uri)
+                .queryParam(HttpParams.USER_NAME, username)
+                .build()
+                .toUri();
+
+        final HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<>(map, headers);
+
+        // then
+        final String expectedMessage = "400";
+        assertThat(this.restTemplate.postForObject(uri, request, String.class)).contains(expectedMessage);
     }
 
 }
