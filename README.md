@@ -40,6 +40,10 @@ docker images
 docker rmi PID
 ``` 
 
+## Swagger
+You can see the swagger documentation in the following url:
+- http://localhost:8080/swagger-ui.html
+
 ### Tips
 
 closing ports
@@ -56,20 +60,16 @@ localhost:8080/friendship/johndoe/requestFriendshipTo/robert
 localhost:8080/friendship/robert/acceptFriendshipTo/johndoe
 localhost:8080/friendship/robert/declineFriendshipTo/johndoe
 localhost:8080/friendship/johndoe/listFriends
-- the controller has to return a something - done
-- the once the user has login you can use the oath token to login
-- review the signature of the methods
-- review the name of the test methods
-- review the messages of the test methods
-- isolate interfaces for query and for command (save) - done
-- 
-- create swagger doc
+
+- develop a new domain to change the current one
+- develop the same model to use JPA and h2 and derby for instance
+- develop the versioning in the improvement project
 
 ## profiles
 
-specify
+to select a profile use the --spring.profiles.active param.
 ```
-java -jar myapp.jar --spring.profiles.active=dev
+java -jar friends-rest-service-0.1.0.jar --spring.profiles.active=dev
 ```
 
 ![ddd-building-blocks](./_media/ddd-building-blocks.png)
