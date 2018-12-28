@@ -1,5 +1,6 @@
 package com.schibsted.spain.friends.infrastructure.auth;
 
+import com.schibsted.spain.friends.infrastructure.HttpParams;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -12,9 +13,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 public class CustomAuthFilter extends OncePerRequestFilter {
-
-
-
 
     @Override
     protected void doFilterInternal(HttpServletRequest request,

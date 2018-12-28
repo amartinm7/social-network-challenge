@@ -1,7 +1,6 @@
 package com.schibsted.spain.friends.interfaces;
 
-import com.schibsted.spain.friends.infrastructure.auth.HttpParams;
-import com.schibsted.spain.friends.domain.User;
+import com.schibsted.spain.friends.infrastructure.HttpParams;
 import com.schibsted.spain.friends.application.SignupService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,8 +12,11 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping(HttpParams.URI_SIGNUP)
 public class SignupLegacyController {
+
   private static final Logger logger = LoggerFactory.getLogger(SignupLegacyController.class);
+
   private final SignupService signupService;
+
   public SignupLegacyController(@Autowired SignupService signupService){
     this.signupService = signupService;
   }
@@ -23,11 +25,10 @@ public class SignupLegacyController {
   public ResponseEntity<String> signUp(
       @RequestParam(HttpParams.USER_NAME) String username,
       @RequestHeader(HttpParams.X_PASSWORD) String password) {
-    logger.info("signup user");
+    logger.info("signup user...");
     try {
-      final User user = new User.Builder().setName(username).setPassword(password).build();
-      if ( signupService.signup(user) ) {
-        return new ResponseEntity<>(user.toString(), HttpStatus.OK);
+      if ( signupService.signup(username, password) ) {
+        return new ResponseEntity<>(username, HttpStatus.OK);
       } else {
         return new ResponseEntity<>("", HttpStatus.BAD_REQUEST);
       }

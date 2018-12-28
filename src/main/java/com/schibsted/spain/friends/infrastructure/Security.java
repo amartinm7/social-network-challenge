@@ -1,5 +1,7 @@
-package com.schibsted.spain.friends.infrastructure.auth;
+package com.schibsted.spain.friends.infrastructure;
 
+import com.schibsted.spain.friends.domain.auth.CustomAuthenticationProvider;
+import com.schibsted.spain.friends.infrastructure.auth.CustomAuthFilter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

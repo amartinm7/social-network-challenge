@@ -1,14 +1,13 @@
 package com.schibsted.spain.friends.persistence;
 
 import com.schibsted.spain.friends.domain.User;
-import com.schibsted.spain.friends.infrastructure.CustomStorageProviderAdapter;
-import com.schibsted.spain.friends.infrastructure.CustomStorageProviderService;
+import com.schibsted.spain.friends.domain.adapters.UserCommandAdapter;
 import org.junit.Ignore;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-public class CustomStorageProviderAdapterTest {
+public class UserCommandAdapterTest {
 
     @Test
     public void saveRightUserShouldBeOK(){
@@ -17,7 +16,7 @@ public class CustomStorageProviderAdapterTest {
         final String password = "password";
         final User user = new User.Builder().setName(username).setPassword(password).build();
         // Then
-        final CustomStorageProviderService service = new CustomStorageProviderAdapter();
+        final CustomStorageRepository service = new UserCommandAdapter();
         service.save(user);
         assertNotNull("The user was not saved properly", user);
     }
@@ -30,7 +29,7 @@ public class CustomStorageProviderAdapterTest {
         final String password = "password";
         final User user = new User.Builder().setName(username).setPassword(password).build();
         // Then
-        final CustomStorageProviderService service = new CustomStorageProviderAdapter();
+        final CustomStorageRepository service = new UserCommandAdapter();
         service.save(user);
         assertNotNull("The user was not saved properly", user);
         // Throws exception
@@ -48,7 +47,7 @@ public class CustomStorageProviderAdapterTest {
         final String passwordZ = "password";
         final User userTo = new User.Builder().setName(usernameZ).setPassword(passwordZ).build();
         // Then
-        final CustomStorageProviderService service = new CustomStorageProviderAdapter();
+        final CustomStorageRepository service = new UserCommandAdapter();
         service.save(userTo);
         // Throws exception
         service.requestFriendship(userFrom, usernameZ);
@@ -63,7 +62,7 @@ public class CustomStorageProviderAdapterTest {
         final User userFrom = new User.Builder().setName(usernameX).setPassword(passwordX).build();
         final String usernameZ = "johnnyZ";
         // Then
-        final CustomStorageProviderService service = new CustomStorageProviderAdapter();
+        final CustomStorageRepository service = new UserCommandAdapter();
         service.save(userFrom);
         // Throws exception
         service.requestFriendship(userFrom, usernameZ);
@@ -79,7 +78,7 @@ public class CustomStorageProviderAdapterTest {
         final String passwordZ = "password";
         final User userTo = new User.Builder().setName(usernameZ).setPassword(passwordZ).build();
         // Then
-        final CustomStorageProviderService service = new CustomStorageProviderAdapter();
+        final CustomStorageRepository service = new UserCommandAdapter();
         service.save(userFrom);
         service.save(userTo);
         assertTrue("The request was not saved properly", service.requestFriendship(userFrom, usernameZ));
@@ -96,7 +95,7 @@ public class CustomStorageProviderAdapterTest {
         final String passwordZ = "password";
         final User userTo = new User.Builder().setName(usernameZ).setPassword(passwordZ).build();
         // Then
-        final CustomStorageProviderService service = new CustomStorageProviderAdapter();
+        final CustomStorageRepository service = new UserCommandAdapter();
         service.save(userFrom);
         service.save(userTo);
         assertTrue("The request was not saved properly", service.requestFriendship(userFrom, usernameZ));
@@ -115,7 +114,7 @@ public class CustomStorageProviderAdapterTest {
         final String passwordZ = "password";
         final User userTo = new User.Builder().setName(usernameZ).setPassword(passwordZ).build();
         // Then
-        final CustomStorageProviderService service = new CustomStorageProviderAdapter();
+        final CustomStorageRepository service = new UserCommandAdapter();
         service.save(userFrom);
         service.save(userTo);
         assertFalse("The accept was not saved properly", service.acceptFriendship(userFrom, usernameZ));
@@ -133,7 +132,7 @@ public class CustomStorageProviderAdapterTest {
         final String passwordZ = "password";
         final User userTo = new User.Builder().setName(usernameZ).setPassword(passwordZ).build();
         // Then
-        final CustomStorageProviderService service = new CustomStorageProviderAdapter();
+        final CustomStorageRepository service = new UserCommandAdapter();
         service.save(userFrom);
         service.save(userTo);
         assertTrue("The request was not saved properly", service.requestFriendship(userFrom, usernameZ));
@@ -152,7 +151,7 @@ public class CustomStorageProviderAdapterTest {
         final String passwordZ = "password";
         final User userTo = new User.Builder().setName(usernameZ).setPassword(passwordZ).build();
         // Then
-        final CustomStorageProviderService service = new CustomStorageProviderAdapter();
+        final CustomStorageRepository service = new UserCommandAdapter();
         service.save(userFrom);
         service.save(userTo);
         assertFalse("The accept was not saved properly", service.declineFriendship(userFrom, usernameZ));
@@ -173,7 +172,7 @@ public class CustomStorageProviderAdapterTest {
         final String passwordToZ = "password";
         final User userToZ = new User.Builder().setName(usernameToZ).setPassword(passwordToZ).build();
         // Then
-        final CustomStorageProviderService service = new CustomStorageProviderAdapter();
+        final CustomStorageRepository service = new UserCommandAdapter();
         service.save(userFrom);
         service.save(userToY);
         service.save(userToZ);
@@ -203,7 +202,7 @@ public class CustomStorageProviderAdapterTest {
         final String passwordToZ = "password";
         final User userToZ = new User.Builder().setName(usernameToZ).setPassword(passwordToZ).build();
         // Then
-        final CustomStorageProviderService service = new CustomStorageProviderAdapter();
+        final CustomStorageRepository service = new UserCommandAdapter();
         service.save(userFrom);
         service.save(userToY);
         service.save(userToZ);

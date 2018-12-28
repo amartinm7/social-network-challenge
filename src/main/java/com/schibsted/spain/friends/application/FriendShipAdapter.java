@@ -1,5 +1,7 @@
 package com.schibsted.spain.friends.application;
 import com.schibsted.spain.friends.domain.User;
+import com.schibsted.spain.friends.domain.ports.UserCommandPort;
+import com.schibsted.spain.friends.domain.ports.UserQueryPort;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,29 +13,31 @@ import java.util.Collection;
 public class FriendShipAdapter implements FriendShipService{
     private static final Logger logger = LoggerFactory.getLogger(FriendShipAdapter.class);
 
-    private final PersistenceService persistenceService;
+    private final UserQueryPort userQueryPort;
+    private final UserCommandPort userCommandPort;
 
-    public FriendShipAdapter(@Autowired PersistenceService persistenceService){
-        this.persistenceService = persistenceService;
+    public FriendShipAdapter(@Autowired UserQueryPort userQueryPort, @Autowired UserCommandPort userCommandPort){
+        this.userQueryPort = userQueryPort;
+        this.userCommandPort = userCommandPort;
     }
 
     @Override
-    public boolean requestFriendship(User userFrom, String userTo) {
-        return persistenceService.requestFriendship(userFrom, userTo);
+    public boolean requestFriendship(String userFrom, String userTo) {
+        return userCommandPort.requestFriendship(userFrom, userTo);
     }
 
     @Override
-    public boolean acceptFriendship(User userFrom, String userTo) {
-        return persistenceService.acceptFriendship(userFrom, userTo);
+    public boolean acceptFriendship(String userFrom, String userTo) {
+        return userCommandPort.acceptFriendship(userFrom, userTo);
     }
 
     @Override
-    public boolean declineFriendship(User userFrom, String userTo) {
-        return persistenceService.declineFriendship(userFrom, userTo);
+    public boolean declineFriendship(String userFrom, String userTo) {
+        return userCommandPort.declineFriendship(userFrom, userTo);
     }
 
     @Override
-    public Collection<User> listFriends(User userFrom) {
-        return persistenceService.listFriends(userFrom);
+    public Collection<User> listFriends(String userFrom) {
+        return userQueryPort.listFriends(userFrom);
     }
 }

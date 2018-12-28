@@ -1,6 +1,6 @@
-package com.schibsted.spain.friends.infrastructure.auth;
+package com.schibsted.spain.friends.domain.auth;
 
-import com.schibsted.spain.friends.infrastructure.CustomStorageProviderService;
+import com.schibsted.spain.friends.domain.ports.UserQueryPort;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -12,14 +12,14 @@ import org.springframework.stereotype.Component;
 public class CustomAuthenticationProvider implements AuthenticationProvider {
 
     @Autowired
-    private CustomStorageProviderService customStorageProviderService;
+    private UserQueryPort userQueryPort;
 
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
         UsernamePasswordAuthenticationToken customAuth = (UsernamePasswordAuthenticationToken)authentication;
         String username = authentication.getName();
         String password = authentication.getCredentials() != null ? authentication.getCredentials().toString() : "";
-        if (customStorageProviderService.isAuthorizatedUser(username, password)){
+        if (userQueryPort.isAuthorizatedUser(username, password)){
             return customAuth;
         }
         return null; // only for not authorized users

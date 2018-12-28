@@ -22,11 +22,13 @@ public class User {
     public String getPassword(){
         return this.password;
     }
+    public Collection<User> getFriendList() {
+        return friends;
+    }
 
     public boolean requestFriendShip(User userTo) {
         if (this.friends.contains(userTo)){
-            // not possible is already a friend
-            return false;
+            return false;  // not possible is already a friend
         }
         return userTo.pendingFriends.add(this);
     }
@@ -49,10 +51,6 @@ public class User {
         }
     }
 
-    public Collection<User> getFriendList() {
-        return friends;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -60,22 +58,20 @@ public class User {
 
         User user = (User) o;
 
-        if (!name.equals(user.name)) return false;
-        return password.equals(user.password);
+        return name.equals(user.name);
     }
 
     @Override
     public int hashCode() {
-        int result = name.hashCode();
-        result = 31 * result + password.hashCode();
-        return result;
+        return name.hashCode();
     }
 
     @Override
     public String toString() {
         final StringBuffer sb = new StringBuffer("User{");
         sb.append("name='").append(name).append('\'');
-        sb.append(", password='").append(password).append('\'');
+        sb.append(", friends=").append(friends);
+        sb.append(", pendingFriends=").append(pendingFriends);
         sb.append('}');
         return sb.toString();
     }

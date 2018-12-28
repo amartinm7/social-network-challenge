@@ -1,6 +1,6 @@
 package com.schibsted.spain.friends.interfaces;
 
-import com.schibsted.spain.friends.infrastructure.auth.HttpParams;
+import com.schibsted.spain.friends.infrastructure.HttpParams;
 import com.schibsted.spain.friends.domain.User;
 import com.schibsted.spain.friends.application.FriendShipService;
 import org.slf4j.Logger;
