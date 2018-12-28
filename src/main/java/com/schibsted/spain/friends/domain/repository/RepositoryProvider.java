@@ -18,7 +18,7 @@ public class RepositoryProvider implements Repository<User,String> {
     }
 
     @Override
-    public boolean delete(String username) {
+    public boolean remove(String username) {
         return (store.remove(username)==null);
     }
 

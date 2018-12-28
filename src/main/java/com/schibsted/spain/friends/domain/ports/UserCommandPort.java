@@ -5,4 +5,5 @@ public interface UserCommandPort {
     boolean requestFriendship(String userFrom, String userTo);
     boolean acceptFriendship(String userFrom, String userTo);
     boolean declineFriendship(String userFrom, String userTo);
+    boolean remove(String username);
 }

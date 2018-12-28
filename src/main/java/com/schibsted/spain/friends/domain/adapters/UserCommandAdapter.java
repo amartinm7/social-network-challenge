@@ -27,7 +27,7 @@ public class UserCommandAdapter
 
     @Override
     public boolean requestFriendship(String userFrom, String userTo) {
-        if ( !isUserStored(userTo) ){
+        if ( !isUserStored(userFrom) || !isUserStored(userTo) ){
             return false;
         }
         final User savedUserFrom = getUser(userFrom);
@@ -37,7 +37,7 @@ public class UserCommandAdapter
 
     @Override
     public boolean acceptFriendship(String userFrom, String userTo) {
-        if ( !isUserStored(userTo) ){
+        if ( !isUserStored(userFrom) || !isUserStored(userTo) ){
             return false;
         }
         final User savedUserFrom = getUser(userFrom);
@@ -47,12 +47,17 @@ public class UserCommandAdapter
 
     @Override
     public boolean declineFriendship(String userFrom, String userTo) {
-        if ( !isUserStored(userTo) ){
+        if ( !isUserStored(userFrom) || !isUserStored(userTo) ){
             return false;
         }
         final User savedUserFrom = getUser(userFrom);
         final User savedUserTo = getUser(userTo);
         return savedUserFrom.declineFriendShip(savedUserTo);
+    }
+
+    @Override
+    public boolean remove(String userFrom) {
+        return repository.remove(userFrom);
     }
 
     private boolean storeUser(User user){ return repository.save(user); }
