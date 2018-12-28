@@ -17,6 +17,8 @@ public class GlobalExceptionHandler
         public ResponseEntity<Object> handleAccessDeniedException(
                 Exception ex, WebRequest request) {
             return new ResponseEntity<Object>(
-                    ex.getMessage(), new HttpHeaders(), HttpStatus.BAD_REQUEST);
+                    String.format("%d, %s", HttpStatus.BAD_REQUEST.value(), ex.getMessage()),
+                    new HttpHeaders(),
+                    HttpStatus.BAD_REQUEST);
         }
 }
