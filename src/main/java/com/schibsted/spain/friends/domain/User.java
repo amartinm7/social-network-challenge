@@ -12,8 +12,8 @@ public class User {
     private User(String name, String password){
         this.name = name;
         this.password = password;
-        this.friends = new HashSet<>();
-        this.pendingFriends = new HashSet<>();
+        this.friends = new LinkedHashSet<>();
+        this.pendingFriends = new LinkedHashSet<>();
     }
 
     public String getName(){
