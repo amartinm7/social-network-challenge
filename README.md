@@ -73,4 +73,4 @@ specify
 java -jar myapp.jar --spring.profiles.active=dev
 ```
 
-![social-networks](./_media/ddd-building-blocks.png)
+![ddd-building-blocks](./_media/ddd-building-blocks.png)
