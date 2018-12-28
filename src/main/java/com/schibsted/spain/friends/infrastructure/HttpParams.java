@@ -8,6 +8,18 @@ public class HttpParams {
     public static final String URI_FRIENDSHIP_DECLINE       = "/decline";
     public static final String URI_FRIENDSHIP_LIST          = "/list";
 
+    public static final String[] URI_AUTH_WHITELIST = {
+            URI_SIGNUP,
+            "/api/**",
+            "/v2/api-docs",
+            "/swagger-resources",
+            "/swagger-resources/**",
+            "/configuration/ui",
+            "/configuration/security",
+            "/swagger-ui.html",
+            "/webjars/**"};
+
+
     public static final String X_PASSWORD                   = "X-Password";
     public static final String USER_NAME                    = "username";
     public static final String USER_NAME_FROM               = "usernameFrom";

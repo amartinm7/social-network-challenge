@@ -21,6 +21,7 @@ public class CustomAuthFilter extends OncePerRequestFilter {
 
         String username = "";
         final String xPassword = request.getHeader(HttpParams.X_PASSWORD);
+
         if (request.getRequestURI().contains(HttpParams.URI_SIGNUP)
                 || (request.getRequestURI().contains(HttpParams.URI_FRIENDSHIP_LIST))){
             username = request.getParameter(HttpParams.USER_NAME);

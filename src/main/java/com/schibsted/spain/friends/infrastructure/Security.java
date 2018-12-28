@@ -13,6 +13,9 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+
+import javax.swing.text.html.HTML;
+
 @Configuration
 @EnableWebSecurity
 @EnableWebMvc
@@ -24,7 +27,7 @@ public class Security extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(
-            AuthenticationManagerBuilder auth) throws Exception {
+            AuthenticationManagerBuilder auth) {
         logger.info("configure AuthenticationManagerBuilder...");
         auth.authenticationProvider(customAuthenticationProvider);
     }
@@ -37,9 +40,10 @@ public class Security extends WebSecurityConfigurerAdapter {
                 .anyRequest().permitAll()
                 .and().csrf().disable();
     }
+
     @Override
-    public void configure(WebSecurity web) throws Exception {
+    public void configure(WebSecurity web) {
         logger.info("configure WebSecurity...");
-        web.ignoring().antMatchers(HttpParams.URI_SIGNUP);
+        web.ignoring().antMatchers(HttpParams.URI_AUTH_WHITELIST);
     }
 }
