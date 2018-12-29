@@ -4,7 +4,7 @@
 
 This service have users that can ask for friendship other users and offers an HTTP API to do so.
 
-## run springboot app
+## ![springboot](./_media/icons/springboot.png) run springboot app
 ```
 gradle wrapper
 ./gradlew build
@@ -18,7 +18,7 @@ java -jar -Dspring.profiles.active=dev build/libs/friends-rest-service-0.1.0.jar
 you can specify the profile using the -Dspring.profiles.active parameter. If you don't specify any, by default is 'dev' in our case.
 
 
-## ![swagger](./_media/icons/docker.png) Dockerize the app: create a docker image and run the project from command line
+## ![swagger](./_media/icons/docker.png) Dockerize the app
 From the project root folder exec the commands to create a docker image and run it:
 
 for macosx start the docker daemon
