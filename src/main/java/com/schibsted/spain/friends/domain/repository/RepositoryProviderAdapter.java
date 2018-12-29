@@ -1,14 +1,14 @@
 package com.schibsted.spain.friends.domain.repository;
 
 import com.schibsted.spain.friends.domain.User;
-import com.schibsted.spain.friends.infrastructure.Repository;
+import com.schibsted.spain.friends.infrastructure.RepositoryPort;
 import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
 import java.util.Map;
 
 @Component
-public class RepositoryProvider implements Repository<User,String> {
+public class RepositoryProviderAdapter implements RepositoryPort<User,String> {
 
     private final Map<String, User> store = new HashMap<>();
 

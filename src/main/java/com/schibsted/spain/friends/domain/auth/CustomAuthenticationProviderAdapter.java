@@ -9,7 +9,7 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.stereotype.Component;
 
 @Component
-public class CustomAuthenticationProvider implements AuthenticationProvider {
+public class CustomAuthenticationProviderAdapter implements AuthenticationProvider {
 
     @Autowired
     private UserQueryPort userQueryPort;
@@ -20,9 +20,9 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
         String username = authentication.getName();
         String password = authentication.getCredentials() != null ? authentication.getCredentials().toString() : "";
         if (userQueryPort.isAuthorizatedUser(username, password)){
-            return customAuth;
+            return customAuth; // authorized users
         }
-        return null; // only for not authorized users
+        return null; // not authorized users
     }
 
     @Override

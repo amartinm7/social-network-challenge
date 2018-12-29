@@ -1,6 +1,6 @@
 package com.schibsted.spain.friends.infrastructure;
 
-import com.schibsted.spain.friends.domain.auth.CustomAuthenticationProvider;
+import com.schibsted.spain.friends.domain.auth.CustomAuthenticationProviderAdapter;
 import com.schibsted.spain.friends.infrastructure.auth.CustomAuthFilter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,8 +14,6 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
-import javax.swing.text.html.HTML;
-
 @Configuration
 @EnableWebSecurity
 @EnableWebMvc
@@ -23,13 +21,13 @@ public class Security extends WebSecurityConfigurerAdapter {
     private static final Logger logger = LoggerFactory.getLogger(Security.class);
 
     @Autowired
-    private CustomAuthenticationProvider customAuthenticationProvider;
+    private CustomAuthenticationProviderAdapter customAuthenticationProviderAdapter;
 
     @Override
     protected void configure(
             AuthenticationManagerBuilder auth) {
         logger.info("configure AuthenticationManagerBuilder...");
-        auth.authenticationProvider(customAuthenticationProvider);
+        auth.authenticationProvider(customAuthenticationProviderAdapter);
     }
 
     @Override
