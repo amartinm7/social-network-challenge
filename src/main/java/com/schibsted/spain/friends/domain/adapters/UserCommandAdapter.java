@@ -3,8 +3,6 @@ package com.schibsted.spain.friends.domain.adapters;
 import com.schibsted.spain.friends.domain.User;
 import com.schibsted.spain.friends.domain.ports.UserCommandPort;
 import com.schibsted.spain.friends.infrastructure.RepositoryPort;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,7 +11,6 @@ import java.util.function.BiFunction;
 @Service
 public class UserCommandAdapter
         implements UserCommandPort {
-    private static final Logger logger = LoggerFactory.getLogger(UserCommandAdapter.class);
 
     private RepositoryPort<User,String> repositoryPort;
 

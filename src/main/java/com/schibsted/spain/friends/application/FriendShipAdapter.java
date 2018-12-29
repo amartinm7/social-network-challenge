@@ -2,8 +2,6 @@ package com.schibsted.spain.friends.application;
 import com.schibsted.spain.friends.domain.User;
 import com.schibsted.spain.friends.domain.ports.UserCommandPort;
 import com.schibsted.spain.friends.domain.ports.UserQueryPort;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,7 +9,6 @@ import java.util.Collection;
 
 @Service
 public class FriendShipAdapter implements FriendShipService{
-    private static final Logger logger = LoggerFactory.getLogger(FriendShipAdapter.class);
 
     private final UserQueryPort userQueryPort;
     private final UserCommandPort userCommandPort;

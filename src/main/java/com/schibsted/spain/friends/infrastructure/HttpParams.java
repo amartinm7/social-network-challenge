@@ -10,6 +10,9 @@ public class HttpParams {
 
     static final String[] URI_AUTH_WHITELIST = {
             URI_SIGNUP,
+            "/",
+            "/index.html",
+            "/images/**",
             "/api/**",
             "/v2/api-docs",
             "/swagger-resources",

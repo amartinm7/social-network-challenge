@@ -3,8 +3,6 @@ package com.schibsted.spain.friends.domain.adapters;
 import com.schibsted.spain.friends.domain.User;
 import com.schibsted.spain.friends.domain.ports.UserQueryPort;
 import com.schibsted.spain.friends.infrastructure.RepositoryPort;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,7 +11,6 @@ import java.util.Collection;
 @Service
 public class UserQueryAdapter
         implements UserQueryPort {
-    private static final Logger logger = LoggerFactory.getLogger(UserQueryAdapter.class);
 
     private RepositoryPort<User,String> repositoryPort;
 

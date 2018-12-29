@@ -34,7 +34,7 @@ public class FriendshipLegacyController {
       @RequestParam(HttpParams.USER_NAME_FROM) String usernameFrom,
       @RequestParam(HttpParams.USER_NAME_TO) String usernameTo,
       @RequestHeader(HttpParams.X_PASSWORD) String password) {
-      logger.info("requestFriendship");
+      logger.info("asking for requestFriendship...");
       if (friendShipService.requestFriendship(usernameFrom, usernameTo)){
           return new ResponseEntity<>(HttpStatus.OK.toString(), HttpStatus.OK);
       } else {
@@ -47,7 +47,7 @@ public class FriendshipLegacyController {
       @RequestParam(HttpParams.USER_NAME_FROM) String usernameFrom,
       @RequestParam(HttpParams.USER_NAME_TO) String usernameTo,
       @RequestHeader(HttpParams.X_PASSWORD) String password) {
-      logger.info("acceptFriendship");
+      logger.info("asking for acceptFriendship...");
       if (friendShipService.acceptFriendship(usernameFrom, usernameTo)){
           return new ResponseEntity<>(HttpStatus.OK.toString(), HttpStatus.OK);
       } else {
@@ -60,7 +60,7 @@ public class FriendshipLegacyController {
       @RequestParam(HttpParams.USER_NAME_FROM) String usernameFrom,
       @RequestParam(HttpParams.USER_NAME_TO) String usernameTo,
       @RequestHeader(HttpParams.X_PASSWORD) String password) {
-      logger.info("declineFriendship");
+      logger.info("asking for declineFriendship...");
       if (friendShipService.declineFriendship(usernameFrom, usernameTo)){
           return new ResponseEntity<>(HttpStatus.OK.toString(), HttpStatus.OK);
       } else {
@@ -72,7 +72,7 @@ public class FriendshipLegacyController {
   ResponseEntity<String[]> listFriends(
       @RequestParam(HttpParams.USER_NAME) String username,
       @RequestHeader(HttpParams.X_PASSWORD) String password) {
-      logger.info("listFriends");
+      logger.info("asking for listFriends...");
       final Collection<User> friends = friendShipService.listFriends(username);
       final String[] theFriends = friends.stream().map(friend -> friend.getName()).toArray(String[]::new);
       return new ResponseEntity<String[]>(theFriends, HttpStatus.OK);

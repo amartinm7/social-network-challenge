@@ -29,7 +29,7 @@ public class SignupLegacyController {
   public ResponseEntity<String> signUp(
       @RequestParam(HttpParams.USER_NAME) String username,
       @RequestHeader(HttpParams.X_PASSWORD) String password) {
-    logger.info("signup user...");
+    logger.info("asking for signup user...");
     if ( signupService.signup(username, password) ) {
       return new ResponseEntity<>(username, HttpStatus.OK);
     } else {
