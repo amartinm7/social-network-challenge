@@ -44,6 +44,15 @@ docker rmi PID
 You can see the swagger documentation in the following url:
 - http://localhost:8080/swagger-ui.html
 
+## Test code Covarage: Jacoco
+To see the report with the code coverage for the testing, simply open the report: 
+- build/reports/jacoco/test/html/index.html
+
+To see checkstyle report
+```
+./gradlew check
+```
+
 ### Tips
 
 closing ports
