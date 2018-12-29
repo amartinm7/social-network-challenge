@@ -75,12 +75,13 @@ sudo kill -9 PID
 
 ## improvements
 
-- send usernames as path paremeters and between the relations of them: 
+send usernames as path paremeters and between the relations of them: 
+
 localhost:8080/friendship/johndoe/requestFriendshipTo/robert
 localhost:8080/friendship/robert/acceptFriendshipTo/johndoe
 localhost:8080/friendship/robert/declineFriendshipTo/johndoe
 localhost:8080/friendship/johndoe/listFriends
 
-
+https://social-network-challenge.herokuapp.com/swagger-ui.html
 
 ![ddd-building-blocks](./_media/ddd-building-blocks.png)
