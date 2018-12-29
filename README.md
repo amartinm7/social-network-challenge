@@ -2,21 +2,21 @@
 
 # social-network-challenge
 
-We need your help migrating a legacy social network service.
-
-This service have users that can friend other users and offers an HTTP API to do so.
+This service have users that can ask for friendship other users and offers an HTTP API to do so.
 
 ## run springboot app
 ```
 gradle wrapper
 ./gradlew build
-./gradlew build bootRun
+./gradlew bootRun
 ```
 
-or run fat jar
+or run the application using the java command line, using the fat jar:
 ```
-java -jar build/libs/friends-rest-service-0.1.0.jar
+java -jar -Dspring.profiles.active=dev build/libs/friends-rest-service-0.1.0.jar
 ```
+you can specify the profile using the -Dspring.profiles.active parameter. If you don't specify any, by default is 'dev' in our case.
+
 
 ## Dockerize the app: create a docker image and run the project from command line
 From the project root folder exec the commands to create a docker image and run it:
@@ -26,15 +26,19 @@ for macosx start the docker daemon
 killall Docker && open /Applications/Docker.app
 ```
 
-then
+then execute the next commands in order to create the docker image and run it:
 ```bash
 docker build -f docker/Dockerfile . -t friends
 docker run -p 8080:8080 friends
+```
+
+to stop the application first we have to stop the docker process and then kill the docker process:
+```
 docker stop $(docker ps -a -q)
 docker rm $(docker ps -a -q)
 ```
 
-to clean docker images
+to clean the docker images from the system:
 ```
 docker images
 docker rmi PID
@@ -44,20 +48,25 @@ docker rmi PID
 You can see the swagger documentation in the following url:
 - http://localhost:8080/swagger-ui.html
 
-## Test code Covarage: Jacoco
+## Test code covarage using Jacoco
 To see the report with the code coverage for the testing, simply open the report: 
 - build/reports/jacoco/test/html/index.html
 
-To see checkstyle report
+## Code Quality coverage using checkstyle and findbugs
+To see the reports simply open the report: 
+- build/reports/checkstyle/main.html
+- build/reports/checkstyle/test.html
+
+You can execute the report on demand:
 ```
 ./gradlew check
 ```
 
-### Tips
+### Some useful Tips
 
 closing ports
 ```
-sudo lsof -i :8888
+sudo lsof -i :8080
 sudo kill -9 PID
 ```
 
@@ -70,15 +79,6 @@ localhost:8080/friendship/robert/acceptFriendshipTo/johndoe
 localhost:8080/friendship/robert/declineFriendshipTo/johndoe
 localhost:8080/friendship/johndoe/listFriends
 
-- develop a new domain to change the current one
-- develop the same model to use JPA and h2 and derby for instance
-- develop the versioning in the improvement project
 
-## profiles
-
-to select a profile use the --spring.profiles.active param.
-```
-java -jar friends-rest-service-0.1.0.jar --spring.profiles.active=dev
-```
 
 ![ddd-building-blocks](./_media/ddd-building-blocks.png)
