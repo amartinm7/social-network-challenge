@@ -3,7 +3,9 @@ package com.schibsted.spain.friends.domain;
 import org.junit.Test;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertFalse;
 
 public class UserTest {
 

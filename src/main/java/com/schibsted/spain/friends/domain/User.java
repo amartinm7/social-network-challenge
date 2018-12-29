@@ -1,6 +1,9 @@
 package com.schibsted.spain.friends.domain;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.Set;
+import java.util.LinkedHashSet;
+import java.util.ArrayList;
 
 public class User {
 
@@ -96,23 +99,23 @@ public class User {
          * Password from 8 to 12 alphanumeric characters.
          */
         private void validate(){
-            final List<String> errorMessages = new ArrayList<>();
+            final Collection<String> errorMessages = new ArrayList<>();
             if(name == null){
                 errorMessages.add("The 'username' parameter is null.");
             }
-            if(name.length() < 5 || name.length() > 10){
+            if(name != null && (name.length() < 5 || name.length() > 10)){
                 errorMessages.add(String.format("The length of the'username' parameter has to be between 5 and 10: current %s.",name.length()));
             }
-            if (!name.matches("[a-zA-Z0-9]*")){
+            if (name != null && !name.matches("[a-zA-Z0-9]*")){
                 errorMessages.add(String.format("The 'username' parameter contains invalid characters. Only alphanumeric are valid characters: current %s.",name.length()));
             }
             if(password == null){
                 errorMessages.add("The 'password' parameter is null.");
             }
-            if(password.length() < 8 || password.length() > 12){
+            if(password != null && (password.length() < 8 || password.length() > 12) ){
                 errorMessages.add(String.format("The length of the 'password' parameter has to be between 8 and 12: current %s.",password.length()));
             }
-            if (!password.matches("[a-zA-Z0-9]*")){
+            if (password != null && !password.matches("[a-zA-Z0-9]*")){
                 errorMessages.add(String.format("The 'password' parameter contains invalid characters. Only alphanumeric are valid characters: current %s.",password.length()));
             }
             if (errorMessages.size() > 0){

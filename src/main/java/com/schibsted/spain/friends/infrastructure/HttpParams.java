@@ -8,7 +8,7 @@ public class HttpParams {
     public static final String URI_FRIENDSHIP_DECLINE       = "/decline";
     public static final String URI_FRIENDSHIP_LIST          = "/list";
 
-    public static final String[] URI_AUTH_WHITELIST = {
+    static final String[] URI_AUTH_WHITELIST = {
             URI_SIGNUP,
             "/api/**",
             "/v2/api-docs",

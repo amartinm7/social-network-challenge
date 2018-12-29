@@ -36,9 +36,9 @@ public class FriendshipLegacyController {
       @RequestHeader(HttpParams.X_PASSWORD) String password) {
       logger.info("requestFriendship");
       if (friendShipService.requestFriendship(usernameFrom, usernameTo)){
-          return new ResponseEntity<>("", HttpStatus.OK);
+          return new ResponseEntity<>(HttpStatus.OK.toString(), HttpStatus.OK);
       } else {
-          return new ResponseEntity<>("", HttpStatus.BAD_REQUEST);
+          return new ResponseEntity<>(HttpStatus.BAD_REQUEST.toString(), HttpStatus.BAD_REQUEST);
       }
   }
 
@@ -49,9 +49,9 @@ public class FriendshipLegacyController {
       @RequestHeader(HttpParams.X_PASSWORD) String password) {
       logger.info("acceptFriendship");
       if (friendShipService.acceptFriendship(usernameFrom, usernameTo)){
-          return new ResponseEntity<>("", HttpStatus.OK);
+          return new ResponseEntity<>(HttpStatus.OK.toString(), HttpStatus.OK);
       } else {
-          return new ResponseEntity<>("", HttpStatus.BAD_REQUEST);
+          return new ResponseEntity<>(HttpStatus.BAD_REQUEST.toString(), HttpStatus.BAD_REQUEST);
       }
   }
 
@@ -62,14 +62,14 @@ public class FriendshipLegacyController {
       @RequestHeader(HttpParams.X_PASSWORD) String password) {
       logger.info("declineFriendship");
       if (friendShipService.declineFriendship(usernameFrom, usernameTo)){
-          return new ResponseEntity<>("", HttpStatus.OK);
+          return new ResponseEntity<>(HttpStatus.OK.toString(), HttpStatus.OK);
       } else {
-          return new ResponseEntity<>("", HttpStatus.BAD_REQUEST);
+          return new ResponseEntity<>(HttpStatus.BAD_REQUEST.toString(), HttpStatus.BAD_REQUEST);
       }
   }
 
   @GetMapping(HttpParams.URI_FRIENDSHIP_LIST)
-  Object listFriends(
+  ResponseEntity<String[]> listFriends(
       @RequestParam(HttpParams.USER_NAME) String username,
       @RequestHeader(HttpParams.X_PASSWORD) String password) {
       logger.info("listFriends");

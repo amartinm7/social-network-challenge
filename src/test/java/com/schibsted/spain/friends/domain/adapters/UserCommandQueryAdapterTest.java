@@ -1,6 +1,7 @@
 package com.schibsted.spain.friends.domain.adapters;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 import com.schibsted.spain.friends.domain.ports.UserCommandPort;
 import com.schibsted.spain.friends.domain.ports.UserQueryPort;
