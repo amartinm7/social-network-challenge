@@ -65,6 +65,37 @@ You can execute the report on demand:
 ./gradlew check
 ```
 
+## improvements
+
+* improving the rest api signature, send usernames as path parameters:
+localhost:8080/friendship/johndoe/requestFriendshipTo/robert
+localhost:8080/friendship/robert/acceptFriendshipTo/johndoe
+localhost:8080/friendship/robert/declineFriendshipTo/johndoe
+localhost:8080/friendship/johndoe/listFriends
+
+* implement cache: we can implement a cache module to cache the request. 
+If the request it's cached then we can get the data from there. Send 200 or 304 depending.
+Add an Expires or a Cache-Control Header to the request to control the TTL of the request in the cache. 
+
+ 
+* implement versioning: qwe can add a versioning in the api to handle the different versions of the api while is evolving.
+for instance:
+localhost:8080/v1/friendship/johndoe/requestFriendshipTo/robert
+localhost:8080/v2/friendship/johndoe/requestFriendshipTo/robert
+
+* implement Circuit Breaker pattern to avoid Deny of Service (DoS)
+* enable CSRF and XSS features from Spring to avoid this kind of attacks.
+* implement JWT feature to authorization things.
+
+
+### Deployed version in heroku without docker
+* https://social-network-challenge.herokuapp.com/swagger-ui.html
+
+
+### Domain Drive Design
+![ddd-building-blocks](./_media/ddd-building-blocks.png)
+
+
 ### Some useful Tips
 
 closing ports
@@ -72,16 +103,3 @@ closing ports
 sudo lsof -i :8080
 sudo kill -9 PID
 ```
-
-## improvements
-
-send usernames as path paremeters and between the relations of them: 
-
-localhost:8080/friendship/johndoe/requestFriendshipTo/robert
-localhost:8080/friendship/robert/acceptFriendshipTo/johndoe
-localhost:8080/friendship/robert/declineFriendshipTo/johndoe
-localhost:8080/friendship/johndoe/listFriends
-
-https://social-network-challenge.herokuapp.com/swagger-ui.html
-
-![ddd-building-blocks](./_media/ddd-building-blocks.png)
