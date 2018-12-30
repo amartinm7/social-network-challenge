@@ -5,7 +5,6 @@ import com.schibsted.spain.friends.application.SignupService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestHeader;
 
 @RestController
 @RequestMapping(HttpParams.URI_SIGNUP)
-public class SignupLegacyController {
+public class SignupLegacyController implements CustomResponse {
 
   private static final Logger logger = LoggerFactory.getLogger(SignupLegacyController.class);
 
@@ -26,14 +25,12 @@ public class SignupLegacyController {
   }
 
   @PostMapping
-  public ResponseEntity<String> signUp(
+  public ResponseEntity<ResponseMessage> signUp(
       @RequestParam(HttpParams.USER_NAME) String username,
       @RequestHeader(HttpParams.X_PASSWORD) String password) {
     logger.info("asking for signup user...");
-    if ( signupService.signup(username, password) ) {
-      return new ResponseEntity<>(username, HttpStatus.OK);
-    } else {
-      return new ResponseEntity<>(String.format("%d, Invalid username/password: %s: %s ", HttpStatus.BAD_REQUEST.value(), username, password), HttpStatus.BAD_REQUEST);
-    }
+    return signupService.signup(username, password)
+            .map( user -> getOKMessage(user) )
+            .orElse( getBadRequestMessage() );
   }
 }

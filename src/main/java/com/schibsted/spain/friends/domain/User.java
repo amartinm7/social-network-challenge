@@ -1,9 +1,6 @@
 package com.schibsted.spain.friends.domain;
 
-import java.util.Collection;
-import java.util.Set;
-import java.util.LinkedHashSet;
-import java.util.ArrayList;
+import java.util.*;
 
 public class User {
 
@@ -29,28 +26,32 @@ public class User {
         return friends;
     }
 
-    public boolean requestFriendShip(User userTo) {
+    public Optional<User> requestFriendShip(User userTo) {
         if (this.friends.contains(userTo)){
-            return false;  // not possible is already a friend
+            return Optional.empty();  // not possible is already a friend
         }
-        return userTo.pendingFriends.add(this);
+        boolean addedRequest = userTo.pendingFriends.add(this);
+        return (addedRequest)? Optional.of(this) : Optional.empty();
     }
 
-    public boolean acceptFriendShip(User userTo) {
+    public Optional<User> acceptFriendShip(User userTo) {
         if (this.pendingFriends.contains(userTo)){
             this.pendingFriends.remove(userTo);
             userTo.pendingFriends.remove(this);
-            return this.friends.add(userTo) && userTo.friends.add(this);
+            boolean addingTo = this.friends.add(userTo);
+            boolean addingFrom = userTo.friends.add(this);
+            return (addingTo && addingFrom) ? Optional.of(this) : Optional.empty();
         } else {
-            return false;
+            return Optional.empty();
         }
     }
 
-    public boolean declineFriendShip(User userTo) {
+    public Optional<User> declineFriendShip(User userTo) {
         if (this.pendingFriends.contains(userTo)){
-            return this.pendingFriends.remove(userTo);
+            boolean removed = this.pendingFriends.remove(userTo);
+            return (removed )? Optional.of(this) : Optional.empty();
         } else {
-            return false;
+            return Optional.empty();
         }
     }
 

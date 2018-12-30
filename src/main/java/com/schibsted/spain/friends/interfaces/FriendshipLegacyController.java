@@ -19,7 +19,7 @@ import java.util.Collection;
 
 @RestController
 @RequestMapping(HttpParams.URI_FRIENDSHIP)
-public class FriendshipLegacyController {
+public class FriendshipLegacyController implements CustomResponse {
 
   private static final Logger logger = LoggerFactory.getLogger(FriendshipLegacyController.class);
 
@@ -30,42 +30,36 @@ public class FriendshipLegacyController {
   }
 
   @PostMapping(HttpParams.URI_FRIENDSHIP_REQUEST)
-  ResponseEntity<String> requestFriendship(
+  ResponseEntity<ResponseMessage> requestFriendship(
       @RequestParam(HttpParams.USER_NAME_FROM) String usernameFrom,
       @RequestParam(HttpParams.USER_NAME_TO) String usernameTo,
       @RequestHeader(HttpParams.X_PASSWORD) String password) {
       logger.info("asking for requestFriendship...");
-      if (friendShipService.requestFriendship(usernameFrom, usernameTo)){
-          return new ResponseEntity<>(HttpStatus.OK.toString(), HttpStatus.OK);
-      } else {
-          return new ResponseEntity<>(HttpStatus.BAD_REQUEST.toString(), HttpStatus.BAD_REQUEST);
-      }
+      return friendShipService.requestFriendship(usernameFrom, usernameTo)
+              .map( user -> getOKMessage(user) )
+              .orElse( getBadRequestMessage() );
   }
 
   @PostMapping(HttpParams.URI_FRIENDSHIP_ACCEPT)
-  ResponseEntity<String> acceptFriendship(
+  ResponseEntity<ResponseMessage> acceptFriendship(
       @RequestParam(HttpParams.USER_NAME_FROM) String usernameFrom,
       @RequestParam(HttpParams.USER_NAME_TO) String usernameTo,
       @RequestHeader(HttpParams.X_PASSWORD) String password) {
       logger.info("asking for acceptFriendship...");
-      if (friendShipService.acceptFriendship(usernameFrom, usernameTo)){
-          return new ResponseEntity<>(HttpStatus.OK.toString(), HttpStatus.OK);
-      } else {
-          return new ResponseEntity<>(HttpStatus.BAD_REQUEST.toString(), HttpStatus.BAD_REQUEST);
-      }
+      return friendShipService.acceptFriendship(usernameFrom, usernameTo)
+              .map( user -> getOKMessage(user) )
+              .orElse( getBadRequestMessage() );
   }
 
   @PostMapping(HttpParams.URI_FRIENDSHIP_DECLINE)
-  ResponseEntity<String> declineFriendship(
+  ResponseEntity<ResponseMessage> declineFriendship(
       @RequestParam(HttpParams.USER_NAME_FROM) String usernameFrom,
       @RequestParam(HttpParams.USER_NAME_TO) String usernameTo,
       @RequestHeader(HttpParams.X_PASSWORD) String password) {
       logger.info("asking for declineFriendship...");
-      if (friendShipService.declineFriendship(usernameFrom, usernameTo)){
-          return new ResponseEntity<>(HttpStatus.OK.toString(), HttpStatus.OK);
-      } else {
-          return new ResponseEntity<>(HttpStatus.BAD_REQUEST.toString(), HttpStatus.BAD_REQUEST);
-      }
+      return friendShipService.declineFriendship(usernameFrom, usernameTo)
+              .map( user -> getOKMessage(user) )
+              .orElse( getBadRequestMessage() );
   }
 
   @GetMapping(HttpParams.URI_FRIENDSHIP_LIST)
@@ -75,6 +69,7 @@ public class FriendshipLegacyController {
       logger.info("asking for listFriends...");
       final Collection<User> friends = friendShipService.listFriends(username);
       final String[] theFriends = friends.stream().map(friend -> friend.getName()).toArray(String[]::new);
-      return new ResponseEntity<String[]>(theFriends, HttpStatus.OK);
+      return new ResponseEntity<>(theFriends, HttpStatus.OK);
   }
+
 }

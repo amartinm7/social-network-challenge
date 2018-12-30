@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
+import java.util.Optional;
 
 @Service
 public class FriendShipAdapter implements FriendShipService{
@@ -19,22 +20,23 @@ public class FriendShipAdapter implements FriendShipService{
     }
 
     @Override
-    public boolean requestFriendship(String userFrom, String userTo) {
+    public Collection<User> listFriends(String userFrom) {
+        return userQueryPort.listFriends(userFrom);
+    }
+
+
+    @Override
+    public Optional<User> requestFriendship(String userFrom, String userTo) {
         return userCommandPort.requestFriendship(userFrom, userTo);
     }
 
     @Override
-    public boolean acceptFriendship(String userFrom, String userTo) {
+    public Optional<User> acceptFriendship(String userFrom, String userTo) {
         return userCommandPort.acceptFriendship(userFrom, userTo);
     }
 
     @Override
-    public boolean declineFriendship(String userFrom, String userTo) {
+    public Optional<User> declineFriendship(String userFrom, String userTo) {
         return userCommandPort.declineFriendship(userFrom, userTo);
-    }
-
-    @Override
-    public Collection<User> listFriends(String userFrom) {
-        return userQueryPort.listFriends(userFrom);
     }
 }
