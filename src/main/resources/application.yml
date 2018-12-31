@@ -3,7 +3,7 @@ server:
 
 spring:
   profiles:
-    active: "prod"
+    active: "dev"
 ---
 spring:
   profiles: dev
@@ -11,7 +11,7 @@ spring:
 logging:
   level:
     .: ERROR
-    org.springframework: ERROR
+    org.springframework: INFO
     com.schibsted: INFO
 
 ---
