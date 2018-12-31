@@ -11,8 +11,11 @@ public class HttpParams {
     static final String[] URI_AUTH_WHITELIST = {
             URI_SIGNUP,
             "/",
+            "/login.html",
+            "/src/**",
             "/v1/**",
             "/v2/**",
+            "/resources/**",
             "/index.html",
             "/images/**",
             "/api/**",
