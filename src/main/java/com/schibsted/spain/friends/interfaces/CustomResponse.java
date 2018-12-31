@@ -6,13 +6,13 @@ import org.springframework.http.ResponseEntity;
 
 public interface CustomResponse {
 
-    default ResponseEntity<ResponseMessage> getOKMessage (User user){
-        final ResponseMessage<User> responseMessage = new ResponseMessage<>(user, HttpStatus.OK.value());
+    default ResponseEntity<ResponseMessage> getOKMessage (User user, ResponseMessage.Action action){
+        final ResponseMessage<User> responseMessage = new ResponseMessage<>(user, HttpStatus.OK.value(), action);
         return new ResponseEntity(responseMessage, HttpStatus.OK );
     }
 
-    default ResponseEntity<ResponseMessage> getBadRequestMessage (){
-        final ResponseMessage<String> responseMessage = new ResponseMessage<>(HttpStatus.BAD_REQUEST.getReasonPhrase(), HttpStatus.BAD_REQUEST.value());
+    default ResponseEntity<ResponseMessage> getBadRequestMessage (ResponseMessage.Action action){
+        final ResponseMessage<String> responseMessage = new ResponseMessage<>(HttpStatus.BAD_REQUEST.getReasonPhrase(), HttpStatus.BAD_REQUEST.value(), action);
         return new ResponseEntity( responseMessage, HttpStatus.BAD_REQUEST);
     }
 }
