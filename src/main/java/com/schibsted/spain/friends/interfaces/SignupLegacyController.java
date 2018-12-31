@@ -30,7 +30,7 @@ public class SignupLegacyController implements CustomResponse {
       @RequestHeader(HttpParams.X_PASSWORD) String password) {
     logger.info("asking for signup user...");
     return signupService.signup(username, password)
-            .map( user -> getOKMessage(user) )
-            .orElse( getBadRequestMessage() );
+            .map( user -> getOKMessage(user, ResponseMessage.Action.SIGNUP) )
+            .orElse( getBadRequestMessage(ResponseMessage.Action.SIGNUP) );
   }
 }

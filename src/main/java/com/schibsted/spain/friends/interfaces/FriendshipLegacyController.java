@@ -36,8 +36,8 @@ public class FriendshipLegacyController implements CustomResponse {
       @RequestHeader(HttpParams.X_PASSWORD) String password) {
       logger.info("asking for requestFriendship...");
       return friendShipService.requestFriendship(usernameFrom, usernameTo)
-              .map( user -> getOKMessage(user) )
-              .orElse( getBadRequestMessage() );
+              .map( user -> getOKMessage(user, ResponseMessage.Action.REQUEST_FRIENDSHIP) )
+              .orElse( getBadRequestMessage(ResponseMessage.Action.REQUEST_FRIENDSHIP) );
   }
 
   @PostMapping(HttpParams.URI_FRIENDSHIP_ACCEPT)
@@ -47,8 +47,8 @@ public class FriendshipLegacyController implements CustomResponse {
       @RequestHeader(HttpParams.X_PASSWORD) String password) {
       logger.info("asking for acceptFriendship...");
       return friendShipService.acceptFriendship(usernameFrom, usernameTo)
-              .map( user -> getOKMessage(user) )
-              .orElse( getBadRequestMessage() );
+              .map( user -> getOKMessage(user, ResponseMessage.Action.ACCEPT_FRIENDSHIP) )
+              .orElse( getBadRequestMessage(ResponseMessage.Action.ACCEPT_FRIENDSHIP) );
   }
 
   @PostMapping(HttpParams.URI_FRIENDSHIP_DECLINE)
@@ -58,8 +58,8 @@ public class FriendshipLegacyController implements CustomResponse {
       @RequestHeader(HttpParams.X_PASSWORD) String password) {
       logger.info("asking for declineFriendship...");
       return friendShipService.declineFriendship(usernameFrom, usernameTo)
-              .map( user -> getOKMessage(user) )
-              .orElse( getBadRequestMessage() );
+              .map( user -> getOKMessage(user, ResponseMessage.Action.DECLINE_FRIENDSHIP) )
+              .orElse( getBadRequestMessage(ResponseMessage.Action.DECLINE_FRIENDSHIP) );
   }
 
   @GetMapping(HttpParams.URI_FRIENDSHIP_LIST)
