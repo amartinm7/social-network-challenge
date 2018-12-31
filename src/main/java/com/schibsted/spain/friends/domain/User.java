@@ -1,6 +1,9 @@
 package com.schibsted.spain.friends.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class User {
 
@@ -22,8 +25,18 @@ public class User {
     public String getPassword(){
         return this.password;
     }
+
+    @JsonIgnore
     public Collection<User> getFriendList() {
         return friends;
+    }
+
+    public Collection<String> getFriends() {
+        return friends.stream().map(user -> user.getName()).collect(Collectors.toList());
+    }
+
+    public Collection<String> getPendingFriends() {
+        return pendingFriends.stream().map(user -> user.getName()).collect(Collectors.toList());
     }
 
     public Optional<User> requestFriendShip(User userTo) {
@@ -59,9 +72,7 @@ public class User {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-
         User user = (User) o;
-
         return name.equals(user.name);
     }
 
@@ -74,8 +85,8 @@ public class User {
     public String toString() {
         final StringBuffer sb = new StringBuffer("User{");
         sb.append("name='").append(name).append('\'');
-        sb.append(", friends=").append(friends);
-        sb.append(", pendingFriends=").append(pendingFriends);
+        sb.append(", friends=").append(friends.stream().map(user -> user.getName()).collect( Collectors.joining( "," ) ));
+        sb.append(", pendingFriends=").append(pendingFriends.stream().map(user -> user.getName()).collect( Collectors.joining( "," ) ));
         sb.append('}');
         return sb.toString();
     }
