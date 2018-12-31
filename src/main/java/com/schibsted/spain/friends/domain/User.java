@@ -1,11 +1,15 @@
 package com.schibsted.spain.friends.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.*;
 import java.util.stream.Collectors;
 
 public class User {
+
+    private static final Logger logger = LoggerFactory.getLogger(User.class);
 
     private final String name;
     private final String password;
@@ -44,6 +48,7 @@ public class User {
             return Optional.empty();  // not possible is already a friend
         }
         boolean addedRequest = userTo.pendingFriends.add(this);
+        logger.info("added request friendship from {} to {}? {}", this.getName(), userTo.getName(), addedRequest);
         return (addedRequest)? Optional.of(this) : Optional.empty();
     }
 
@@ -53,6 +58,7 @@ public class User {
             userTo.pendingFriends.remove(this);
             boolean addingTo = this.friends.add(userTo);
             boolean addingFrom = userTo.friends.add(this);
+            logger.info("accepted friendship from {} to {}? {}", this.getName(), userTo.getName(), (addingTo && addingFrom));
             return (addingTo && addingFrom) ? Optional.of(this) : Optional.empty();
         } else {
             return Optional.empty();
@@ -62,7 +68,8 @@ public class User {
     public Optional<User> declineFriendShip(User userTo) {
         if (this.pendingFriends.contains(userTo)){
             boolean removed = this.pendingFriends.remove(userTo);
-            return (removed )? Optional.of(this) : Optional.empty();
+            logger.info("declined friendship from {} to {}? {}", this.getName(), userTo.getName(), removed);
+            return (removed)? Optional.of(this) : Optional.empty();
         } else {
             return Optional.empty();
         }

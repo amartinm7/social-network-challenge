@@ -15,7 +15,6 @@ public class HttpParams {
             "/src/**",
             "/v1/**",
             "/v2/**",
-            "/resources/**",
             "/index.html",
             "/images/**",
             "/api/**",
