@@ -26,7 +26,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-@ActiveProfiles("test")
+@ActiveProfiles("dev")
 public class SignupLegacyControllerIT {
     private static final Logger logger = LoggerFactory.getLogger(SignupLegacyControllerIT.class);
     @LocalServerPort
