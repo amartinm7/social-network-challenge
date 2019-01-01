@@ -3,8 +3,14 @@
 # social-network-challenge
 
 This service have users that can ask for friendship other users and offers an HTTP API to do so.
+Open the next url to see the app running:
+
+* http://localhost:8080/index.html
+
+(under construction: only implemented some functionalities as the challenge requires)
 
 ## ![springboot](./_media/icons/springboot.png) run springboot app
+To start, install the gradle wrapper is you didn't do it previously and boot the app: 
 ```bash
 gradle wrapper
 ./gradlew build
@@ -46,7 +52,6 @@ docker rmi PID
 
 Once you have the dockerized app is really easy bring it to the cloud. You look for a cloud provider to deploy it and host it.
 
-
 ## ![swagger](./_media/icons/swagger.png) Swagger
 You can see the swagger documentation in the following url:
 - http://localhost:8080/swagger-ui.html
@@ -65,17 +70,15 @@ You can execute the report on demand:
 ./gradlew check
 ```
 
-## improvements
-
-### actuator for checking the availability of the system
-
+## actuator for checking the availability of the system
 Under the next urls you can see how is the system running:
 * http://localhost:8080/actuator/health
 * http://localhost:8080/actuator/info
 
-### New URIs with path params for the rest api
+## Improvements
 
-improving the rest api signature sending usernames as path parameters (currently implemented) :
+### New URIs with path params for the rest api (status=implemented)
+Improving the rest api signature sending usernames as path parameters (currently implemented) :
 ```
 http://localhost:8080/friendship/{usernameFrom}/request/{usernameTo}
 http://localhost:8080/friendship/{usernameFrom}/accept/{usernameTo}
@@ -83,12 +86,12 @@ http://localhost:8080/friendship/{usernameFrom}/decline/{usernameTo}
 http://localhost:8080/friendship/{username}/list
 ```
 
-### implement cache in the front-controller 
+### implement cache in the front-controller (status=idea)
 We can implement a cache module to cache the request. This is the URI and the headers. 
 If the request it's cached then we can get the data from there. We can try to a Memcache or REDIS service as cache.
 The idea behind is to use a cache service as CloudFront is in the AWS ecosystem. 
  
-### implement versioning
+### implement versioning (status=implemented)
 We can add a versioning in the api to handle the different versions of the api while this API is evolving.
 For instance:
 ```
@@ -99,22 +102,20 @@ http://localhost:8080/v1/swagger-ui.html
 For achieving this we can change the context-path property in the application.yml file. 
 At this moment you can specify the profile when you run springboot for testing this behaviour.
 
-### More ideas
-* implement Circuit Breaker pattern to avoid the degradation of the system, in the case this REST API was consuming another REST API.
-* enable CSRF and XSS features from Spring to avoid this kind of attacks.
-* implement JWT feature to authorization things.
-
-
-### Deployed version in heroku without docker
+### Deployed version in heroku without docker (status=implemented)
 At this moment Heroku provides a functionality to deploy the projects under git. In this case use the build.gradle 
 as pipeline to deploy the application in the cloud. You can see the application running in the next url:
  
 * https://social-network-challenge.herokuapp.com/swagger-ui.html
 
+### More room to improve (status=idea)
+* implement Circuit Breaker pattern to avoid the degradation of the system, in the case this REST API was consuming another REST API.
+* enable CSRF and XSS features from Spring to avoid this kind of attacks.
+* implement JWT feature to authorization things.
 
-### Domain Drive Design
+## Domain Drive Design
 The application follows some rules of the DDD.
-The application is splitted in four modules:
+The application is splited in four modules:
 * interface layer
 * application layer
 * domain layer
