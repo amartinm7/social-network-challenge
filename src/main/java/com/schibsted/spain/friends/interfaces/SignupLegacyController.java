@@ -28,7 +28,7 @@ public class SignupLegacyController implements CustomResponse {
   public ResponseEntity<ResponseMessage> signUp(
       @RequestParam(HttpParams.USER_NAME) String username,
       @RequestHeader(HttpParams.X_PASSWORD) String password) {
-    logger.info("asking for signup user...");
+    logger.info("asking for signup user {}", username);
     return signupService.signup(username, password)
             .map( user -> getOKMessage(user, ResponseMessage.Action.SIGNUP) )
             .orElse( getBadRequestMessage(ResponseMessage.Action.SIGNUP) );

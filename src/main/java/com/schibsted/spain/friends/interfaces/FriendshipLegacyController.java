@@ -21,55 +21,55 @@ import java.util.Collection;
 @RequestMapping(HttpParams.URI_FRIENDSHIP)
 public class FriendshipLegacyController implements CustomResponse {
 
-  private static final Logger logger = LoggerFactory.getLogger(FriendshipLegacyController.class);
+    private static final Logger logger = LoggerFactory.getLogger(FriendshipLegacyController.class);
 
-  private FriendShipService friendShipService;
+    private FriendShipService friendShipService;
 
-  public FriendshipLegacyController(@Autowired FriendShipService friendShipService){
-    this.friendShipService = friendShipService;
-  }
+    public FriendshipLegacyController(@Autowired FriendShipService friendShipService) {
+        this.friendShipService = friendShipService;
+    }
 
-  @PostMapping(HttpParams.URI_FRIENDSHIP_REQUEST)
-  ResponseEntity<ResponseMessage> requestFriendship(
-      @RequestParam(HttpParams.USER_NAME_FROM) String usernameFrom,
-      @RequestParam(HttpParams.USER_NAME_TO) String usernameTo,
-      @RequestHeader(HttpParams.X_PASSWORD) String password) {
-      logger.info("asking for requestFriendship...");
-      return friendShipService.requestFriendship(usernameFrom, usernameTo)
-              .map( user -> getOKMessage(user, ResponseMessage.Action.REQUEST_FRIENDSHIP) )
-              .orElse( getBadRequestMessage(ResponseMessage.Action.REQUEST_FRIENDSHIP) );
-  }
+    @PostMapping(HttpParams.URI_FRIENDSHIP_REQUEST)
+    public ResponseEntity<ResponseMessage> requestFriendship(
+            @RequestParam(HttpParams.USER_NAME_FROM) String usernameFrom,
+            @RequestParam(HttpParams.USER_NAME_TO) String usernameTo,
+            @RequestHeader(HttpParams.X_PASSWORD) String password) {
+        logger.info("asking for requestFriendship from {} to {}", usernameFrom, usernameTo);
+        return friendShipService.requestFriendship(usernameFrom, usernameTo)
+                .map(user -> getOKMessage(user, ResponseMessage.Action.REQUEST_FRIENDSHIP))
+                .orElse(getBadRequestMessage(ResponseMessage.Action.REQUEST_FRIENDSHIP));
+    }
 
-  @PostMapping(HttpParams.URI_FRIENDSHIP_ACCEPT)
-  ResponseEntity<ResponseMessage> acceptFriendship(
-      @RequestParam(HttpParams.USER_NAME_FROM) String usernameFrom,
-      @RequestParam(HttpParams.USER_NAME_TO) String usernameTo,
-      @RequestHeader(HttpParams.X_PASSWORD) String password) {
-      logger.info("asking for acceptFriendship...");
-      return friendShipService.acceptFriendship(usernameFrom, usernameTo)
-              .map( user -> getOKMessage(user, ResponseMessage.Action.ACCEPT_FRIENDSHIP) )
-              .orElse( getBadRequestMessage(ResponseMessage.Action.ACCEPT_FRIENDSHIP) );
-  }
+    @PostMapping(HttpParams.URI_FRIENDSHIP_ACCEPT)
+    public ResponseEntity<ResponseMessage> acceptFriendship(
+            @RequestParam(HttpParams.USER_NAME_FROM) String usernameFrom,
+            @RequestParam(HttpParams.USER_NAME_TO) String usernameTo,
+            @RequestHeader(HttpParams.X_PASSWORD) String password) {
+        logger.info("asking for acceptFriendship from {} to {}", usernameFrom, usernameTo);
+        return friendShipService.acceptFriendship(usernameFrom, usernameTo)
+                .map(user -> getOKMessage(user, ResponseMessage.Action.ACCEPT_FRIENDSHIP))
+                .orElse(getBadRequestMessage(ResponseMessage.Action.ACCEPT_FRIENDSHIP));
+    }
 
-  @PostMapping(HttpParams.URI_FRIENDSHIP_DECLINE)
-  ResponseEntity<ResponseMessage> declineFriendship(
-      @RequestParam(HttpParams.USER_NAME_FROM) String usernameFrom,
-      @RequestParam(HttpParams.USER_NAME_TO) String usernameTo,
-      @RequestHeader(HttpParams.X_PASSWORD) String password) {
-      logger.info("asking for declineFriendship...");
-      return friendShipService.declineFriendship(usernameFrom, usernameTo)
-              .map( user -> getOKMessage(user, ResponseMessage.Action.DECLINE_FRIENDSHIP) )
-              .orElse( getBadRequestMessage(ResponseMessage.Action.DECLINE_FRIENDSHIP) );
-  }
+    @PostMapping(HttpParams.URI_FRIENDSHIP_DECLINE)
+    public ResponseEntity<ResponseMessage> declineFriendship(
+            @RequestParam(HttpParams.USER_NAME_FROM) String usernameFrom,
+            @RequestParam(HttpParams.USER_NAME_TO) String usernameTo,
+            @RequestHeader(HttpParams.X_PASSWORD) String password) {
+        logger.info("asking for declineFriendship from {} to {}", usernameFrom, usernameTo);
+        return friendShipService.declineFriendship(usernameFrom, usernameTo)
+                .map(user -> getOKMessage(user, ResponseMessage.Action.DECLINE_FRIENDSHIP))
+                .orElse(getBadRequestMessage(ResponseMessage.Action.DECLINE_FRIENDSHIP));
+    }
 
-  @GetMapping(HttpParams.URI_FRIENDSHIP_LIST)
-  ResponseEntity<String[]> listFriends(
-      @RequestParam(HttpParams.USER_NAME) String username,
-      @RequestHeader(HttpParams.X_PASSWORD) String password) {
-      logger.info("asking for listFriends...");
-      final Collection<User> friends = friendShipService.listFriends(username);
-      final String[] theFriends = friends.stream().map(friend -> friend.getName()).toArray(String[]::new);
-      return new ResponseEntity<>(theFriends, HttpStatus.OK);
-  }
+    @GetMapping(HttpParams.URI_FRIENDSHIP_LIST)
+    public ResponseEntity<String[]> listFriends(
+            @RequestParam(HttpParams.USER_NAME) String username,
+            @RequestHeader(HttpParams.X_PASSWORD) String password) {
+        logger.info("asking for listFriends for {}", username);
+        final Collection<User> friends = friendShipService.listFriends(username);
+        final String[] theFriends = friends.stream().map(friend -> friend.getName()).toArray(String[]::new);
+        return new ResponseEntity<>(theFriends, HttpStatus.OK);
+    }
 
 }

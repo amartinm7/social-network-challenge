@@ -83,7 +83,7 @@ for instance:
 localhost:8080/v1/friendship/johndoe/requestFriendshipTo/robert
 localhost:8080/v2/friendship/johndoe/requestFriendshipTo/robert
 
-* implement Circuit Breaker pattern to avoid Deny of Service (DoS)
+* implement Circuit Breaker pattern to avoid Deny of Service (DoS) in the case this REST API was consuming another service of another REST API.
 * enable CSRF and XSS features from Spring to avoid this kind of attacks.
 * implement JWT feature to authorization things.
 

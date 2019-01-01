@@ -14,4 +14,5 @@ public class FriendsApplication {
     logger.info("Welcome to the FriendsApplication...");
     SpringApplication.run(FriendsApplication.class, args);
   }
+
 }
