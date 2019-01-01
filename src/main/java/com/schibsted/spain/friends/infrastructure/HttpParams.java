@@ -8,6 +8,11 @@ public class HttpParams {
     public static final String URI_FRIENDSHIP_DECLINE       = "/decline";
     public static final String URI_FRIENDSHIP_LIST          = "/list";
 
+    public static final String URI_FRIENDSHIP_REQUEST_V1       = "{usernameFrom}/request/{usernameTo}";
+    public static final String URI_FRIENDSHIP_ACCEPT_V1        = "{usernameFrom}/accept/{usernameTo}";
+    public static final String URI_FRIENDSHIP_DECLINE_V1       = "{usernameFrom}/decline/{usernameTo}";
+    public static final String URI_FRIENDSHIP_LIST_V1          = "{username}/list";
+
     static final String[] URI_AUTH_WHITELIST = {
             URI_SIGNUP,
             "/",

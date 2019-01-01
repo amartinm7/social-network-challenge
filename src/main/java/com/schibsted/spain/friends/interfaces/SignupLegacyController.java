@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestHeader;
 
 @RestController
 @RequestMapping(HttpParams.URI_SIGNUP)
-public class SignupLegacyController implements CustomResponse {
+public class SignupLegacyController {
 
   private static final Logger logger = LoggerFactory.getLogger(SignupLegacyController.class);
 
@@ -30,7 +30,7 @@ public class SignupLegacyController implements CustomResponse {
       @RequestHeader(HttpParams.X_PASSWORD) String password) {
     logger.info("asking for signup user {}", username);
     return signupService.signup(username, password)
-            .map( user -> getOKMessage(user, ResponseMessage.Action.SIGNUP) )
-            .orElse( getBadRequestMessage(ResponseMessage.Action.SIGNUP) );
+            .map( user -> CustomResponse.getOKMessage(user, ResponseMessage.Action.SIGNUP) )
+            .orElse( CustomResponse.getBadRequestMessage(ResponseMessage.Action.SIGNUP) );
   }
 }

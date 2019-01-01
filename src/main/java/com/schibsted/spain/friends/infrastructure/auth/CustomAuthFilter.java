@@ -4,6 +4,7 @@ import com.schibsted.spain.friends.infrastructure.HttpParams;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.util.StringUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import javax.servlet.FilterChain;
@@ -22,12 +23,20 @@ public class CustomAuthFilter extends OncePerRequestFilter {
         String username = "";
         final String xPassword = request.getHeader(HttpParams.X_PASSWORD);
 
-        if (request.getRequestURI().contains(HttpParams.URI_SIGNUP)
-                || (request.getRequestURI().contains(HttpParams.URI_FRIENDSHIP_LIST))){
+        if (request.getRequestURI().contains(HttpParams.URI_FRIENDSHIP_LIST)){
             username = request.getParameter(HttpParams.USER_NAME);
         } else if (request.getRequestURI().contains(HttpParams.URI_FRIENDSHIP)){
             username = request.getParameter(HttpParams.USER_NAME_FROM);
         }
+
+        // FOR SUPPORTING THE NEW CONTROLLER URI VERSIONS
+        if (StringUtils.isEmpty(username)){
+            final String[] tokens = request.getRequestURI().split("/");
+            if (tokens.length > 2) {
+                username = request.getRequestURI().split("/")[2];
+            }
+        }
+
         // Create our Authentication and let Spring know about it
         Authentication auth = new UsernamePasswordAuthenticationToken(username, xPassword);
         SecurityContextHolder.getContext().setAuthentication(auth);
