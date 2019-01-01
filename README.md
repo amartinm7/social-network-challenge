@@ -5,14 +5,14 @@
 This service have users that can ask for friendship other users and offers an HTTP API to do so.
 
 ## ![springboot](./_media/icons/springboot.png) run springboot app
-```
+```bash
 gradle wrapper
 ./gradlew build
 ./gradlew bootRun
 ```
 
 or run the application using the java command line, using the fat jar:
-```
+```bash
 java -jar -Dspring.profiles.active=dev build/libs/friends-rest-service-0.1.0.jar
 ```
 you can specify the profile using the -Dspring.profiles.active parameter. If you don't specify any, by default is 'dev' in our case.
@@ -33,13 +33,13 @@ docker run -p 8080:8080 friends
 ```
 
 to stop the application first we have to stop the docker process and then kill the docker process:
-```
+```bash
 docker stop $(docker ps -a -q)
 docker rm $(docker ps -a -q)
 ```
 
 to clean the docker images from the system:
-```
+```bash
 docker images
 docker rmi PID
 ``` 
@@ -61,7 +61,7 @@ To see the reports simply open the report:
 - build/reports/checkstyle/test.html
 
 You can execute the report on demand:
-```
+```bash
 ./gradlew check
 ```
 
@@ -86,8 +86,9 @@ The idea behind is to use a cache service as CloudFront is in the AWS ecosystem.
 We can add a versioning in the api to handle the different versions of the api while this API is evolving.
 For instance:
 ```
-localhost:8080/v1/friendship/{usernameFrom}/request/{usernameTo}
-localhost:8080/v2/friendship/{usernameFrom}/request/{usernameTo}
+http://localhost:8080/v1/friendship/{usernameFrom}/request/{usernameTo}
+http://localhost:8080/v2/friendship/{usernameFrom}/request/{usernameTo}
+http://localhost:8080/v1/swagger-ui.html
 ```
 For achieving this we can change the context-path property in the application.yml file. 
 At this moment you can specify the profile when you run springboot for testing this behaviour.
@@ -100,13 +101,20 @@ At this moment you can specify the profile when you run springboot for testing t
 
 ### Deployed version in heroku without docker
 At this moment Heroku provides a functionality to deploy the projects under git. In this case use the build.gradle 
-as pipeline to deploy the application in the cloud. You can see the application running in the next url: 
+as pipeline to deploy the application in the cloud. You can see the application running in the next url:
+ 
 * https://social-network-challenge.herokuapp.com/swagger-ui.html
 
 
 ### Domain Drive Design
-![ddd-building-blocks](./_media/ddd-building-blocks.png)
+The application follows some rules of the DDD.
+The application is splitted in four modules:
+* interface layer
+* application layer
+* domain layer
+* intrastructure layer
 
+![ddd-building-blocks](./_media/ddd-building-blocks.png)
 
 ### Some useful Tips
 
