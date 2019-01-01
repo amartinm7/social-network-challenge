@@ -9,6 +9,10 @@ curl -X POST "http://localhost:8080/signup?username=username2" -H  "accept: */*"
 echo
 curl -X POST "http://localhost:8080/signup?username=username3" -H  "accept: */*" -H  "X-Password: password"
 echo
+curl -X POST "http://localhost:8080/signup?username=username4" -H  "accept: */*" -H  "X-Password: password"
+echo
+curl -X POST "http://localhost:8080/signup?username=username5" -H  "accept: */*" -H  "X-Password: password"
+echo
 
 # send requests
 curl -X POST "http://localhost:8080/friendship/request?usernameFrom=username&usernameTo=username1" -H  "accept: */*" -H  "X-Password: password"
