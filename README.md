@@ -67,28 +67,40 @@ You can execute the report on demand:
 
 ## improvements
 
-* improving the rest api signature, send usernames as path parameters:
-localhost:8080/friendship/johndoe/requestFriendshipTo/robert
-localhost:8080/friendship/robert/acceptFriendshipTo/johndoe
-localhost:8080/friendship/robert/declineFriendshipTo/johndoe
-localhost:8080/friendship/johndoe/listFriends
+### New URIs with path params for the rest api
 
-* implement cache: we can implement a cache module to cache the request. 
-If the request it's cached then we can get the data from there. Send 200 or 304 depending.
-Add an Expires or a Cache-Control Header to the request to control the TTL of the request in the cache. 
+improving the rest api signature sending usernames as path parameters (currently implemented) :
+```
+http://localhost:8080/friendship/{usernameFrom}/request/{usernameTo}
+http://localhost:8080/friendship/{usernameFrom}/accept/{usernameTo}
+http://localhost:8080/friendship/{usernameFrom}/decline/{usernameTo}
+http://localhost:8080/friendship/{username}/list
+```
 
+### implement cache in the front-controller 
+We can implement a cache module to cache the request. This is the URI and the headers. 
+If the request it's cached then we can get the data from there. We can try to a Memcache or REDIS service as cache.
+The idea behind is to use a cache service as CloudFront is in the AWS ecosystem. 
  
-* implement versioning: qwe can add a versioning in the api to handle the different versions of the api while is evolving.
-for instance:
-localhost:8080/v1/friendship/johndoe/requestFriendshipTo/robert
-localhost:8080/v2/friendship/johndoe/requestFriendshipTo/robert
+### implement versioning
+We can add a versioning in the api to handle the different versions of the api while this API is evolving.
+For instance:
+```
+localhost:8080/v1/friendship/{usernameFrom}/request/{usernameTo}
+localhost:8080/v2/friendship/{usernameFrom}/request/{usernameTo}
+```
+For achieving this we can change the context-path property in the application.yml file. 
+At this moment you can specify the profile when you run springboot for testing this behaviour.
 
-* implement Circuit Breaker pattern to avoid Deny of Service (DoS) in the case this REST API was consuming another service of another REST API.
+### More ideas
+* implement Circuit Breaker pattern to avoid the degradation of the system, in the case this REST API was consuming another REST API.
 * enable CSRF and XSS features from Spring to avoid this kind of attacks.
 * implement JWT feature to authorization things.
 
 
 ### Deployed version in heroku without docker
+At this moment Heroku provides a functionality to deploy the projects under git. In this case use the build.gradle 
+as pipeline to deploy the application in the cloud. You can see the application running in the next url: 
 * https://social-network-challenge.herokuapp.com/swagger-ui.html
 
 
@@ -98,7 +110,7 @@ localhost:8080/v2/friendship/johndoe/requestFriendshipTo/robert
 
 ### Some useful Tips
 
-closing ports
+Closing ports, useful when the service is running and you want to kill it.
 ```
 sudo lsof -i :8080
 sudo kill -9 PID
