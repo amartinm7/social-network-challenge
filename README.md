@@ -72,8 +72,6 @@ You can execute the report on demand:
 Under the next urls you can see how is the system running:
 * http://localhost:8080/actuator/health
 * http://localhost:8080/actuator/info
-* http://localhost:8080/actuator/metrics
-* http://localhost:8080/actuator/trace
 
 ### New URIs with path params for the rest api
 
