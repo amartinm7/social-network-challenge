@@ -7,9 +7,9 @@ Open the next url to see the app running:
 
 * https://social-network-challenge.herokuapp.com/swagger-ui.html
 * http://localhost:8080/swagger-ui.html
-* http://localhost:8080/index.html
 
-(under construction: only implemented some functionalities as the challenge requires)
+Single Page Application under construction: only implemented some functionalities as the challenge requires)
+* http://localhost:8080/index.html
 
 ## ![springboot](./_media/icons/springboot.png) run springboot app
 To start, install the gradle wrapper is you didn't do it previously and boot the app: 
