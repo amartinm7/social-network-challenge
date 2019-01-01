@@ -5,6 +5,8 @@
 This service have users that can ask for friendship other users and offers an HTTP API to do so.
 Open the next url to see the app running:
 
+* https://social-network-challenge.herokuapp.com/swagger-ui.html
+* http://localhost:8080/swagger-ui.html
 * http://localhost:8080/index.html
 
 (under construction: only implemented some functionalities as the challenge requires)
@@ -102,11 +104,14 @@ http://localhost:8080/v1/swagger-ui.html
 For achieving this we can change the context-path property in the application.yml file. 
 At this moment you can specify the profile when you run springboot for testing this behaviour.
 
-### Deployed version in heroku without docker (status=implemented)
+### Deployed version in heroku (status=implemented)
 At this moment Heroku provides a functionality to deploy the projects under git. In this case use the build.gradle 
 as pipeline to deploy the application in the cloud. You can see the application running in the next url:
  
 * https://social-network-challenge.herokuapp.com/swagger-ui.html
+
+### Deployed version in heroku with docker (status=idea)
+At this moment Heroku provides a functionality to deploy the projects under git. There are a heroku pipeline to do it. 
 
 ### More room to improve (status=idea)
 * implement Circuit Breaker pattern to avoid the degradation of the system, in the case this REST API was consuming another REST API.
