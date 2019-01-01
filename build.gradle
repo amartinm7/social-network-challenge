@@ -21,8 +21,6 @@ apply plugin: "jacoco"
 apply plugin: 'checkstyle'
 apply plugin: 'findbugs'
 
-
-
 group = 'es.schibsted'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = 1.8
@@ -60,7 +58,6 @@ jacocoTestReport {
 
 // to see the test coverage
 build.finalizedBy(jacocoTestReport)
-
 
 findbugs {
 	ignoreFailures = false
