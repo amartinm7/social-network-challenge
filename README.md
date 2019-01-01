@@ -3,13 +3,13 @@
 # social-network-challenge
 
 This service have users that can ask for friendship other users and offers an HTTP API to do so.
-Open the next url to see the app running:
 
+## Deployed app in the cloud
+Swagger:
 * https://social-network-challenge.herokuapp.com/swagger-ui.html
-* http://localhost:8080/swagger-ui.html
 
-Single Page Application under construction: only implemented some functionalities as the challenge requires)
-* http://localhost:8080/index.html
+Single Page Application (status=under construction): only implemented with some functionalities as the challenge requires
+* https://social-network-challenge.herokuapp.com/index.html 
 
 ## ![springboot](./_media/icons/springboot.png) run springboot app
 To start, install the gradle wrapper is you didn't do it previously and boot the app: 
@@ -57,6 +57,17 @@ Once you have the dockerized app is really easy bring it to the cloud. You look 
 ## ![swagger](./_media/icons/swagger.png) Swagger
 You can see the swagger documentation in the following url:
 - http://localhost:8080/swagger-ui.html
+
+
+## Single Page Application (status=under construction)
+Once the app is runnning you can visit the next url to manage the REST API.
+* http://localhost:8080/index.html
+
+You can run the curl files to test the app with users. 
+Once the app is running you can run from the command line of the root project:
+```bash
+sh ./src/test/resources/all_cases_curl.sh
+```
 
 ## Test code covarage using Jacoco
 To see the report with the code coverage for the testing, simply open the report: 
