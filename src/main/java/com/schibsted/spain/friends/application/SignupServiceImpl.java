@@ -8,11 +8,11 @@ import org.springframework.stereotype.Service;
 import java.util.Optional;
 
 @Service
-public class SignupAdapter implements SignupService {
+public class SignupServiceImpl implements SignupService {
 
     private final UserCommandPort userCommandPort;
 
-    public SignupAdapter (@Autowired UserCommandPort userCommandPort){
+    public SignupServiceImpl(@Autowired UserCommandPort userCommandPort){
         this.userCommandPort = userCommandPort;
     }
 

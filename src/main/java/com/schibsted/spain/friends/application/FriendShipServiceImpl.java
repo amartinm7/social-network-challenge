@@ -9,12 +9,12 @@ import java.util.Collection;
 import java.util.Optional;
 
 @Service
-public class FriendShipAdapter implements FriendShipService{
+public class FriendShipServiceImpl implements FriendShipService{
 
     private final UserQueryPort userQueryPort;
     private final UserCommandPort userCommandPort;
 
-    public FriendShipAdapter(@Autowired UserQueryPort userQueryPort, @Autowired UserCommandPort userCommandPort){
+    public FriendShipServiceImpl(@Autowired UserQueryPort userQueryPort, @Autowired UserCommandPort userCommandPort){
         this.userQueryPort = userQueryPort;
         this.userCommandPort = userCommandPort;
     }
