@@ -8,7 +8,7 @@ This service have users that can ask for friendship other users and offers an HT
 Swagger:
 * https://social-network-challenge.herokuapp.com/swagger-ui.html
 
-Single Page Application (status=under construction): only implemented with some functionalities as the challenge requires
+Single Page Application (status=under construction)
 * https://social-network-challenge.herokuapp.com/index.html 
 
 ## ![springboot](./_media/icons/springboot.png) run springboot app
