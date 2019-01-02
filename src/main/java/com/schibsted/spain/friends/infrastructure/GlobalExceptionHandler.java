@@ -17,6 +17,6 @@ public class GlobalExceptionHandler
         public ResponseEntity<ResponseMessage> handleIllegalArgumentException(
                 Exception ex, WebRequest request) {
             return CustomResponse.getBadRequestMessage(
-                    String.format("%d, %s", HttpStatus.BAD_REQUEST.value(), ex.getMessage()));
+                    String.format("%s", ex.getMessage()));
         }
 }
