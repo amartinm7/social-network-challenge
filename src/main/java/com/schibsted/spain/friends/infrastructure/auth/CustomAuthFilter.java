@@ -20,12 +20,10 @@ public class CustomAuthFilter extends OncePerRequestFilter {
                                     HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
 
-        String username = "";
         final String xPassword = request.getHeader(HttpParams.X_PASSWORD);
 
-        if (request.getRequestURI().contains(HttpParams.URI_FRIENDSHIP_LIST)){
-            username = request.getParameter(HttpParams.USER_NAME);
-        } else if (request.getRequestURI().contains(HttpParams.URI_FRIENDSHIP)){
+        String username = request.getParameter(HttpParams.USER_NAME);
+        if (StringUtils.isEmpty(username)) {
             username = request.getParameter(HttpParams.USER_NAME_FROM);
         }
 
