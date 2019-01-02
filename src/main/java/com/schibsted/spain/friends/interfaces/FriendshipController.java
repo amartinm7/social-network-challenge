@@ -37,7 +37,7 @@ public class FriendshipController {
             @PathVariable(HttpParams.USER_NAME_FROM) String usernameFrom,
             @PathVariable(HttpParams.USER_NAME_TO) String usernameTo,
             @RequestHeader(HttpParams.X_PASSWORD) String password) {
-        logger.info("asking for requestFriendship from {} to {}", usernameFrom, usernameTo);
+        logger.info("(improved api version) asking for requestFriendship from {} to {}", usernameFrom, usernameTo);
         return friendShipService.requestFriendship(usernameFrom, usernameTo)
                 .map(user -> CustomResponse.getOKMessage(user))
                 .orElse(CustomResponse.getInternalErrorMessage());
@@ -49,7 +49,7 @@ public class FriendshipController {
             @PathVariable(HttpParams.USER_NAME_FROM) String usernameFrom,
             @PathVariable(HttpParams.USER_NAME_TO) String usernameTo,
             @RequestHeader(HttpParams.X_PASSWORD) String password) {
-        logger.info("asking for acceptFriendship from {} to {}", usernameFrom, usernameTo);
+        logger.info("(improved api version) asking for acceptFriendship from {} to {}", usernameFrom, usernameTo);
         return friendShipService.acceptFriendship(usernameFrom, usernameTo)
                 .map(user -> CustomResponse.getOKMessage(user))
                 .orElse(CustomResponse.getInternalErrorMessage());
@@ -61,7 +61,7 @@ public class FriendshipController {
             @PathVariable(HttpParams.USER_NAME_FROM) String usernameFrom,
             @PathVariable(HttpParams.USER_NAME_TO) String usernameTo,
             @RequestHeader(HttpParams.X_PASSWORD) String password) {
-        logger.info("asking for declineFriendship from {} to {}", usernameFrom, usernameTo);
+        logger.info("(improved api version) asking for declineFriendship from {} to {}", usernameFrom, usernameTo);
         return friendShipService.declineFriendship(usernameFrom, usernameTo)
                 .map(user -> CustomResponse.getOKMessage(user))
                 .orElse(CustomResponse.getInternalErrorMessage());
@@ -72,7 +72,7 @@ public class FriendshipController {
     public ResponseEntity<String[]> listFriends(
             @PathVariable(HttpParams.USER_NAME) String username,
             @RequestHeader(HttpParams.X_PASSWORD) String password) {
-        logger.info("asking for listFriends for {}", username);
+        logger.info("(improved api version) asking for listFriends for {}", username);
         final Collection<User> friends = friendShipService.listFriends(username);
         final String[] theFriends = friends.stream().map(friend -> friend.getName()).toArray(String[]::new);
         return new ResponseEntity<>(theFriends, HttpStatus.OK);
