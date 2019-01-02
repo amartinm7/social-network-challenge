@@ -55,11 +55,11 @@ public class User {
         return (addedRequest)? Optional.of(this) : Optional.empty();
     }
     private void validateRelationshipLists(User userTo){
-        if (this.friends.contains(userTo)) {
-            throw new IllegalArgumentException(String.format("The userTo %s is already in the list of friends.", userTo.getName()));
-        }
         if (!this.pendingFriends.contains(userTo)) {
             throw new IllegalArgumentException(String.format("The userTo %s is not in the list of pending friends.", userTo.getName()));
+        }
+        if (this.friends.contains(userTo)) {
+            throw new IllegalArgumentException(String.format("The userTo %s is already in the list of friends.", userTo.getName()));
         }
     }
     public Optional<User> acceptFriendShip(User userTo) {
