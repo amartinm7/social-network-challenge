@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 @Component
 public class RepositoryProviderAdapter implements RepositoryPort<User,String> {
@@ -23,8 +24,12 @@ public class RepositoryProviderAdapter implements RepositoryPort<User,String> {
     }
 
     @Override
-    public User find(String username) {
-        return store.get(username);
+    public Optional<User> find(String username) {
+        if (store.containsKey(username)){
+            return Optional.of(store.get(username));
+        } else {
+            return Optional.empty();
+        }
     }
 
     @Override

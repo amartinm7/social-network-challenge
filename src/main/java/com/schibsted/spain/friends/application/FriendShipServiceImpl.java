@@ -41,4 +41,9 @@ public class FriendShipServiceImpl implements FriendShipService{
     public Optional<User> declineFriendship(String userFrom, String userTo) {
         return userCommandPort.declineFriendship(userFrom, userTo);
     }
+
+    @Override
+    public Optional<User> getUser(String userFrom) {
+        return userQueryPort.getUser(userFrom);
+    }
 }

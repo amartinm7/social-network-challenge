@@ -20,7 +20,10 @@ public class CustomAuthFilter extends OncePerRequestFilter {
                                     HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
 
-        final String xPassword = request.getHeader(HttpParams.X_PASSWORD);
+        String xPassword = request.getHeader(HttpParams.X_PASSWORD);
+        if (StringUtils.isEmpty(xPassword)) {
+            xPassword = request.getParameter(HttpParams.PASSWORD);
+        }
 
         String username = request.getParameter(HttpParams.USER_NAME);
         if (StringUtils.isEmpty(username)) {

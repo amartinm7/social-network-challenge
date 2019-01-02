@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
+import java.util.Optional;
 
 @Service
 public class UserQueryAdapter
@@ -22,25 +23,27 @@ public class UserQueryAdapter
         if ( !isUserStored(username) ) {
            return false;
         }
-        final User storedUser = getUser(username);
+        final User storedUser = getUser(username).get();
         return storedUser.getPassword().equals(password);
     }
 
     @Override
     public Collection<User> listFriends(String userFrom) {
-        final User savedUserFrom = getUser(userFrom);
+        final User savedUserFrom = getUser(userFrom).orElseThrow(()-> new IllegalArgumentException(String.format("The user %s doesn't exist.",userFrom)));
         return savedUserFrom.getFriendList();
     }
 
     @Override
     public Collection<User> listPendingFriends(String userFrom) {
-        final User savedUserFrom = getUser(userFrom);
+        final User savedUserFrom = getUser(userFrom).orElseThrow(()-> new IllegalArgumentException(String.format("The user %s doesn't exist.",userFrom)));
         return savedUserFrom.getPendingFriendsList();
     }
 
-    private User getUser(String user){
+    @Override
+    public Optional<User> getUser(String user){
         return repositoryPort.find(user);
     }
+
     private boolean isUserStored(String user){
         return repositoryPort.exists(user);
     }

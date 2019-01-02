@@ -35,7 +35,7 @@ public class FriendshipLegacyControllerIT {
         final String urlMethod = HttpParams.URI_SIGNUP;
 
         // when
-        final HttpEntity<MultiValueMap<String, String>> request = RestTemplateHelper.getHttpEntity (username, password);
+        final HttpEntity<MultiValueMap<String, String>> request = RestTemplateHelper.getHttpEntity (password);
         final URI uri = RestTemplateHelper.getURI(port, urlMethod, username);
 
         // then
@@ -51,7 +51,7 @@ public class FriendshipLegacyControllerIT {
         doSignUp(usernameFrom,passwordFrom, usernameFrom);
         doSignUp(usernameTo,passwordTo, usernameTo);
 
-        final HttpEntity<MultiValueMap<String, String>> request = RestTemplateHelper.getHttpEntity (usernameFrom, passwordFrom);
+        final HttpEntity<MultiValueMap<String, String>> request = RestTemplateHelper.getHttpEntity (passwordFrom);
         final URI uri = RestTemplateHelper.getURI(port, urlMethod, usernameFrom, usernameTo);
 
         // Expected
@@ -68,7 +68,7 @@ public class FriendshipLegacyControllerIT {
         // when
         doRequest(usernameFrom, passwordFrom, usernameTo, passwordTo);
 
-        final HttpEntity<MultiValueMap<String, String>> request = RestTemplateHelper.getHttpEntity (usernameTo, passwordTo);
+        final HttpEntity<MultiValueMap<String, String>> request = RestTemplateHelper.getHttpEntity (passwordTo);
         final URI uri = RestTemplateHelper.getURI(port, urlMethod, usernameTo, usernameFrom);
 
         final String expectedMessage = usernameTo;
@@ -84,7 +84,7 @@ public class FriendshipLegacyControllerIT {
         // when
         doRequest(usernameFrom, passwordFrom, usernameTo, passwordTo);
 
-        final HttpEntity<MultiValueMap<String, String>> request = RestTemplateHelper.getHttpEntity (usernameTo, passwordTo);
+        final HttpEntity<MultiValueMap<String, String>> request = RestTemplateHelper.getHttpEntity (passwordTo);
         final URI uri = RestTemplateHelper.getURI(port, urlMethod, usernameTo, usernameFrom);
 
         final String expectedMessage = usernameTo;
@@ -115,7 +115,7 @@ public class FriendshipLegacyControllerIT {
 
         // when
         doSignUp(usernameFrom,passwordFrom, usernameFrom);
-        final HttpEntity<MultiValueMap<String, String>> request = RestTemplateHelper.getHttpEntity (usernameFrom, passwordFrom);
+        final HttpEntity<MultiValueMap<String, String>> request = RestTemplateHelper.getHttpEntity (passwordFrom);
         final URI uri = RestTemplateHelper.getURI(port, urlMethod, usernameFrom, usernameTo);
 
         // expected
@@ -150,7 +150,7 @@ public class FriendshipLegacyControllerIT {
         // when
         doRequest(usernameFrom, passwordFrom, usernameTo, passwordTo);
 
-        final HttpEntity<MultiValueMap<String, String>> request = RestTemplateHelper.getHttpEntity (usernameTo, passwordTo);
+        final HttpEntity<MultiValueMap<String, String>> request = RestTemplateHelper.getHttpEntity (passwordTo);
         final URI uri = RestTemplateHelper.getURI(port, urlMethod, usernameTo, usernameUnknownUser);
 
         // expected
@@ -185,7 +185,7 @@ public class FriendshipLegacyControllerIT {
         // when
         doRequest(usernameFrom, passwordFrom, usernameTo, passwordTo);
 
-        final HttpEntity<MultiValueMap<String, String>> request = RestTemplateHelper.getHttpEntity (usernameTo, passwordTo);
+        final HttpEntity<MultiValueMap<String, String>> request = RestTemplateHelper.getHttpEntity (passwordTo);
         final URI uri = RestTemplateHelper.getURI(port, urlMethod, usernameTo, usernameUnknownUser);
 
         // expected
@@ -203,7 +203,7 @@ public class FriendshipLegacyControllerIT {
         final String passwordTo = "password";
         final String urlMethod =  HttpParams.URI_FRIENDSHIP + HttpParams.URI_FRIENDSHIP_DECLINE;
         // when
-        final HttpEntity<MultiValueMap<String, String>> request = RestTemplateHelper.getHttpEntity (usernameFrom, passwordFrom);
+        final HttpEntity<MultiValueMap<String, String>> request = RestTemplateHelper.getHttpEntity (passwordFrom);
         final URI uri = RestTemplateHelper.getURI(port, urlMethod, usernameFrom, usernameTo);
 
         // expected
@@ -225,7 +225,7 @@ public class FriendshipLegacyControllerIT {
         // when
         doAccept( usernameFrom, passwordFrom, usernameTo, passwordTo);
         // when
-        final HttpEntity<MultiValueMap<String, String>> request = RestTemplateHelper.getHttpEntity (usernameTo, passwordTo);
+        final HttpEntity<MultiValueMap<String, String>> request = RestTemplateHelper.getHttpEntity (passwordTo);
         final URI uri = RestTemplateHelper.getURI(port, urlMethod, usernameTo);
 
         // expected
@@ -248,7 +248,7 @@ public class FriendshipLegacyControllerIT {
         // when
         doRequest( usernameFrom, passwordFrom, usernameTo, passwordTo);
         // when
-        final HttpEntity<MultiValueMap<String, String>> request = RestTemplateHelper.getHttpEntity (usernameTo, passwordTo);
+        final HttpEntity<MultiValueMap<String, String>> request = RestTemplateHelper.getHttpEntity (passwordTo);
         final URI uri = RestTemplateHelper.getURI(port, urlMethod, usernameTo);
 
         // expected

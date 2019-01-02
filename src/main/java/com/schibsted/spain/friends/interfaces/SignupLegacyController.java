@@ -33,7 +33,6 @@ public class SignupLegacyController {
     logger.info("asking for signup user {}", username);
     return signupService.signup(username, password)
             .map( user -> CustomResponse.getOKMessage(user) )
-            .orElse( CustomResponse.getBadRequestMessage(
-                    String.format("Invalid action: the combination username/password: %s/%s is not right. Provide a right credentials", username, password)) );
+            .orElse(CustomResponse.getInternalErrorMessage());
   }
 }

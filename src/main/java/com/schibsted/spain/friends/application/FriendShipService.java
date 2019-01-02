@@ -10,4 +10,6 @@ public interface FriendShipService {
     Optional<User> declineFriendship(String userFrom, String userTo);
     Collection<User> listFriends(String userFrom);
     Collection<User> listPendingFriends(String userFrom);
+    Optional<User> getUser (String username);
+
 }
