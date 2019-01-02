@@ -21,12 +21,12 @@ public class UserCommandQueryAdapterTest {
     @Autowired
     private UserQueryPort userQueryPort;
 
-    final String usernameFrom = "johnnyX";
-    final String passwordFrom = "password";
-    final String usernameTo = "johnnyZ";
-    final String passwordTo = "password";
-    final String usernameTo2 = "johnnyO";
-    final String passwordTo2 = "password";
+    private final String usernameFrom = "johnnyX";
+    private final String passwordFrom = "password";
+    private final String usernameTo = "johnnyZ";
+    private final String passwordTo = "password";
+    private final String usernameTo2 = "johnnyO";
+    private final String passwordTo2 = "password";
 
     @Before
     public void setup(){
