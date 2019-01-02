@@ -191,4 +191,22 @@ public class FriendshipLegacyControllerIT {
         // then
         assertThat(this.restTemplate.postForObject(uri, request, String.class)).contains(expectedMessage);
     }
+    @Test
+    public void invalidCredentialsReturnForbbiden() throws Exception {
+        // given a user
+        final String usernameFrom = "UnknownUser";
+        final String passwordFrom = "password";
+        final String usernameTo = "johnnyZ6";
+        final String passwordTo = "password";
+        final String urlMethod =  HttpParams.URI_FRIENDSHIP + HttpParams.URI_FRIENDSHIP_DECLINE;
+        // when
+        final HttpEntity<MultiValueMap<String, String>> request = RestTemplateHelper.getHttpEntity (usernameFrom, passwordFrom);
+        final URI uri = RestTemplateHelper.getURI(port, urlMethod, usernameFrom, usernameTo);
+
+        // expected
+        final String expectedMessage = "403";
+
+        // then
+        assertThat(this.restTemplate.postForObject(uri, request, String.class)).contains(expectedMessage);
+    }
 }
