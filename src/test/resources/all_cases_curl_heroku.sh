@@ -43,7 +43,6 @@ curl -X POST "https://social-network-challenge.herokuapp.com/friendship/request?
 echo
 
 # send requests
-
 curl -X POST "https://social-network-challenge.herokuapp.com/friendship/request?usernameFrom=username1&usernameTo=username" -H  "accept: */*" -H  "X-Password: password"
 echo
 curl -X POST "https://social-network-challenge.herokuapp.com/friendship/request?usernameFrom=username2&usernameTo=username" -H  "accept: */*" -H  "X-Password: password"
