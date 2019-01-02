@@ -5,6 +5,7 @@ import com.schibsted.spain.friends.application.SignupService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,7 +25,7 @@ public class SignupLegacyController {
     this.signupService = signupService;
   }
 
-  @PostMapping
+  @PostMapping (produces = MediaType.APPLICATION_JSON_VALUE)
   public ResponseEntity<ResponseMessage> signUp(
       @RequestParam(HttpParams.USER_NAME) String username,
       @RequestHeader(HttpParams.X_PASSWORD) String password) {

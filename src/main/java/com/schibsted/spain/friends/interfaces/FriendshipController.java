@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -29,7 +30,8 @@ public class FriendshipController {
         this.friendShipService = friendShipService;
     }
 
-    @PostMapping(HttpParams.URI_FRIENDSHIP_REQUEST_V1)
+    @PostMapping(value = HttpParams.URI_FRIENDSHIP_REQUEST_V1,
+            produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ResponseMessage> requestFriendship(
             @PathVariable(HttpParams.USER_NAME_FROM) String usernameFrom,
             @PathVariable(HttpParams.USER_NAME_TO) String usernameTo,
@@ -40,7 +42,8 @@ public class FriendshipController {
                 .orElse(CustomResponse.getBadRequestMessage(ResponseMessage.Action.REQUEST_FRIENDSHIP));
     }
 
-    @PostMapping(HttpParams.URI_FRIENDSHIP_ACCEPT_V1)
+    @PostMapping(value = HttpParams.URI_FRIENDSHIP_ACCEPT_V1,
+            produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ResponseMessage> acceptFriendship(
             @PathVariable(HttpParams.USER_NAME_FROM) String usernameFrom,
             @PathVariable(HttpParams.USER_NAME_TO) String usernameTo,
@@ -51,7 +54,8 @@ public class FriendshipController {
                 .orElse(CustomResponse.getBadRequestMessage(ResponseMessage.Action.ACCEPT_FRIENDSHIP));
     }
 
-    @PostMapping(HttpParams.URI_FRIENDSHIP_DECLINE_V1)
+    @PostMapping(value = HttpParams.URI_FRIENDSHIP_DECLINE_V1,
+            produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ResponseMessage> declineFriendship(
             @PathVariable(HttpParams.USER_NAME_FROM) String usernameFrom,
             @PathVariable(HttpParams.USER_NAME_TO) String usernameTo,
@@ -62,7 +66,8 @@ public class FriendshipController {
                 .orElse(CustomResponse.getBadRequestMessage(ResponseMessage.Action.DECLINE_FRIENDSHIP));
     }
 
-    @GetMapping(HttpParams.URI_FRIENDSHIP_LIST_V1)
+    @GetMapping(value = HttpParams.URI_FRIENDSHIP_LIST_V1,
+            produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String[]> listFriends(
             @PathVariable(HttpParams.USER_NAME) String username,
             @RequestHeader(HttpParams.X_PASSWORD) String password) {

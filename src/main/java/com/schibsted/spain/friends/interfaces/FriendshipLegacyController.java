@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -29,7 +30,8 @@ public class FriendshipLegacyController {
         this.friendShipService = friendShipService;
     }
 
-    @PostMapping(HttpParams.URI_FRIENDSHIP_REQUEST)
+    @PostMapping(value = HttpParams.URI_FRIENDSHIP_REQUEST,
+            produces = MediaType.APPLICATION_JSON_VALUE )
     public ResponseEntity<ResponseMessage> requestFriendship(
             @RequestParam(HttpParams.USER_NAME_FROM) String usernameFrom,
             @RequestParam(HttpParams.USER_NAME_TO) String usernameTo,
@@ -40,7 +42,8 @@ public class FriendshipLegacyController {
                 .orElse(CustomResponse.getBadRequestMessage(ResponseMessage.Action.REQUEST_FRIENDSHIP));
     }
 
-    @PostMapping(HttpParams.URI_FRIENDSHIP_ACCEPT)
+    @PostMapping(value = HttpParams.URI_FRIENDSHIP_ACCEPT,
+            produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ResponseMessage> acceptFriendship(
             @RequestParam(HttpParams.USER_NAME_FROM) String usernameFrom,
             @RequestParam(HttpParams.USER_NAME_TO) String usernameTo,
@@ -51,7 +54,8 @@ public class FriendshipLegacyController {
                 .orElse(CustomResponse.getBadRequestMessage(ResponseMessage.Action.ACCEPT_FRIENDSHIP));
     }
 
-    @PostMapping(HttpParams.URI_FRIENDSHIP_DECLINE)
+    @PostMapping(value = HttpParams.URI_FRIENDSHIP_DECLINE,
+            produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ResponseMessage> declineFriendship(
             @RequestParam(HttpParams.USER_NAME_FROM) String usernameFrom,
             @RequestParam(HttpParams.USER_NAME_TO) String usernameTo,
@@ -62,7 +66,8 @@ public class FriendshipLegacyController {
                 .orElse(CustomResponse.getBadRequestMessage(ResponseMessage.Action.DECLINE_FRIENDSHIP));
     }
 
-    @GetMapping(HttpParams.URI_FRIENDSHIP_LIST)
+    @GetMapping(value = HttpParams.URI_FRIENDSHIP_LIST,
+            produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String[]> listFriends(
             @RequestParam(HttpParams.USER_NAME) String username,
             @RequestHeader(HttpParams.X_PASSWORD) String password) {
