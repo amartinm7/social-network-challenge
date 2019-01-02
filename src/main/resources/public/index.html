@@ -7,7 +7,7 @@
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <link rel="shortcut icon" href="https://getuikit.com/v2/docs/images/favicon.ico" type="image/x-icon">
     <link rel="apple-touch-icon-precomposed" href="https://getuikit.com/v2/docs/images/apple-touch-icon.png">
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
 
     <link rel="stylesheet" href="src/css/uikit.css">
     <script src="src/js/jquery.js"></script>
@@ -52,25 +52,25 @@
         <div class="uk-container uk-container-center uk-margin-top uk-margin-large-bottom">
 
             <nav class="uk-navbar uk-margin-large-bottom">
-                <a class="uk-navbar-brand uk-hidden-small" href="https://getuikit.com/v2/docs/layouts_frontpage.html">Social Network Challenge</a>
+                <a class="uk-navbar-brand uk-hidden-small" href="#">Social Network Challenge</a>
                 <ul class="uk-navbar-nav uk-hidden-small">
                     <li>
-                        <a href="https://getuikit.com/v2/docs/layouts_frontpage.html">Frontpage</a>
+                        <a href="#">Frontpage</a>
                     </li>
                     <li>
-                        <a href="https://getuikit.com/v2/docs/layouts_portfolio.html">Portfolio</a>
+                        <a href="#">Portfolio</a>
                     </li>
                     <li>
-                        <a href="https://getuikit.com/v2/docs/layouts_blog.html">Blog</a>
+                        <a href="#">Blog</a>
                     </li>
                     <li>
-                        <a href="https://getuikit.com/v2/docs/layouts_documentation.html">Documentation</a>
+                        <a href="#">Documentation</a>
                     </li>
                     <li class="uk-active">
-                        <a href="https://getuikit.com/v2/docs/layouts_contact.html">Contact</a>
+                        <a href="#">Contact</a>
                     </li>
                     <li>
-                        <a href="https://getuikit.com/v2/docs/layouts_login.html">Login</a>
+                        <a href="#">Login</a>
                     </li>
                 </ul>
                 <a href="#offcanvas" class="uk-navbar-toggle uk-visible-small" data-uk-offcanvas=""></a>
@@ -80,7 +80,7 @@
             <div class="uk-grid" data-uk-grid-margin="">
                 <div class="uk-width-1-1 uk-text-center uk-row-first">
                     <h1 class="uk-heading-large">Contact</h1>
-                    <p class="uk-text-large">Welcome to the Social Network Challenge</p>
+                    <p class="uk-text-large">Welcome to the Social Network Challenge (Under construction)</p>
                 </div>
             </div>
 
@@ -337,27 +337,31 @@
 
             },
             requestFriendship: function() {
+              try {
                 const self = this
 
                 const headers = {
-                    'Content-Type': 'application/json',
-                    'X-Password': this.user.password,
-                    "Access-Control-Allow-Origin": "*"
+                  'Content-Type': 'application/json',
+                  'X-Password': this.user.password,
+                  "Access-Control-Allow-Origin": "*"
                 }
 
                 const axiosInstance = axios.create({
-                    timeout: 3000,
-                    headers: headers
+                  timeout: 3000,
+                  headers: headers
                 })
 
-                axiosInstance.post( this.urlRequestWithParams )
-                    .then(function(response){
-                        console.log(JSON.stringify(response.data))
-                        self.responseMessages.requestFriendship = "The invitation was sent properly"
-                    }).catch( function(error) {
-                        console.error(error)
-                        self.responseMessages.requestFriendship = "The invitation wasn't accepted, try it another time."
-                    })
+                axiosInstance.post(this.urlRequestWithParams)
+                  .then(function (response) {
+                    console.log(JSON.stringify(response.data))
+                    self.responseMessages.requestFriendship = "The invitation was sent properly"
+                  }).catch(function (error) {
+                  console.error(error)
+                  self.responseMessages.requestFriendship = "The invitation wasn't accepted, try it another time."
+                })
+              } catch(error){
+                console.error(error)
+              }
             },
             acceptFriendship: function() {
                 const self = this

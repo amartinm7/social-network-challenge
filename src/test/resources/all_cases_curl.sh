@@ -13,15 +13,15 @@ curl -X POST "http://localhost:8080/signup?username=username4" -H  "accept: */*"
 echo
 curl -X POST "http://localhost:8080/signup?username=username5" -H  "accept: */*" -H  "X-Password: password"
 echo
-curl -X POST "https://localhost:8080/signup?username=username6" -H  "accept: */*" -H  "X-Password: password"
+curl -X POST "http://localhost:8080/signup?username=username6" -H  "accept: */*" -H  "X-Password: password"
 echo
-curl -X POST "https://localhost:8080/signup?username=username7" -H  "accept: */*" -H  "X-Password: password"
+curl -X POST "http://localhost:8080/signup?username=username7" -H  "accept: */*" -H  "X-Password: password"
 echo
-curl -X POST "https://localhost:8080/signup?username=username8" -H  "accept: */*" -H  "X-Password: password"
+curl -X POST "http://localhost:8080/signup?username=username8" -H  "accept: */*" -H  "X-Password: password"
 echo
-curl -X POST "https://localhost:8080/signup?username=username9" -H  "accept: */*" -H  "X-Password: password"
+curl -X POST "http://localhost:8080/signup?username=username9" -H  "accept: */*" -H  "X-Password: password"
 echo
-curl -X POST "https://localhost:8080/signup?username=username10" -H  "accept: */*" -H  "X-Password: password"
+curl -X POST "http://localhost:8080/signup?username=username10" -H  "accept: */*" -H  "X-Password: password"
 echo
 
 # send requests
