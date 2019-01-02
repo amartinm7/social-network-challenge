@@ -131,6 +131,7 @@ At this moment Heroku provides a functionality to deploy the projects under git.
 * implement Circuit Breaker pattern to avoid the degradation of the system, in the case this REST API was consuming another REST API.
 * enable CSRF and XSS features from Spring to avoid this kind of attacks.
 * implement JWT feature to authorization things.
+* implement a concurrency mechanism to avoid updating the store at the same time for the same user.
 
 ## Domain Drive Design
 The application follows some rules of the DDD.
