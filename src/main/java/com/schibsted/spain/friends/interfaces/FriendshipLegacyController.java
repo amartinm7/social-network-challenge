@@ -78,4 +78,15 @@ public class FriendshipLegacyController {
         return new ResponseEntity<>(theFriends, HttpStatus.OK);
     }
 
+    @GetMapping(value = HttpParams.URI_FRIENDSHIP_LIST_PENDING,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<String[]> listPendingFriends(
+            @RequestParam(HttpParams.USER_NAME) String username,
+            @RequestHeader(HttpParams.X_PASSWORD) String password) {
+        logger.info("asking for listPendingFriends for {}", username);
+        final Collection<User> friends = friendShipService.listPendingFriends(username);
+        final String[] theFriends = friends.stream().map(friend -> friend.getName()).toArray(String[]::new);
+        return new ResponseEntity<>(theFriends, HttpStatus.OK);
+    }
+
 }

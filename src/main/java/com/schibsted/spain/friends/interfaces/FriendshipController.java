@@ -67,13 +67,24 @@ public class FriendshipController {
                 .orElse(CustomResponse.getInternalErrorMessage());
     }
 
-    @GetMapping(value = HttpParams.URI_FRIENDSHIP_LIST_V1,
+    @GetMapping(value = HttpParams.URI_FRIENDSHIP_LIST_FRIENDS_V1,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String[]> listFriends(
             @PathVariable(HttpParams.USER_NAME) String username,
             @RequestHeader(HttpParams.X_PASSWORD) String password) {
         logger.info("(improved api version) asking for listFriends for {}", username);
         final Collection<User> friends = friendShipService.listFriends(username);
+        final String[] theFriends = friends.stream().map(friend -> friend.getName()).toArray(String[]::new);
+        return new ResponseEntity<>(theFriends, HttpStatus.OK);
+    }
+
+    @GetMapping(value = HttpParams.URI_FRIENDSHIP_LIST_PENDING_V1,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<String[]> listPendingFriends(
+            @PathVariable(HttpParams.USER_NAME) String username,
+            @RequestHeader(HttpParams.X_PASSWORD) String password) {
+        logger.info("(improved api version) asking for listPendingFriends for {}", username);
+        final Collection<User> friends = friendShipService.listPendingFriends(username);
         final String[] theFriends = friends.stream().map(friend -> friend.getName()).toArray(String[]::new);
         return new ResponseEntity<>(theFriends, HttpStatus.OK);
     }
