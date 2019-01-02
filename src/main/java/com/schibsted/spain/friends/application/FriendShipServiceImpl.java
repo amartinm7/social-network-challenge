@@ -24,6 +24,8 @@ public class FriendShipServiceImpl implements FriendShipService{
         return userQueryPort.listFriends(userFrom);
     }
 
+    @Override
+    public Collection<User> listPendingFriends(String userFrom)  { return userQueryPort.listPendingFriends(userFrom); }
 
     @Override
     public Optional<User> requestFriendship(String userFrom, String userTo) {
