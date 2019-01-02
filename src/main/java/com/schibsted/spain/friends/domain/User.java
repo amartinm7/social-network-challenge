@@ -56,7 +56,7 @@ public class User {
             throw new IllegalArgumentException(String.format("The %s has already a pending request for this friend %s.", userTo.getName(), this.getName()));
         }
         if (this.equals(userTo)){
-            throw new IllegalArgumentException(String.format("You can't ask for friendship to yourself", this.getName(), userTo.getName()));
+            throw new IllegalArgumentException(String.format("You can't ask for friendship to yourself"));
         }
         boolean addedRequest = userTo.pendingFriends.add(this);
         logger.info("added request friendship from {} to {}? {}", this.getName(), userTo.getName(), addedRequest);
