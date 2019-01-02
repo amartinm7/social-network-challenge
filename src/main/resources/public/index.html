@@ -332,10 +332,9 @@
                         console.log(JSON.stringify(response.data))
                         self.login()
                     }).catch( function(error) {
-                    self.responseMessages.login = 'Error, try another time. Change the user/password'
-                    console.error(error)
-                })
-
+                        self.responseMessages.login = 'Error, try another time. Change the user/password'
+                        console.error(error)
+                    })
             },
             requestFriendship: function() {
               try {
