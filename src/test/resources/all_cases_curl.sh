@@ -35,9 +35,14 @@ curl -X POST "http://localhost:8080/friendship/request?usernameFrom=username&use
 echo
 curl -X POST "http://localhost:8080/friendship/request?usernameFrom=username&usernameTo=username5" -H  "accept: */*" -H  "X-Password: password"
 echo
+curl -X POST "http://localhost:8080/friendship/request?usernameFrom=username&usernameTo=username6" -H  "accept: */*" -H  "X-Password: password"
+echo
+curl -X POST "http://localhost:8080/friendship/request?usernameFrom=username&usernameTo=username7" -H  "accept: */*" -H  "X-Password: password"
+echo
+curl -X POST "http://localhost:8080/friendship/request?usernameFrom=username8&usernameTo=username" -H  "accept: */*" -H  "X-Password: password"
+echo
 
 # send requests
-
 curl -X POST "http://localhost:8080/friendship/request?usernameFrom=username1&usernameTo=username" -H  "accept: */*" -H  "X-Password: password"
 echo
 curl -X POST "http://localhost:8080/friendship/request?usernameFrom=username2&usernameTo=username" -H  "accept: */*" -H  "X-Password: password"
