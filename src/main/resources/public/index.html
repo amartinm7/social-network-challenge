@@ -10,8 +10,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
 
     <link rel="stylesheet" href="src/css/uikit.css">
-    <!--<script src="src/js/jquery.js"></script>-->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js
+    <script src="src/js/jquery.js"></script>
     <script src="src/js/uikit.js"></script>
 </head>
 
@@ -103,18 +102,17 @@
                 </div>
                 <div class="uk-width-medium-1-4 uk-push-1-4 uk-text-center uk-row-first">
                     <h2 class="uk-margin-bottom-remove">Your Bio</h2>
-                    <p class="uk-text-large uk-margin-top-remove uk-text-muted">
-                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type
+                    <p class="uk-text-large uk-margin-top-remove uk-text-muted uk-text-justify">
+                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s
                     </p>
                 </div>
             </div>
-            <template v-if="hasFriends">
 
+            <template v-if="hasFriends">
                 <div class="uk-width-1-1 uk-text-center uk-row-first">
                     <p class="uk-text-large"></p>
                     <p class="uk-text-large">Your friends are here</p>
                 </div>
-
                 <div class="uk-grid" data-uk-grid-margin="">
                     <div class="uk-width-medium-1-5 uk-text-center uk-row-first" v-for="item in user.friends" >
                         <div class="uk-thumbnail uk-overlay-hover uk-border-circle">
@@ -132,21 +130,31 @@
                         <h2 class="uk-margin-bottom-remove">{{item}}</h2>
                         <p class="uk-text-large uk-margin-top-remove uk-text-muted">Job Description</p>
                     </div>
-
                 </div>
+                <hr class="uk-grid-divider">
             </template>
+
             <template v-if="hasRequests">
+                <div class="uk-width-1-1 uk-text-center uk-row-first">
+                    <p class="uk-text-large"></p>
+                    <p class="uk-text-large"></p>
+                    <p class="uk-text-large">
+                        <span>Your pending friends are here: click to decline</span>
+                        <a class="uk-icon-button uk-icon-thumbs-down"></a>
+                        <span> or </span>
+                        <a class="uk-icon-button uk-icon-thumbs-up"></a>
+                        <span>accept</span>
+                    </p>
+                </div>
                 <div class="uk-grid" data-uk-grid-margin="">
-
-                    <div class="uk-width-medium-1-5 uk-text-center uk-row-first" v-for="item in user.friends" >
+                    <div class="uk-width-medium-1-5 uk-text-center uk-row-first" v-for="item in user.pending" >
                         <div class="uk-thumbnail uk-overlay-hover uk-border-circle">
                             <figure class="uk-overlay">
                                 <img class="uk-border-circle" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4NCjwhLS0gR2VuZXJhdG9yOiBBZG9iZSBJbGx1c3RyYXRvciAxNi4wLjQsIFNWRyBFeHBvcnQgUGx1Zy1JbiAuIFNWRyBWZXJzaW9uOiA2LjAwIEJ1aWxkIDApICAtLT4NCjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+DQo8c3ZnIHZlcnNpb249IjEuMSIgaWQ9IkViZW5lXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4Ig0KCSB3aWR0aD0iMjAwcHgiIGhlaWdodD0iMjAwcHgiIHZpZXdCb3g9IjAgMCAyMDAgMjAwIiBlbmFibGUtYmFja2dyb3VuZD0ibmV3IDAgMCAyMDAgMjAwIiB4bWw6c3BhY2U9InByZXNlcnZlIj4NCjxyZWN0IGZpbGw9IiNGNUY1RjUiIHdpZHRoPSIyMDAiIGhlaWdodD0iMjAwIi8+DQo8Zz4NCgk8cGF0aCBmaWxsPSIjRDhEOEQ4IiBkPSJNMTgyLjI1NiwxNjUuNzk2Yy0wLjgzNi00LjY3Ny0xLjg5Ni05LjAwNy0zLjE3Mi0xMy4wMDFjLTEuMjc3LTMuOTk2LTIuOTk1LTcuODg4LTUuMTU0LTExLjY4Ng0KCQljLTIuMTU4LTMuNzkzLTQuNjMxLTcuMDI4LTcuNDI3LTkuNzA1Yy0yLjgwMS0yLjY3NC02LjIxMy00LjgxMi0xMC4yNDctNi40MDljLTQuMDM1LTEuNTk3LTguNDg4LTIuMzk2LTEzLjM1OS0yLjM5Ng0KCQljLTAuNzE5LDAtMi4zOTYsMC44NTgtNS4wMzIsMi41NzNjLTIuNjM2LDEuNzIyLTUuNjEyLDMuNjM4LTguOTI3LDUuNzVjLTMuMzE2LDIuMTE4LTcuNjMxLDQuMDM1LTEyLjk0LDUuNzUzDQoJCWMtNS4zMTIsMS43MTktMTAuNjQ2LDIuNTc2LTE1Ljk5NiwyLjU3NmMtNS4zNTIsMC0xMC42ODQtMC44NTctMTUuOTk2LTIuNTc2Yy01LjMxNC0xLjcxOC05LjYyOS0zLjYzNS0xMi45NC01Ljc1Mw0KCQljLTMuMzE5LTIuMTEyLTYuMjkxLTQuMDI4LTguOTI3LTUuNzVjLTIuNjM2LTEuNzE1LTQuMzEyLTIuNTczLTUuMDMzLTIuNTczYy00Ljg3NiwwLTkuMzI5LDAuNzk5LTEzLjM2MSwyLjM5Ng0KCQljLTQuMDMzLDEuNTk4LTcuNDUxLDMuNzM1LTEwLjI0Miw2LjQwOWMtMi44MDEsMi42NzctNS4yNzMsNS45MTItNy40Myw5LjcwNWMtMi4xNTcsMy43OTgtMy44NzcsNy42ODgtNS4xNTMsMTEuNjg2DQoJCWMtMS4yNzgsMy45OTQtMi4zMzcsOC4zMjQtMy4xNzcsMTMuMDAxYy0wLjgzNyw0LjY3MS0xLjM5OCw5LjAyNC0xLjY3NywxMy4wNmMtMC4yNzksNC4wMzMtMC40MTksOC4xNy0wLjQxOSwxMi4zOTkNCgkJYzAsMy4xNCwwLjM0NSw2LjA0LDAuOTY5LDguNzQ1aDE2Ni43NzFjMC42MjUtMi43MDUsMC45NzItNS42MDUsMC45NzItOC43NDVjMC00LjIyOS0wLjE0MS04LjM2Ni0wLjQyMi0xMi4zOTkNCgkJQzE4My42NTQsMTc0LjgyLDE4My4wOTYsMTcwLjQ2NywxODIuMjU2LDE2NS43OTZ6Ii8+DQoJPHBhdGggZmlsbD0iI0Q4RDhEOCIgZD0iTTEwMCwxMzAuMjY4YzEyLjcsMCwyMy41NDQtNC40OTQsMzIuNTMzLTEzLjQ3OWM4Ljk4NC04Ljk4OCwxMy40NzktMTkuODMsMTMuNDc5LTMyLjUzMg0KCQljMC0xMi43MDItNC40OTQtMjMuNTQzLTEzLjQ3OS0zMi41MzFDMTIzLjU0NCw0Mi43MzgsMTEyLjcsMzguMjQzLDEwMCwzOC4yNDNzLTIzLjU0Nyw0LjQ5NS0zMi41MzEsMTMuNDgxDQoJCWMtOC45ODksOC45ODgtMTMuNDgxLDE5LjgyOS0xMy40ODEsMzIuNTMxYzAsMTIuNzAyLDQuNDkyLDIzLjU0NCwxMy40ODEsMzIuNTMyQzc2LjQ1MywxMjUuNzczLDg3LjMsMTMwLjI2OCwxMDAsMTMwLjI2OHoiLz4NCjwvZz4NCjwvc3ZnPg0K" alt="" width="200" height="200">
                                 <figcaption class="uk-overlay-panel uk-overlay-background uk-flex uk-flex-center uk-flex-middle uk-text-center uk-border-circle">
                                     <div>
-                                        <a href="#" class="uk-icon-button uk-icon-github"></a>
-                                        <a href="#" class="uk-icon-button uk-icon-twitter"></a>
-                                        <a href="#" class="uk-icon-button uk-icon-html5"></a>
+                                        <a v-on:click="declineFriendship(item)" class="uk-icon-button uk-icon-thumbs-down" ></a>
+                                        <a v-on:click="acceptFriendship(item)" class="uk-icon-button uk-icon-thumbs-up"></a>
                                     </div>
                                 </figcaption>
                             </figure>
@@ -154,16 +162,15 @@
                         <h2 class="uk-margin-bottom-remove">{{item}}</h2>
                         <p class="uk-text-large uk-margin-top-remove uk-text-muted">Job Description</p>
                     </div>
-
                 </div>
+                <hr class="uk-grid-divider">
             </template>
-            <hr class="uk-grid-divider">
 
             <div class="uk-grid" data-uk-grid-margin="">
                 <div class="uk-width-medium-2-3 uk-row-first">
                     <div class="uk-panel uk-panel-header">
-
-                        <h3 class="uk-panel-title">Get in touch, ask for friendship to another user. Fill the next fields:</h3>
+                        <p class="uk-text-large"></p>
+                        <h3 class="uk-panel-title">Get in touch! ask for friendship to another user. Just fill the form and do submit!</h3>
 
                         <div class="uk-form uk-form-stacked">
 
@@ -184,13 +191,7 @@
                             <div class="uk-form-row">
                                 <div class="uk-form-controls">
                                     <button class="uk-button uk-button-primary" v-on:click="requestFriendship">Submit</button>
-                                </div>
-                            </div>
-                            <div class="uk-text-center">
-                                <div class="uk-inline-clip uk-transition-toggle" tabindex="0">
-                                    <div class="uk-transition-slide-bottom uk-position-bottom uk-overlay uk-overlay-default">
-                                        <p class="uk-h4 uk-margin-remove">{{responseMessages.requestFriendship}}</p>
-                                    </div>
+                                    <span class="uk-h4 uk-margin-remove uk-text-right">{{responseMessages.requestFriendship}}</span>
                                 </div>
                             </div>
 
@@ -270,7 +271,8 @@
                 requestFriendship: '/friendship/request',
                 acceptFriendship: '/friendship/accept',
                 declineFriendship: '/friendship/decline',
-                listFriends: '/friendship/list'
+                listFriends: '/friendship/list',
+                listPending: '/friendship/pending'
             },
             responseMessages: {
                 login: "",
@@ -290,14 +292,11 @@
             urlRequestWithParams: function() {
                 return `${this.url.requestFriendship}?usernameFrom=${this.user.username}&usernameTo=${this.usernameTo}`
             },
-            urlAcceptWithParams: function() {
-                return `${this.url.acceptFriendship}?usernameFrom=${this.user.username}&usernameTo=${this.usernameTo}`
-            },
-            urlDeclineWithParams: function() {
-                return `${this.url.declineFriendship}?usernameFrom=${this.user.username}&usernameTo=${this.usernameTo}`
-            },
             urlListWithParams: function() {
                 return `${this.url.listFriends}?username=${this.user.username}`
+            },
+            urlListPendingWithParams: function() {
+                return `${this.url.listPending}?username=${this.user.username}`
             },
             hasFriends: function () {
                 return this.user.friends.length > 0
@@ -307,11 +306,21 @@
             }
         },
         methods: {
+            urlAcceptWithParams: function(usernameTo) {
+                return `${this.url.acceptFriendship}?usernameFrom=${this.user.username}&usernameTo=${usernameTo}`
+            },
+            urlDeclineWithParams: function(usernameTo) {
+                return `${this.url.declineFriendship}?usernameFrom=${this.user.username}&usernameTo=${usernameTo}`
+            },
+            reloadModel(){
+                this.listFriends()
+                this.listPendingFriends()
+            },
             login: function(){
                 const self = this
                 self.show.login = false
                 self.show.contacts = true
-                this.listFriends()
+                this.reloadModel()
             },
             signup: function () {
                 const self = this
@@ -333,11 +342,10 @@
                         self.login()
                     }).catch( function(error) {
                         self.responseMessages.login = 'Error, try another time. Change the user/password'
-                        console.error(error)
+                        console.log(error)
                     })
             },
             requestFriendship: function() {
-              try {
                 const self = this
 
                 const headers = {
@@ -356,14 +364,12 @@
                     console.log(JSON.stringify(response.data))
                     self.responseMessages.requestFriendship = "The invitation was sent properly"
                   }).catch(function (error) {
-                  console.error(error)
-                  self.responseMessages.requestFriendship = "The invitation wasn't accepted, try it another time."
-                })
-              } catch(error){
-                console.error(error)
-              }
+                      console.log(error)
+                      self.responseMessages.requestFriendship = error.response.data.message
+                  })
+
             },
-            acceptFriendship: function() {
+            acceptFriendship: function(userTo) {
                 const self = this
                 const headers = {
                     'Content-Type': 'application/json',
@@ -376,16 +382,17 @@
                     headers: headers
                 })
 
-                axiosInstance.post( this.urlAcceptWithParams )
+                axiosInstance.post( this.urlAcceptWithParams(userTo) )
                     .then(function(response){
                         console.log(JSON.stringify(response.data))
                         self.responseMessages.acceptFriendship = "The accepted invitation"
+                        self.reloadModel()
                     }).catch( function(error) {
-                        console.error(error)
-                        self.responseMessages.acceptFriendship = "Error to accept the invitation"
+                        console.log(error)
+                        self.responseMessages.acceptFriendship = error.response.data.message
                     })
             },
-            declineFriendship: function() {
+            declineFriendship: function(userTo) {
                 const self = this
                 const headers = {
                     'Content-Type': 'application/json',
@@ -398,13 +405,14 @@
                     headers: headers
                 })
 
-                axiosInstance.post( this.urlDeclineWithParams )
+                axiosInstance.post( this.urlDeclineWithParams(userTo) )
                     .then(function(response){
                         console.log(JSON.stringify(response.data))
                         self.responseMessages.declineFriendship = "Declining the invitation"
+                        self.reloadModel()
                     }).catch( function(error) {
-                        console.error(error)
-                        self.responseMessages.declineFriendship = "Error to decline the invitation"
+                        console.log(error)
+                        self.responseMessages.declineFriendship = error.response.data.message
                     })
             },
             listFriends: function() {
@@ -425,12 +433,34 @@
                         console.log(JSON.stringify(response.data))
                         self.user.friends = response.data
                     }).catch( function(error) {
-                    console.error(error)
+                        console.log(error)
+                    })
+            },
+            listPendingFriends: function() {
+                const self = this
+                const headers = {
+                    'Content-Type': 'application/json',
+                    'X-Password': this.user.password,
+                    "Access-Control-Allow-Origin": "*"
+                }
+
+                const axiosInstance = axios.create({
+                    timeout: 3000,
+                    headers: headers
                 })
+
+                axiosInstance.get( this.urlListPendingWithParams )
+                    .then(function(response){
+                        console.log(JSON.stringify(response.data))
+                        self.user.pending = response.data
+                    }).catch( function(error) {
+                        console.log(error)
+                    })
             }
         },
         mounted () {
             console.log('Application started')
+            console.log(`hasFriends: ${this.hasFriends}, hasRequests: ${this.hasRequests}`)
         }
     })
 </script>
