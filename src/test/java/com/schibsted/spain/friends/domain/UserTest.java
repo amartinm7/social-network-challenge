@@ -82,7 +82,21 @@ public class UserTest {
         assertNotNull("The userTo is null", userFrom);
         assertTrue("Not valid request for friendship", userFrom.requestFriendShip(userTo).isPresent());
         assertThrows (IllegalArgumentException.class,() -> userFrom.requestFriendShip(userTo), "Not valid request for friendship");
+    }
 
+    @Test
+    public void twoRequestOverTheSameUserShouldBeFalse(){
+        // given
+        final String usernameFrom = "johnny";
+        final String passwordFrom = "password";
+        final String usernameTo = "johnny";
+        final String passwordTo = "password";
+        // then
+        final User userFrom = new User.Builder().setName(usernameFrom).setPassword(passwordFrom).build();
+        assertNotNull("The userFrom is null", userFrom);
+        final User userTo = new User.Builder().setName(usernameTo).setPassword(passwordTo).build();
+        assertNotNull("The userTo is null", userFrom);
+        assertThrows (IllegalArgumentException.class,() -> userFrom.requestFriendShip(userTo), "Not valid request for friendship");
     }
 
     @Test
