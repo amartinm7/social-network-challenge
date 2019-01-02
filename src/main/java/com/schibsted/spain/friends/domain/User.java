@@ -45,34 +45,39 @@ public class User {
 
     public Optional<User> requestFriendShip(User userTo) {
         if (this.friends.contains(userTo)){
-            return Optional.empty();  // not possible is already a friend
+            throw new IllegalArgumentException(String.format("The userTo %s is already a friend.", userTo.getName()));
+        }
+        if (userTo.pendingFriends.contains(this)){
+            throw new IllegalArgumentException(String.format("The userTo %s has already a pending request for this friend %s.", userTo.getName(), this.getName()));
         }
         boolean addedRequest = userTo.pendingFriends.add(this);
         logger.info("added request friendship from {} to {}? {}", this.getName(), userTo.getName(), addedRequest);
         return (addedRequest)? Optional.of(this) : Optional.empty();
     }
-
-    public Optional<User> acceptFriendShip(User userTo) {
-        if (this.pendingFriends.contains(userTo)){
-            this.pendingFriends.remove(userTo);
-            userTo.pendingFriends.remove(this);
-            boolean addingTo = this.friends.add(userTo);
-            boolean addingFrom = userTo.friends.add(this);
-            logger.info("accepted friendship from {} to {}? {}", this.getName(), userTo.getName(), (addingTo && addingFrom));
-            return (addingTo && addingFrom) ? Optional.of(this) : Optional.empty();
-        } else {
-            return Optional.empty();
+    private void validateRelationshipLists(User userTo){
+        if (this.friends.contains(userTo)) {
+            throw new IllegalArgumentException(String.format("The userTo %s is already in the list of friends.", userTo.getName()));
         }
+        if (!this.pendingFriends.contains(userTo)) {
+            throw new IllegalArgumentException(String.format("The userTo %s is not in the list of pending friends.", userTo.getName()));
+        }
+    }
+    public Optional<User> acceptFriendShip(User userTo) {
+        validateRelationshipLists(userTo);
+        this.pendingFriends.remove(userTo);
+        userTo.pendingFriends.remove(this);
+        boolean addingTo = this.friends.add(userTo);
+        boolean addingFrom = userTo.friends.add(this);
+        logger.info("accepted friendship from {} to {}? {}", this.getName(), userTo.getName(), (addingTo && addingFrom));
+        return (addingTo && addingFrom) ? Optional.of(this) : Optional.empty();
+
     }
 
     public Optional<User> declineFriendShip(User userTo) {
-        if (this.pendingFriends.contains(userTo)){
-            boolean removed = this.pendingFriends.remove(userTo);
-            logger.info("declined friendship from {} to {}? {}", this.getName(), userTo.getName(), removed);
-            return (removed)? Optional.of(this) : Optional.empty();
-        } else {
-            return Optional.empty();
-        }
+        validateRelationshipLists(userTo);
+        boolean removed = this.pendingFriends.remove(userTo);
+        logger.info("declined friendship from {} to {}? {}", this.getName(), userTo.getName(), removed);
+        return (removed)? Optional.of(this) : Optional.empty();
     }
 
     @Override
@@ -138,7 +143,7 @@ public class User {
                 errorMessages.add(String.format("The 'password' parameter contains invalid characters. Only alphanumeric are valid characters: current %s.",password.length()));
             }
             if (errorMessages.size() > 0){
-                throw new IllegalArgumentException(String.join("|| ", errorMessages));
+                throw new IllegalArgumentException(String.join("; ", errorMessages));
             }
         }
 

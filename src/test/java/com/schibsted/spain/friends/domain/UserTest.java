@@ -81,7 +81,8 @@ public class UserTest {
         final User userTo = new User.Builder().setName(usernameTo).setPassword(passwordTo).build();
         assertNotNull("The userTo is null", userFrom);
         assertTrue("Not valid request for friendship", userFrom.requestFriendShip(userTo).isPresent());
-        assertFalse("Not valid request for friendship", userFrom.requestFriendShip(userTo).isPresent());
+        assertThrows (IllegalArgumentException.class,() -> userFrom.requestFriendShip(userTo), "Not valid request for friendship");
+
     }
 
     @Test
@@ -97,7 +98,7 @@ public class UserTest {
         final User userTo = new User.Builder().setName(usernameTo).setPassword(passwordTo).build();
         assertNotNull("The userTo is null", userFrom);
         assertTrue("the request for friendship is ok but was error", userFrom.requestFriendShip(userTo).isPresent());
-        assertFalse("the request for friendship is already done but was ok", userFrom.requestFriendShip(userTo).isPresent());
+        assertThrows (IllegalArgumentException.class,() -> userFrom.requestFriendShip(userTo), "Not valid request for friendship");
         assertTrue("Not accepted friendship", userTo.acceptFriendShip(userFrom).isPresent());
     }
 
@@ -114,9 +115,10 @@ public class UserTest {
         final User userTo = new User.Builder().setName(usernameTo).setPassword(passwordTo).build();
         assertNotNull("The userTo is null", userFrom);
         assertTrue("valid request for friendship but was error", userFrom.requestFriendShip(userTo).isPresent());
-        assertFalse("Invalid request for friendship but was ok", userFrom.requestFriendShip(userTo).isPresent());
+        assertThrows (IllegalArgumentException.class,() -> userFrom.requestFriendShip(userTo), "Not valid request for friendship");
         assertTrue("valid accepted friendship but was error", userTo.acceptFriendShip(userFrom).isPresent());
-        assertFalse("Invalid accepted friendship but was ok", userTo.acceptFriendShip(userFrom).isPresent());
+        assertThrows (IllegalArgumentException.class,() -> userTo.acceptFriendShip(userFrom), "Not valid accept for friendship");
+
     }
 
     @Test
@@ -132,7 +134,7 @@ public class UserTest {
         final User userTo = new User.Builder().setName(usernameTo).setPassword(passwordTo).build();
         assertNotNull("The userTo is null", userFrom);
         assertTrue("valid request for friendship but was error", userFrom.requestFriendShip(userTo).isPresent());
-        assertFalse("Invalid request for friendship but was ok", userFrom.requestFriendShip(userTo).isPresent());
+        assertThrows (IllegalArgumentException.class,() -> userFrom.requestFriendShip(userTo), "Not valid request for friendship");
         assertTrue("valid declined friendship but was error", userTo.declineFriendShip(userFrom).isPresent());
     }
 
@@ -149,9 +151,10 @@ public class UserTest {
         final User userTo = new User.Builder().setName(usernameTo).setPassword(passwordTo).build();
         assertNotNull("The userTo is null", userFrom);
         assertTrue("valid request for friendship but was error", userFrom.requestFriendShip(userTo).isPresent());
-        assertFalse("Invalid request for friendship but was ok", userFrom.requestFriendShip(userTo).isPresent());
+        assertThrows (IllegalArgumentException.class,() -> userFrom.requestFriendShip(userTo), "Not valid request for friendship");
         assertTrue("valid declined friendship but was error", userTo.declineFriendShip(userFrom).isPresent());
-        assertFalse("Invalid declined friendship but was ok", userTo.declineFriendShip(userFrom).isPresent());
+        assertThrows (IllegalArgumentException.class,() -> userTo.declineFriendShip(userFrom), "Not valid decline for friendship");
+
     }
 
     @Test
@@ -169,15 +172,16 @@ public class UserTest {
         final User userTo1 = new User.Builder().setName(usernameTo1).setPassword(passwordTo1).build();
         assertNotNull("The userTo is null", userFrom);
         assertTrue("valid request for friendship but was error", userFrom.requestFriendShip(userTo1).isPresent());
-        assertFalse("Invalid request for friendship but was ok", userFrom.requestFriendShip(userTo1).isPresent());
+        assertThrows (IllegalArgumentException.class,() -> userFrom.requestFriendShip(userTo1), "Not valid request for friendship");
         assertTrue("valid declined friendship but was error", userTo1.acceptFriendShip(userFrom).isPresent());
-        assertFalse("Invalid declined friendship but was ok", userTo1.acceptFriendShip(userFrom).isPresent());
+        assertThrows (IllegalArgumentException.class,() -> userTo1.acceptFriendShip(userFrom), "Not valid accept for friendship");
+
         final User userTo2 = new User.Builder().setName(usernameTo2).setPassword(passwordTo2).build();
         assertNotNull("The userTo is null", userFrom);
         assertTrue("valid request for friendship but was error", userFrom.requestFriendShip(userTo2).isPresent());
-        assertFalse("Invalid request for friendship but was ok", userFrom.requestFriendShip(userTo2).isPresent());
+        assertThrows (IllegalArgumentException.class,() -> userFrom.requestFriendShip(userTo2), "Not valid request for friendship");
         assertTrue("valid declined friendship but was error", userTo2.acceptFriendShip(userFrom).isPresent());
-        assertFalse("Invalid declined friendship but was ok", userTo2.acceptFriendShip(userFrom).isPresent());
+        assertThrows (IllegalArgumentException.class,() -> userTo2.acceptFriendShip(userFrom), "Not valid accept for friendship");
         assertTrue("the user1 has to be friend but is not", userFrom.getFriendList().contains(userTo1));
         assertTrue("the user2 has to be friend but is not", userFrom.getFriendList().contains(userTo2));
     }
@@ -197,13 +201,14 @@ public class UserTest {
         final User userTo1 = new User.Builder().setName(usernameTo1).setPassword(passwordTo1).build();
         assertNotNull("The userTo is null", userFrom);
         assertTrue("valid request for friendship but was error", userFrom.requestFriendShip(userTo1).isPresent());
-        assertFalse("Invalid request for friendship but was ok", userFrom.requestFriendShip(userTo1).isPresent());
+        assertThrows (IllegalArgumentException.class,() -> userFrom.requestFriendShip(userTo1), "Not valid request for friendship");
         assertTrue("valid accept friendship but was error", userTo1.acceptFriendShip(userFrom).isPresent());
-        assertFalse("Invalid accept friendship but was ok", userTo1.acceptFriendShip(userFrom).isPresent());
+        assertThrows (IllegalArgumentException.class,() -> userTo1.acceptFriendShip(userFrom), "Not valid accept for friendship");
+
         final User userTo2 = new User.Builder().setName(usernameTo2).setPassword(passwordTo2).build();
         assertNotNull("The userTo is null", userFrom);
         assertTrue("valid request for friendship but was error", userFrom.requestFriendShip(userTo2).isPresent());
-        assertFalse("Invalid request for friendship but was ok", userFrom.requestFriendShip(userTo2).isPresent());
+        assertThrows (IllegalArgumentException.class,() -> userFrom.requestFriendShip(userTo2), "Not valid request for friendship");
         assertTrue("the user1 has to be friend but is not", userFrom.getFriendList().contains(userTo1));
         assertFalse("the user2 is not a friend but he is in the list", userFrom.getFriendList().contains(userTo2));
     }

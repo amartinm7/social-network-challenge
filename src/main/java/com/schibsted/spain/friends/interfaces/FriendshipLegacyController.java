@@ -1,5 +1,6 @@
 package com.schibsted.spain.friends.interfaces;
 
+import com.schibsted.spain.friends.infrastructure.CustomResponse;
 import com.schibsted.spain.friends.infrastructure.HttpParams;
 import com.schibsted.spain.friends.domain.User;
 import com.schibsted.spain.friends.application.FriendShipService;
@@ -38,8 +39,8 @@ public class FriendshipLegacyController {
             @RequestHeader(HttpParams.X_PASSWORD) String password) {
         logger.info("asking for requestFriendship from {} to {}", usernameFrom, usernameTo);
         return friendShipService.requestFriendship(usernameFrom, usernameTo)
-                .map(user -> CustomResponse.getOKMessage(user, ResponseMessage.Action.REQUEST_FRIENDSHIP))
-                .orElse(CustomResponse.getBadRequestMessage(ResponseMessage.Action.REQUEST_FRIENDSHIP));
+                .map(user -> CustomResponse.getOKMessage(user))
+                .orElse(CustomResponse.getInternalErrorMessage());
     }
 
     @PostMapping(value = HttpParams.URI_FRIENDSHIP_ACCEPT,
@@ -50,8 +51,8 @@ public class FriendshipLegacyController {
             @RequestHeader(HttpParams.X_PASSWORD) String password) {
         logger.info("asking for acceptFriendship from {} to {}", usernameFrom, usernameTo);
         return friendShipService.acceptFriendship(usernameFrom, usernameTo)
-                .map(user -> CustomResponse.getOKMessage(user, ResponseMessage.Action.ACCEPT_FRIENDSHIP))
-                .orElse(CustomResponse.getBadRequestMessage(ResponseMessage.Action.ACCEPT_FRIENDSHIP));
+                .map(user -> CustomResponse.getOKMessage(user))
+                .orElse(CustomResponse.getInternalErrorMessage());
     }
 
     @PostMapping(value = HttpParams.URI_FRIENDSHIP_DECLINE,
@@ -62,8 +63,8 @@ public class FriendshipLegacyController {
             @RequestHeader(HttpParams.X_PASSWORD) String password) {
         logger.info("asking for declineFriendship from {} to {}", usernameFrom, usernameTo);
         return friendShipService.declineFriendship(usernameFrom, usernameTo)
-                .map(user -> CustomResponse.getOKMessage(user, ResponseMessage.Action.DECLINE_FRIENDSHIP))
-                .orElse(CustomResponse.getBadRequestMessage(ResponseMessage.Action.DECLINE_FRIENDSHIP));
+                .map(user -> CustomResponse.getOKMessage(user))
+                .orElse(CustomResponse.getInternalErrorMessage());
     }
 
     @GetMapping(value = HttpParams.URI_FRIENDSHIP_LIST,

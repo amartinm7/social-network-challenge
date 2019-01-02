@@ -1,6 +1,6 @@
 package com.schibsted.spain.friends.infrastructure;
 
-import org.springframework.http.HttpHeaders;
+import com.schibsted.spain.friends.interfaces.ResponseMessage;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -14,11 +14,9 @@ public class GlobalExceptionHandler
     extends ResponseEntityExceptionHandler {
 
         @ExceptionHandler({ IllegalArgumentException.class })
-        public ResponseEntity<Object> handleAccessDeniedException(
+        public ResponseEntity<ResponseMessage> handleIllegalArgumentException(
                 Exception ex, WebRequest request) {
-            return new ResponseEntity<Object>(
-                    String.format("%d, %s", HttpStatus.BAD_REQUEST.value(), ex.getMessage()),
-                    new HttpHeaders(),
-                    HttpStatus.BAD_REQUEST);
+            return CustomResponse.getBadRequestMessage(
+                    String.format("%d, %s", HttpStatus.BAD_REQUEST.value(), ex.getMessage()));
         }
 }

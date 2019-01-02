@@ -1,5 +1,6 @@
 package com.schibsted.spain.friends.interfaces;
 
+import com.schibsted.spain.friends.infrastructure.CustomResponse;
 import com.schibsted.spain.friends.infrastructure.HttpParams;
 import com.schibsted.spain.friends.application.SignupService;
 import org.slf4j.Logger;
@@ -31,7 +32,8 @@ public class SignupLegacyController {
       @RequestHeader(HttpParams.X_PASSWORD) String password) {
     logger.info("asking for signup user {}", username);
     return signupService.signup(username, password)
-            .map( user -> CustomResponse.getOKMessage(user, ResponseMessage.Action.SIGNUP) )
-            .orElse( CustomResponse.getBadRequestMessage(ResponseMessage.Action.SIGNUP) );
+            .map( user -> CustomResponse.getOKMessage(user) )
+            .orElse( CustomResponse.getBadRequestMessage(
+                    String.format("Invalid action: the combination username/password: %s/%s is not right. Provide a right credentials", username, password)) );
   }
 }

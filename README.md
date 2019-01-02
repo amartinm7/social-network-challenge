@@ -121,6 +121,9 @@ as pipeline to deploy the application in the cloud. You can see the application 
  
 * https://social-network-challenge.herokuapp.com/swagger-ui.html
 
+### Returned messages
+At this moment, the app only return simple messages without any reason
+
 ### Deploy app in heroku with docker (status=idea)
 At this moment Heroku provides a functionality to deploy the projects under git. There are a heroku.yml pipeline to do it. 
 
