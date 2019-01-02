@@ -7,11 +7,15 @@ public class HttpParams {
     public static final String URI_FRIENDSHIP_ACCEPT        = "/accept";
     public static final String URI_FRIENDSHIP_DECLINE       = "/decline";
     public static final String URI_FRIENDSHIP_LIST          = "/list";
+    public static final String URI_FRIENDSHIP_LIST_PENDING  = "/pending";
+
 
     public static final String URI_FRIENDSHIP_REQUEST_V1       = "{usernameFrom}/request/{usernameTo}";
     public static final String URI_FRIENDSHIP_ACCEPT_V1        = "{usernameFrom}/accept/{usernameTo}";
     public static final String URI_FRIENDSHIP_DECLINE_V1       = "{usernameFrom}/decline/{usernameTo}";
-    public static final String URI_FRIENDSHIP_LIST_V1          = "{username}/list";
+    public static final String URI_FRIENDSHIP_LIST_FRIENDS_V1  = "{username}/listFriends";
+    public static final String URI_FRIENDSHIP_LIST_PENDING_V1  = "{username}/listPending";
+
 
     static final String[] URI_AUTH_WHITELIST = {
             URI_SIGNUP,
@@ -30,7 +34,6 @@ public class HttpParams {
             "/configuration/security",
             "/swagger-ui.html",
             "/webjars/**"};
-
 
     public static final String X_PASSWORD                   = "X-Password";
     public static final String USER_NAME                    = "username";
