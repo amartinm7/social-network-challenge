@@ -123,7 +123,7 @@ as pipeline to deploy the application in the cloud. You can see the application 
 * https://social-network-challenge.herokuapp.com/swagger-ui.html
 
 ### Deploy app in heroku with docker (status=idea)
-At this moment Heroku provides a functionality to deploy the projects under git. There are a heroku.yml pipeline to do it. 
+At this moment Heroku provides a functionality to deploy dockerized projects under git. There are a heroku.yml pipeline to do it. 
 
 ### More room to improve (status=idea)
 * implement Circuit Breaker pattern to avoid the degradation of the system, in the case this REST API was consuming another REST API.
