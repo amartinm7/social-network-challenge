@@ -226,5 +226,4 @@ public class UserTest {
         assertTrue("the user1 has to be friend but is not", userFrom.getFriendList().contains(userTo1));
         assertFalse("the user2 is not a friend but he is in the list", userFrom.getFriendList().contains(userTo2));
     }
-
 }
