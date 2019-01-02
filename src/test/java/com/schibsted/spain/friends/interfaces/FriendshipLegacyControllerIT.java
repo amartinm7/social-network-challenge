@@ -8,6 +8,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.util.MultiValueMap;
@@ -39,6 +41,7 @@ public class FriendshipLegacyControllerIT {
         // then
         assertThat(this.restTemplate.postForObject(uri, request, String.class)).contains(expectedMessage);
     }
+
 
     public void doRequest(String usernameFrom, String passwordFrom, String usernameTo, String passwordTo) throws Exception {
         // given a user
@@ -208,5 +211,51 @@ public class FriendshipLegacyControllerIT {
 
         // then
         assertThat(this.restTemplate.postForObject(uri, request, String.class)).contains(expectedMessage);
+    }
+
+    @Test
+    public void listFriends() throws Exception {
+        // given a user
+        final String usernameFrom = "johnnyX7";
+        final String passwordFrom = "password";
+        final String usernameTo = "johnnyZ7";
+        final String passwordTo = "password";
+        final String urlMethod =  HttpParams.URI_FRIENDSHIP + HttpParams.URI_FRIENDSHIP_LIST;
+
+        // when
+        doAccept( usernameFrom, passwordFrom, usernameTo, passwordTo);
+        // when
+        final HttpEntity<MultiValueMap<String, String>> request = RestTemplateHelper.getHttpEntity (usernameTo, passwordTo);
+        final URI uri = RestTemplateHelper.getURI(port, urlMethod, usernameTo);
+
+        // expected
+        final String expectedMessage = usernameFrom;
+
+        // then
+        final ResponseEntity<String> response = this.restTemplate.exchange(uri, HttpMethod.GET, request, String.class);
+        assertThat(response.getBody().contains(expectedMessage));
+    }
+
+    @Test
+    public void listPendingFriends() throws Exception {
+        // given a user
+        final String usernameFrom = "johnnyX8";
+        final String passwordFrom = "password";
+        final String usernameTo = "johnnyZ8";
+        final String passwordTo = "password";
+        final String urlMethod =  HttpParams.URI_FRIENDSHIP + HttpParams.URI_FRIENDSHIP_LIST_PENDING;
+
+        // when
+        doRequest( usernameFrom, passwordFrom, usernameTo, passwordTo);
+        // when
+        final HttpEntity<MultiValueMap<String, String>> request = RestTemplateHelper.getHttpEntity (usernameTo, passwordTo);
+        final URI uri = RestTemplateHelper.getURI(port, urlMethod, usernameTo);
+
+        // expected
+        final String expectedMessage = usernameFrom;
+
+        // then
+        final ResponseEntity<String> response = this.restTemplate.exchange(uri, HttpMethod.GET, request, String.class);
+        assertThat(response.getBody().contains(expectedMessage));
     }
 }
