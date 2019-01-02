@@ -28,25 +28,25 @@ public class RestTemplateHelper {
         return request;
     }
 
-    public static URI getURI (int port , String urlMethod, String username) throws Exception{
+    public static URI getURI (int port , String urlMethod, String queryParamUsername) throws Exception{
         final String url = DOMAIN + port + urlMethod;
         final URI uriTemp = new URL(url).toURI();
         final URI uri = UriComponentsBuilder
                 .fromUri(uriTemp)
-                .queryParam(HttpParams.USER_NAME, username)
+                .queryParam(HttpParams.USER_NAME, queryParamUsername)
                 .build()
                 .toUri();
         return uri;
     }
 
 
-    public static URI getURI (int port , String urlMethod, String usernameFrom, String usernameTo) throws Exception{
+    public static URI getURI (int port , String urlMethod, String queryParamUsernameFrom, String queryParamUsernameTo) throws Exception{
         final String url = DOMAIN + port + urlMethod;
         final URI uriTemp = new URL(url).toURI();
         final URI uri = UriComponentsBuilder
                 .fromUri(uriTemp)
-                .queryParam(HttpParams.USER_NAME_FROM, usernameFrom)
-                .queryParam(HttpParams.USER_NAME_TO, usernameTo)
+                .queryParam(HttpParams.USER_NAME_FROM, queryParamUsernameFrom)
+                .queryParam(HttpParams.USER_NAME_TO, queryParamUsernameTo)
                 .build()
                 .toUri();
         return uri;
