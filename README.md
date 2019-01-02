@@ -96,7 +96,8 @@ Improving the rest api signature sending usernames as path parameters (currently
 http://localhost:8080/friendship/{usernameFrom}/request/{usernameTo}
 http://localhost:8080/friendship/{usernameFrom}/accept/{usernameTo}
 http://localhost:8080/friendship/{usernameFrom}/decline/{usernameTo}
-http://localhost:8080/friendship/{username}/list
+http://localhost:8080/friendship/{username}/listFriends
+http://localhost:8080/friendship/{username}/listPending
 ```
 
 ### implement cache in the front-controller (status=idea)
