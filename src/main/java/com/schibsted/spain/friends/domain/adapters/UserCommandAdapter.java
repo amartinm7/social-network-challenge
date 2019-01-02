@@ -32,7 +32,7 @@ public class UserCommandAdapter
     public Optional<User> save(String username, String password){
         final User user = new User.Builder().setName(username).setPassword(password).build();
         if (isUserStored(username)){
-            throw new IllegalArgumentException(String.format("The username %s already exists in the system.", username));
+            throw new IllegalArgumentException(String.format("The user %s already exists in the system.", username));
         }
         return (storeUser(user)) ? Optional.of(user) : Optional.empty();
     }
@@ -57,10 +57,10 @@ public class UserCommandAdapter
 
     private Optional<User> execute(String userFrom, String userTo, BiFunction<User,User,Optional<User>> biFunction) {
         if ( !isUserStored(userFrom) ){
-            throw new IllegalArgumentException(String.format("The userFrom %s doesn't exist.", userFrom));
+            throw new IllegalArgumentException(String.format("The user %s doesn't exist.", userFrom));
         }
         if ( !isUserStored(userTo) ){
-            throw new IllegalArgumentException(String.format("The userTo %s doesn't exist", userTo));
+            throw new IllegalArgumentException(String.format("The user %s doesn't exist", userTo));
         }
         final User savedUserFrom = getUser(userFrom);
         final User savedUserTo = getUser(userTo);

@@ -35,6 +35,11 @@ public class User {
         return friends;
     }
 
+    @JsonIgnore
+    public Collection<User> getPendingFriendsList() {
+        return pendingFriends;
+    }
+
     public Collection<String> getFriends() {
         return friends.stream().map(user -> user.getName()).collect(Collectors.toList());
     }
@@ -45,13 +50,13 @@ public class User {
 
     public Optional<User> requestFriendShip(User userTo) {
         if (this.friends.contains(userTo)){
-            throw new IllegalArgumentException(String.format("The userTo %s is already a friend.", userTo.getName()));
+            throw new IllegalArgumentException(String.format("The %s is already a friend.", userTo.getName()));
         }
         if (userTo.pendingFriends.contains(this)){
-            throw new IllegalArgumentException(String.format("The userTo %s has already a pending request for this friend %s.", userTo.getName(), this.getName()));
+            throw new IllegalArgumentException(String.format("The %s has already a pending request for this friend %s.", userTo.getName(), this.getName()));
         }
         if (this.equals(userTo)){
-            throw new IllegalArgumentException(String.format("You can't ask for friendship to yourself: %s = %s", this.getName(), userTo.getName()));
+            throw new IllegalArgumentException(String.format("You can't ask for friendship to yourself", this.getName(), userTo.getName()));
         }
         boolean addedRequest = userTo.pendingFriends.add(this);
         logger.info("added request friendship from {} to {}? {}", this.getName(), userTo.getName(), addedRequest);
@@ -59,10 +64,10 @@ public class User {
     }
     private void validateRelationshipLists(User userTo){
         if (!this.pendingFriends.contains(userTo)) {
-            throw new IllegalArgumentException(String.format("The userTo %s is not in the list of pending friends.", userTo.getName()));
+            throw new IllegalArgumentException(String.format("The %s is not in the list of pending friends.", userTo.getName()));
         }
         if (this.friends.contains(userTo)) {
-            throw new IllegalArgumentException(String.format("The userTo %s is already in the list of friends.", userTo.getName()));
+            throw new IllegalArgumentException(String.format("The %s is already in the list of friends.", userTo.getName()));
         }
     }
     public Optional<User> acceptFriendShip(User userTo) {

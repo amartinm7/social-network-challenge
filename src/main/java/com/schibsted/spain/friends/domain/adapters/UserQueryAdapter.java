@@ -32,6 +32,12 @@ public class UserQueryAdapter
         return savedUserFrom.getFriendList();
     }
 
+    @Override
+    public Collection<User> listPendingFriends(String userFrom) {
+        final User savedUserFrom = getUser(userFrom);
+        return savedUserFrom.getPendingFriendsList();
+    }
+
     private User getUser(String user){
         return repositoryPort.find(user);
     }

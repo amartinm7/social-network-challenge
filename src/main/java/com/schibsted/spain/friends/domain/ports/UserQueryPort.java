@@ -6,5 +6,7 @@ import java.util.Collection;
 
 public interface UserQueryPort {
     Collection<User> listFriends(String userFrom);
+    Collection<User> listPendingFriends(String userFrom);
+
     boolean isAuthorizatedUser(String username, String password);
 }
