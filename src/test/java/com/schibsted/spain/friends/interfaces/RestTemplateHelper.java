@@ -6,6 +6,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
+import org.springframework.util.StringUtils;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
@@ -16,10 +17,12 @@ public class RestTemplateHelper {
 
     final static String DOMAIN = "http://localhost:";
 
-    public static HttpEntity<MultiValueMap<String, String>> getHttpEntity (String username, String password) throws Exception{
+    public static HttpEntity<MultiValueMap<String, String>> getHttpEntity (String password) throws Exception{
         final HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
-        headers.add(HttpParams.X_PASSWORD,password);
+        if (!StringUtils.isEmpty(password)) {
+            headers.add(HttpParams.X_PASSWORD, password);
+        }
 
         final MultiValueMap<String,String> map = new LinkedMultiValueMap<>();
         map.put("bodyParam1", Collections.singletonList("putParamXHereIfYouNeedIt"));
@@ -47,6 +50,18 @@ public class RestTemplateHelper {
                 .fromUri(uriTemp)
                 .queryParam(HttpParams.USER_NAME_FROM, queryParamUsernameFrom)
                 .queryParam(HttpParams.USER_NAME_TO, queryParamUsernameTo)
+                .build()
+                .toUri();
+        return uri;
+    }
+
+    public static URI getURIForLogin (int port , String urlMethod, String queryParamUsernameFrom, String password) throws Exception{
+        final String url = DOMAIN + port + urlMethod;
+        final URI uriTemp = new URL(url).toURI();
+        final URI uri = UriComponentsBuilder
+                .fromUri(uriTemp)
+                .queryParam(HttpParams.USER_NAME, queryParamUsernameFrom)
+                .queryParam(HttpParams.PASSWORD, password)
                 .build()
                 .toUri();
         return uri;

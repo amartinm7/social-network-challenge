@@ -25,7 +25,9 @@ public class UserCommandAdapter
     }
 
     private boolean storeUser(User user){ return repositoryPort.save(user); }
-    private User getUser(String user){ return repositoryPort.find(user); }
+
+    private Optional<User> getUser(String user){ return repositoryPort.find(user); }
+
     private boolean isUserStored(String user){ return repositoryPort.exists(user); }
 
     @Override
@@ -56,14 +58,8 @@ public class UserCommandAdapter
     }
 
     private Optional<User> execute(String userFrom, String userTo, BiFunction<User,User,Optional<User>> biFunction) {
-        if ( !isUserStored(userFrom) ){
-            throw new IllegalArgumentException(String.format("The user %s doesn't exist.", userFrom));
-        }
-        if ( !isUserStored(userTo) ){
-            throw new IllegalArgumentException(String.format("The user %s doesn't exist", userTo));
-        }
-        final User savedUserFrom = getUser(userFrom);
-        final User savedUserTo = getUser(userTo);
+        final User savedUserFrom = getUser(userFrom).orElseThrow(()-> new IllegalArgumentException(String.format("The user %s doesn't exist.",userFrom)));
+        final User savedUserTo = getUser(userTo).orElseThrow(()-> new IllegalArgumentException(String.format("The user %s doesn't exist.",userTo)));
         return biFunction.apply(savedUserFrom, savedUserTo);
     }
 

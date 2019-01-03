@@ -1,6 +1,7 @@
 package com.schibsted.spain.friends.infrastructure;
 
 public class HttpParams {
+    public static final String URI_LOGIN                    = "/login";
     public static final String URI_SIGNUP                   = "/signup";
     public static final String URI_FRIENDSHIP               = "/friendship";
     public static final String URI_FRIENDSHIP_REQUEST       = "/request";
@@ -39,6 +40,6 @@ public class HttpParams {
     public static final String USER_NAME                    = "username";
     public static final String USER_NAME_FROM               = "usernameFrom";
     public static final String USER_NAME_TO                 = "usernameTo";
-
+    public static final String PASSWORD                     = "password";
 
 }

@@ -267,6 +267,7 @@
                 pending: []
             },
             url:{
+                login: '/login',
                 signup: '/signup',
                 requestFriendship: '/friendship/request',
                 acceptFriendship: '/friendship/accept',
@@ -288,6 +289,9 @@
         computed: {
             urlSignupWithParams: function(){
                 return `${this.url.signup}?username=${this.user.username}`;
+            },
+            urlLoginWithParams: function(){
+                return `${this.url.login}?username=${this.user.username}&password=${this.user.password}`;
             },
             urlRequestWithParams: function() {
                 return `${this.url.requestFriendship}?usernameFrom=${this.user.username}&usernameTo=${this.usernameTo}`
@@ -318,9 +322,28 @@
             },
             login: function(){
                 const self = this
-                self.show.login = false
-                self.show.contacts = true
-                this.reloadModel()
+                const headers = {
+                    'Content-Type': 'application/json',
+                    'X-Password': this.user.password,
+                    "Access-Control-Allow-Origin": "*"
+                }
+
+                const axiosInstance = axios.create({
+                    timeout: 3000,
+                    headers: headers
+                })
+
+                axiosInstance.get( this.urlLoginWithParams )
+                    .then(function(response){
+                        console.log(JSON.stringify(response.data))
+                        self.user.friends = response.data
+                        self.show.login = false
+                        self.show.contacts = true
+                        self.reloadModel()
+                    }).catch( function(error) {
+                        console.log(error)
+                        self.responseMessages.login = error.response.data.message
+                    })
             },
             signup: function () {
                 const self = this
@@ -341,7 +364,7 @@
                         console.log(JSON.stringify(response.data))
                         self.login()
                     }).catch( function(error) {
-                        self.responseMessages.login = 'Error, try another time. Change the user/password'
+                        self.responseMessages.login = error.response.data.message
                         console.log(error)
                     })
             },
