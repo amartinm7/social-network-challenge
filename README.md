@@ -130,6 +130,7 @@ At this moment Heroku provides a functionality to deploy dockerized projects und
 * enable CSRF and XSS features from Spring to avoid this kind of attacks.
 * implement JWT feature to authorization things.
 * implement a concurrency mechanism to avoid updating the store at the same time for the same user.
+* implement a mechanism to log the system: kibana + elastic search + logstash. More info https://www.elastic.co/
 
 ## Domain Drive Design
 The application follows some rules of the DDD.
