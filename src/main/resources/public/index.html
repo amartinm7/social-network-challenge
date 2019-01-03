@@ -257,234 +257,234 @@
 </body>
 </html>
 <script>
-    var app = new Vue({
-        el: '#app',
-        data: {
-            usernameTo: '',
-            user:{
-                username: "username",
-                password: "password",
-                friends: [],
-                pending: []
-            },
-            url:{
-                login: '/login',
-                signup: '/signup',
-                requestFriendship: '/friendship/request',
-                acceptFriendship: '/friendship/accept',
-                declineFriendship: '/friendship/decline',
-                listFriends: '/friendship/list',
-                listPending: '/friendship/pending'
-            },
-            responseMessages: {
-                login: "",
-                requestFriendship: "",
-                acceptFriendship: "",
-                declineFriendship: ""
-            },
-            show: {
-                login: true,
-                contacts: false
-            }
-        },
-        computed: {
-            urlSignupWithParams: function(){
-                return `${this.url.signup}?username=${this.user.username}`;
-            },
-            urlLoginWithParams: function(){
-                return `${this.url.login}?username=${this.user.username}&password=${this.user.password}`;
-            },
-            urlRequestWithParams: function() {
-                return `${this.url.requestFriendship}?usernameFrom=${this.user.username}&usernameTo=${this.usernameTo}`
-            },
-            urlListWithParams: function() {
-                return `${this.url.listFriends}?username=${this.user.username}`
-            },
-            urlListPendingWithParams: function() {
-                return `${this.url.listPending}?username=${this.user.username}`
-            },
-            hasFriends: function () {
-                return this.user.friends.length > 0
-            },
-            hasRequests: function () {
-                return this.user.pending.length > 0
-            }
-        },
-        methods: {
-            urlAcceptWithParams: function(usernameTo) {
-                return `${this.url.acceptFriendship}?usernameFrom=${this.user.username}&usernameTo=${usernameTo}`
-            },
-            urlDeclineWithParams: function(usernameTo) {
-                return `${this.url.declineFriendship}?usernameFrom=${this.user.username}&usernameTo=${usernameTo}`
-            },
-            reloadModel(){
-                this.listFriends()
-                this.listPendingFriends()
-            },
-            login: function(){
-                const self = this
-                const headers = {
-                    'Content-Type': 'application/json',
-                    'X-Password': this.user.password,
-                    "Access-Control-Allow-Origin": "*"
-                }
-
-                const axiosInstance = axios.create({
-                    timeout: 3000,
-                    headers: headers
-                })
-
-                axiosInstance.get( this.urlLoginWithParams )
-                    .then(function(response){
-                        console.log(JSON.stringify(response.data))
-                        self.user.friends = response.data
-                        self.show.login = false
-                        self.show.contacts = true
-                        self.reloadModel()
-                    }).catch( function(error) {
-                        console.log(error)
-                        self.responseMessages.login = error.response.data.message
-                    })
-            },
-            signup: function () {
-                const self = this
-                const headers = {
-                    'Content-Type': 'application/json',
-                    'X-Password': this.user.password,
-                    "Access-Control-Allow-Origin": "*"
-                }
-
-                const axiosInstance = axios.create({
-                    timeout: 3000,
-                    headers: headers
-                })
-
-                axiosInstance.post( this.urlSignupWithParams )
-                    .then(function(response){
-                        self.responseMessages.login = "Success, user created properly"
-                        console.log(JSON.stringify(response.data))
-                        self.login()
-                    }).catch( function(error) {
-                        self.responseMessages.login = error.response.data.message
-                        console.log(error)
-                    })
-            },
-            requestFriendship: function() {
-                const self = this
-
-                const headers = {
-                  'Content-Type': 'application/json',
-                  'X-Password': this.user.password,
-                  "Access-Control-Allow-Origin": "*"
-                }
-
-                const axiosInstance = axios.create({
-                  timeout: 3000,
-                  headers: headers
-                })
-
-                axiosInstance.post(this.urlRequestWithParams)
-                  .then(function (response) {
-                    console.log(JSON.stringify(response.data))
-                    self.responseMessages.requestFriendship = "The invitation was sent properly"
-                  }).catch(function (error) {
-                      console.log(error)
-                      self.responseMessages.requestFriendship = error.response.data.message
-                  })
-
-            },
-            acceptFriendship: function(userTo) {
-                const self = this
-                const headers = {
-                    'Content-Type': 'application/json',
-                    'X-Password': this.user.password,
-                    "Access-Control-Allow-Origin": "*"
-                }
-
-                const axiosInstance = axios.create({
-                    timeout: 3000,
-                    headers: headers
-                })
-
-                axiosInstance.post( this.urlAcceptWithParams(userTo) )
-                    .then(function(response){
-                        console.log(JSON.stringify(response.data))
-                        self.responseMessages.acceptFriendship = "The accepted invitation"
-                        self.reloadModel()
-                    }).catch( function(error) {
-                        console.log(error)
-                        self.responseMessages.acceptFriendship = error.response.data.message
-                    })
-            },
-            declineFriendship: function(userTo) {
-                const self = this
-                const headers = {
-                    'Content-Type': 'application/json',
-                    'X-Password': this.user.password,
-                    "Access-Control-Allow-Origin": "*"
-                }
-
-                const axiosInstance = axios.create({
-                    timeout: 3000,
-                    headers: headers
-                })
-
-                axiosInstance.post( this.urlDeclineWithParams(userTo) )
-                    .then(function(response){
-                        console.log(JSON.stringify(response.data))
-                        self.responseMessages.declineFriendship = "Declining the invitation"
-                        self.reloadModel()
-                    }).catch( function(error) {
-                        console.log(error)
-                        self.responseMessages.declineFriendship = error.response.data.message
-                    })
-            },
-            listFriends: function() {
-                const self = this
-                const headers = {
-                    'Content-Type': 'application/json',
-                    'X-Password': this.user.password,
-                    "Access-Control-Allow-Origin": "*"
-                }
-
-                const axiosInstance = axios.create({
-                    timeout: 3000,
-                    headers: headers
-                })
-
-                axiosInstance.get( this.urlListWithParams )
-                    .then(function(response){
-                        console.log(JSON.stringify(response.data))
-                        self.user.friends = response.data
-                    }).catch( function(error) {
-                        console.log(error)
-                    })
-            },
-            listPendingFriends: function() {
-                const self = this
-                const headers = {
-                    'Content-Type': 'application/json',
-                    'X-Password': this.user.password,
-                    "Access-Control-Allow-Origin": "*"
-                }
-
-                const axiosInstance = axios.create({
-                    timeout: 3000,
-                    headers: headers
-                })
-
-                axiosInstance.get( this.urlListPendingWithParams )
-                    .then(function(response){
-                        console.log(JSON.stringify(response.data))
-                        self.user.pending = response.data
-                    }).catch( function(error) {
-                        console.log(error)
-                    })
-            }
-        },
-        mounted () {
-            console.log('Application started')
-            console.log(`hasFriends: ${this.hasFriends}, hasRequests: ${this.hasRequests}`)
+  var app = new Vue({
+    el: '#app',
+    data: {
+      usernameTo: '',
+      user:{
+        username: "username",
+        password: "password",
+        friends: [],
+        pending: []
+      },
+      url:{
+        login: '/login',
+        signup: '/signup',
+        requestFriendship: '/friendship/request',
+        acceptFriendship: '/friendship/accept',
+        declineFriendship: '/friendship/decline',
+        listFriends: '/friendship/list',
+        listPending: '/friendship/pending'
+      },
+      responseMessages: {
+        login: "",
+        requestFriendship: "",
+        acceptFriendship: "",
+        declineFriendship: ""
+      },
+      show: {
+        login: true,
+        contacts: false
+      }
+    },
+    computed: {
+      urlSignupWithParams: function(){
+        return `${this.url.signup}?username=${this.user.username}`;
+      },
+      urlLoginWithParams: function(){
+        return `${this.url.login}?username=${this.user.username}&password=${this.user.password}`;
+      },
+      urlRequestWithParams: function() {
+        return `${this.url.requestFriendship}?usernameFrom=${this.user.username}&usernameTo=${this.usernameTo}`
+      },
+      urlListWithParams: function() {
+        return `${this.url.listFriends}?username=${this.user.username}`
+      },
+      urlListPendingWithParams: function() {
+        return `${this.url.listPending}?username=${this.user.username}`
+      },
+      hasFriends: function () {
+        return this.user.friends.length > 0
+      },
+      hasRequests: function () {
+        return this.user.pending.length > 0
+      }
+    },
+    methods: {
+      urlAcceptWithParams: function(usernameTo) {
+        return `${this.url.acceptFriendship}?usernameFrom=${this.user.username}&usernameTo=${usernameTo}`
+      },
+      urlDeclineWithParams: function(usernameTo) {
+        return `${this.url.declineFriendship}?usernameFrom=${this.user.username}&usernameTo=${usernameTo}`
+      },
+      reloadModel(){
+        this.listFriends()
+        this.listPendingFriends()
+      },
+      login: function(){
+        const self = this
+        const headers = {
+          'Content-Type': 'application/json',
+          'X-Password': this.user.password,
+          "Access-Control-Allow-Origin": "*"
         }
-    })
+
+        const axiosInstance = axios.create({
+          timeout: 3000,
+          headers: headers
+        })
+
+        axiosInstance.get( this.urlLoginWithParams )
+          .then(function(response){
+            console.log(JSON.stringify(response.data))
+            self.user.friends = response.data
+            self.show.login = false
+            self.show.contacts = true
+            self.reloadModel()
+          }).catch( function(error) {
+          console.log(error)
+          self.responseMessages.login = error.response.data.message
+        })
+      },
+      signup: function () {
+        const self = this
+        const headers = {
+          'Content-Type': 'application/json',
+          'X-Password': this.user.password,
+          "Access-Control-Allow-Origin": "*"
+        }
+
+        const axiosInstance = axios.create({
+          timeout: 3000,
+          headers: headers
+        })
+
+        axiosInstance.post( this.urlSignupWithParams )
+          .then(function(response){
+            self.responseMessages.login = "Success, user created properly"
+            console.log(JSON.stringify(response.data))
+            self.login()
+          }).catch( function(error) {
+          self.responseMessages.login = error.response.data.message
+          console.log(error)
+        })
+      },
+      requestFriendship: function() {
+        const self = this
+
+        const headers = {
+          'Content-Type': 'application/json',
+          'X-Password': this.user.password,
+          "Access-Control-Allow-Origin": "*"
+        }
+
+        const axiosInstance = axios.create({
+          timeout: 3000,
+          headers: headers
+        })
+
+        axiosInstance.post(this.urlRequestWithParams)
+          .then(function (response) {
+            console.log(JSON.stringify(response.data))
+            self.responseMessages.requestFriendship = "The invitation was sent properly"
+          }).catch(function (error) {
+          console.log(error)
+          self.responseMessages.requestFriendship = error.response.data.message
+        })
+
+      },
+      acceptFriendship: function(userTo) {
+        const self = this
+        const headers = {
+          'Content-Type': 'application/json',
+          'X-Password': this.user.password,
+          "Access-Control-Allow-Origin": "*"
+        }
+
+        const axiosInstance = axios.create({
+          timeout: 3000,
+          headers: headers
+        })
+
+        axiosInstance.post( this.urlAcceptWithParams(userTo) )
+          .then(function(response){
+            console.log(JSON.stringify(response.data))
+            self.responseMessages.acceptFriendship = "The accepted invitation"
+            self.reloadModel()
+          }).catch( function(error) {
+          console.log(error)
+          self.responseMessages.acceptFriendship = error.response.data.message
+        })
+      },
+      declineFriendship: function(userTo) {
+        const self = this
+        const headers = {
+          'Content-Type': 'application/json',
+          'X-Password': this.user.password,
+          "Access-Control-Allow-Origin": "*"
+        }
+
+        const axiosInstance = axios.create({
+          timeout: 3000,
+          headers: headers
+        })
+
+        axiosInstance.post( this.urlDeclineWithParams(userTo) )
+          .then(function(response){
+            console.log(JSON.stringify(response.data))
+            self.responseMessages.declineFriendship = "Declining the invitation"
+            self.reloadModel()
+          }).catch( function(error) {
+          console.log(error)
+          self.responseMessages.declineFriendship = error.response.data.message
+        })
+      },
+      listFriends: function() {
+        const self = this
+        const headers = {
+          'Content-Type': 'application/json',
+          'X-Password': this.user.password,
+          "Access-Control-Allow-Origin": "*"
+        }
+
+        const axiosInstance = axios.create({
+          timeout: 3000,
+          headers: headers
+        })
+
+        axiosInstance.get( this.urlListWithParams )
+          .then(function(response){
+            console.log(JSON.stringify(response.data))
+            self.user.friends = response.data
+          }).catch( function(error) {
+          console.log(error)
+        })
+      },
+      listPendingFriends: function() {
+        const self = this
+        const headers = {
+          'Content-Type': 'application/json',
+          'X-Password': this.user.password,
+          "Access-Control-Allow-Origin": "*"
+        }
+
+        const axiosInstance = axios.create({
+          timeout: 3000,
+          headers: headers
+        })
+
+        axiosInstance.get( this.urlListPendingWithParams )
+          .then(function(response){
+            console.log(JSON.stringify(response.data))
+            self.user.pending = response.data
+          }).catch( function(error) {
+          console.log(error)
+        })
+      }
+    },
+    mounted () {
+      console.log('Application started')
+      console.log(`hasFriends: ${this.hasFriends}, hasRequests: ${this.hasRequests}`)
+    }
+  })
 </script>
