@@ -142,10 +142,19 @@ The application is splited in four modules:
 
 ![ddd-building-blocks](./_media/ddd-building-blocks.png)
 
-### Some useful Tips
+## Some useful Tips
 
+## Closing ports
 Closing ports, useful when the service is running and you want to kill it.
 ```
 sudo lsof -i :8080
 sudo kill -9 PID
 ```
+
+## Using an local httpServer to develop
+Install and run the local server to see the changes refreshed in the browser automatically.
+```bash
+npm install -g live-server
+live-server
+```
+More info https://www.npmjs.com/package/live-server
