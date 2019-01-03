@@ -1,7 +1,6 @@
 package com.schibsted.spain.friends.interfaces;
 
 import com.schibsted.spain.friends.application.FriendShipService;
-import com.schibsted.spain.friends.application.SignupService;
 import com.schibsted.spain.friends.infrastructure.CustomResponse;
 import com.schibsted.spain.friends.infrastructure.HttpParams;
 import org.slf4j.Logger;
@@ -26,7 +25,7 @@ public class LoginController {
   @GetMapping (produces = MediaType.APPLICATION_JSON_VALUE)
   public ResponseEntity<ResponseMessage> login(
       @RequestParam(HttpParams.USER_NAME) String username,
-      @RequestParam(HttpParams.X_PASSWORD) String password) {
+      @RequestParam(HttpParams.PASSWORD) String password) {
     logger.info("asking for login user {}", username);
     return friendShipService.getUser(username)
             .map( user -> CustomResponse.getOKMessage(user) )

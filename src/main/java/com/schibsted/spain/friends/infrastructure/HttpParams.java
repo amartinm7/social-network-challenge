@@ -40,6 +40,6 @@ public class HttpParams {
     public static final String USER_NAME                    = "username";
     public static final String USER_NAME_FROM               = "usernameFrom";
     public static final String USER_NAME_TO                 = "usernameTo";
-    public static final String PASSWORD                    = "password";
+    public static final String PASSWORD                     = "password";
 
 }

@@ -60,7 +60,7 @@ public class RestTemplateHelper {
         final URI uriTemp = new URL(url).toURI();
         final URI uri = UriComponentsBuilder
                 .fromUri(uriTemp)
-                .queryParam(HttpParams.USER_NAME_FROM, queryParamUsernameFrom)
+                .queryParam(HttpParams.USER_NAME, queryParamUsernameFrom)
                 .queryParam(HttpParams.PASSWORD, password)
                 .build()
                 .toUri();
