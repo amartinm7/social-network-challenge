@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class UserCommandQueryAdapterTest {
+public class UserAdaptersTest {
 
     @Autowired
     private UserCommandPort userCommandPort;
