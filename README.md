@@ -1,5 +1,18 @@
 ![social-networks](./_media/social-networks.png)
 
+
+#
+
+Some notes for the interviewers, what I would expect from them:
+- First for all, appreciate to the candidate for the effort to make/finish the challenge. Say thank you.
+- Stay positive, give a constructive feedback, always in a respectful way.
+- There are a lot solutions, this challenge is an approach of many others. Be positive.
+- You are looking for a partner, a person who can join your team and help to be better. Don't be an ass.
+- Don't put the candidate under pressure. Relax and take it easy.
+- Be smart and treat to the candidate as you wish to be treated.
+- Spread your enthusiasm, explain the open position and the work to do in a enthusiastic way.
+- laugh a lot, is for free! 
+     
 # social-network-challenge
 
 This service have users that can ask for friendship other users and offers an HTTP API to do so.
