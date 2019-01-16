@@ -13,7 +13,7 @@ Some notes for the interviewers, what I would expect from them:
 - Spread your enthusiasm, explain the open position and the work to do in a enthusiastic way.
 - laugh a lot, is for free! 
      
-# Considerations, being clear
+# Considerations, staying/being clear
 - Taking into account the spending time to achieve the challenge, the requirements and so on, this is one approach and fits into the requirements. 
 - It doesn't mean that it's the real truth. You can implement another approaches and it will be good too.
 - Everything can be improved of course, but this is an stating point for a tech talk, so be positive and get the best of it.
