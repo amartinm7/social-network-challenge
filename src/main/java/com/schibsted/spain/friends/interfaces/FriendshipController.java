@@ -4,6 +4,7 @@ import com.schibsted.spain.friends.application.FriendShipService;
 import com.schibsted.spain.friends.domain.User;
 import com.schibsted.spain.friends.infrastructure.CustomResponse;
 import com.schibsted.spain.friends.infrastructure.HttpParams;
+import com.schibsted.spain.friends.infrastructure.ResponseMessage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

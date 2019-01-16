@@ -1,4 +1,4 @@
-package com.schibsted.spain.friends.interfaces;
+package com.schibsted.spain.friends.infrastructure;
 
 public class ResponseMessage<T>{
     private final T message;
