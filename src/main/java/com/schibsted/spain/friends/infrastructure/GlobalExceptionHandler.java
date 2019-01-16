@@ -1,5 +1,7 @@
 package com.schibsted.spain.friends.infrastructure;
 
+import com.schibsted.spain.friends.infrastructure.messages.CustomResponse;
+import com.schibsted.spain.friends.infrastructure.messages.ResponseMessage;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;

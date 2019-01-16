@@ -1,4 +1,4 @@
-package com.schibsted.spain.friends.infrastructure;
+package com.schibsted.spain.friends.infrastructure.messages;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 

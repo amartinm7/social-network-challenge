@@ -1,9 +1,9 @@
 package com.schibsted.spain.friends.interfaces;
 
-import com.schibsted.spain.friends.infrastructure.CustomResponse;
+import com.schibsted.spain.friends.infrastructure.messages.CustomResponse;
 import com.schibsted.spain.friends.infrastructure.HttpParams;
 import com.schibsted.spain.friends.application.SignupService;
-import com.schibsted.spain.friends.infrastructure.ResponseMessage;
+import com.schibsted.spain.friends.infrastructure.messages.ResponseMessage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
