@@ -9,6 +9,9 @@ import org.springframework.stereotype.Service;
 import java.util.Collection;
 import java.util.Optional;
 
+//TODO: TO KEEP IN MIND AS IDEA OR REMINDER
+//HERE WE ARE APPLYING THE CQRS PATTERN (https://martinfowler.com/bliki/CQRS.html)
+//CQRS STANDS FOR Command Query Responsibility Segregation
 @Service
 public class UserQueryAdapter
         implements UserQueryPort {
