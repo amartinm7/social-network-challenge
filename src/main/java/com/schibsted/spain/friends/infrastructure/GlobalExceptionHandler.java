@@ -13,6 +13,11 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 public class GlobalExceptionHandler
     extends ResponseEntityExceptionHandler {
 
+        //TODO: TO KEEP IN MIND AS IDEA
+        //the microservice is designed to throw IllegalArgumentException for the validations
+        //this is the global point to handle them in this challenge.
+        //Please think that this is one approach for this challenge,
+        //It doesn't mean that this has to be done in the same way in another projects
         @ExceptionHandler({ IllegalArgumentException.class })
         public ResponseEntity<ResponseMessage> handleIllegalArgumentException(
                 Exception ex, WebRequest request) {

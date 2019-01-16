@@ -12,6 +12,9 @@ public class User {
     private static final Logger logger = LoggerFactory.getLogger(User.class);
 
     private final String name;
+    //TODO: TO KEEP IN MIND AS IDEA
+    //But the most common cases the password belong to another domain. Think in an security-ldap system or similar.
+    //for this challenge is enough
     private final String password;
     private final Set<User> friends;
     private final Set<User> pendingFriends;

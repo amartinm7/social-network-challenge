@@ -13,6 +13,13 @@ Some notes for the interviewers, what I would expect from them:
 - Spread your enthusiasm, explain the open position and the work to do in a enthusiastic way.
 - laugh a lot, is for free! 
      
+# Considerations, being clear
+Taking into account the spending time to achieve the challenge, the requirements and so on, this is one approach. 
+It doesn't mean that it's the real truth. You can implement another approaches and it will be good too.
+Everything can be improved of course, but this is point for a tech talk so be positive and get the best of it.
+Think what we can achieve in the future from here instead of criticizing the work. 
+
+     
 # social-network-challenge
 
 This service have users that can ask for friendship other users and offers an HTTP API to do so.
@@ -164,10 +171,14 @@ sudo lsof -i :8080
 sudo kill -9 PID
 ```
 
-## Using an local httpServer to develop
+## Using an local httpServer to develop static content
 Install and run the local server to see the changes refreshed in the browser automatically.
 ```bash
 npm install -g live-server
 live-server
 ```
 More info https://www.npmjs.com/package/live-server
+
+
+### some notes
+ 
