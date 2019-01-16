@@ -180,5 +180,5 @@ live-server
 More info https://www.npmjs.com/package/live-server
 
 
-### some notes
+#
  
