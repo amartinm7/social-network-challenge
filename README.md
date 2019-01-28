@@ -154,13 +154,17 @@ At this moment Heroku provides a functionality to deploy dockerized projects und
 
 ## DDD: Domain-Driven Design
 The application follows some rules of the DDD.
-The application is splited in four modules:
-* interface layer
-* application layer
-* domain layer
-* intrastructure layer
+The application is divided in four modules/layers:
+* interface/presentation layer: show the information to the user and capture the user events.
+* application layer: define the use cases. Coordinates the domain objects to resolve problems.
+* domain layer: resolve the specific problems for this domain.
+* infrastructure layer: isolate the technology agreements for the system. 
+Contains the implementations for email services, persistence services, transaction services and so on. 
 
 ![ddd-building-blocks](./_media/ddd4.png)
+
+https://devexperto.com/domain-driven-design-2/
+
 
 
 ![ddd-building-blocks](./_media/ddd-building-blocks.png)
