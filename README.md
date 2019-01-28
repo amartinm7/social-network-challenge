@@ -152,13 +152,16 @@ At this moment Heroku provides a functionality to deploy dockerized projects und
 * implement a concurrency mechanism to avoid updating the store at the same time for the same user.
 * implement a mechanism to log the system: kibana + elastic search + logstash. More info https://www.elastic.co/
 
-## Domain Drive Design
+## DDD: Domain-Driven Design
 The application follows some rules of the DDD.
 The application is splited in four modules:
 * interface layer
 * application layer
 * domain layer
 * intrastructure layer
+
+![ddd-building-blocks](./_media/ddd4.png)
+
 
 ![ddd-building-blocks](./_media/ddd-building-blocks.png)
 
