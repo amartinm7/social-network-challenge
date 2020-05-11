@@ -1,3 +1,5 @@
+[![BCH compliance](https://bettercodehub.com/edge/badge/amartinm7/social-network-challenge?branch=master)](https://bettercodehub.com/)
+
 ![social-networks](./_media/social-networks.png)
 
 
